@@ -1,30 +1,25 @@
 ﻿using System;
 using Evergine.Bindings.Vulkan;
-using Tea2D.Core.Diagnostics.Logging;
 
 namespace Tea2D.Graphics.Vulkan
 {
     public sealed class VulkanInstance : IDisposable
     {
         private readonly VkInstance _instance;
-        private readonly VkDebugUtilsMessengerEXT _debugMessenger = VkDebugUtilsMessengerEXT.Null;
+        private readonly PhysicalDevice _physicalDevice;
+        private readonly DebugMessenger? _debugMessenger;
 
         internal VulkanInstance(VkInstance instance)
         {
             _instance = instance;
+            _physicalDevice = PhysicalDevice.PickPhysicalDevice(ref instance);
 
-            VulkanApi.SetupDebugMessenger(new VulkanDebugUtilsMessengerCreateInfo
-            {
-                LogLevel = LogLevel.Trace,
-                GeneralMessageTypeEnabled = true,
-                ValidationMessageTypeEnabled = true,
-                PerformanceMessageTypeEnabled = true
-            }, instance, ref _debugMessenger);
+            DebugMessenger.SetupDebugMessenger(ref _instance, ref _debugMessenger!);
         }
 
         public unsafe void Dispose()
         {
-            VulkanApi.DestroyDebugMessenger(_instance, _debugMessenger);
+            _debugMessenger?.Dispose();
             VulkanNative.vkDestroyInstance(_instance, null);
         }
     }

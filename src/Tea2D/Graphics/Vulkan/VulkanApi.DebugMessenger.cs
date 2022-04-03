@@ -6,19 +6,20 @@ using Tea2D.Core.Diagnostics.Logging;
 
 namespace Tea2D.Graphics.Vulkan
 {
+    public unsafe delegate VkBool32 DebugCallbackDelegate(VkDebugUtilsMessageSeverityFlagsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, VkDebugUtilsMessengerCallbackDataEXT pCallbackData, void* pUserData);
+    
+    //TODO: rework!!!
     internal static unsafe partial class VulkanApi
     {
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate VkResult vkCreateDebugUtilsMessengerEXTDelegate(VkInstance instance, VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pMessenger);
+        private delegate VkResult VkCreateDebugUtilsMessengerExtDelegate(VkInstance instance, VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pMessenger);
 
         [UnmanagedFunctionPointer(CallingConvention.StdCall)]
-        private delegate void vkDestroyDebugUtilsMessengerEXTDelegate(VkInstance instance, VkDebugUtilsMessengerEXT messenger, VkAllocationCallbacks* pAllocator);
-        private delegate VkBool32 DebugCallbackDelegate(VkDebugUtilsMessageSeverityFlagsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, VkDebugUtilsMessengerCallbackDataEXT pCallbackData, void* pUserData);
-
-        private static readonly DebugCallbackDelegate CallbackDelegate = DebugCallback;
-
-        private static vkCreateDebugUtilsMessengerEXTDelegate _vkCreateDebugUtilsMessengerExtPtr;
-        private static vkDestroyDebugUtilsMessengerEXTDelegate _vkDestroyDebugUtilsMessengerExtPtr;
+        private delegate void VkDestroyDebugUtilsMessengerExtDelegate(VkInstance instance, VkDebugUtilsMessengerEXT messenger, VkAllocationCallbacks* pAllocator);
+        
+        private static DebugCallbackDelegate _callbackDelegate;
+        private static VkCreateDebugUtilsMessengerExtDelegate _vkCreateDebugUtilsMessengerExtPtr;
+        private static VkDestroyDebugUtilsMessengerExtDelegate _vkDestroyDebugUtilsMessengerExtPtr;
 
         private static VkResult VkCreateDebugUtilsMessengerExt(VkInstance instance, VkDebugUtilsMessengerCreateInfoEXT* pCreateInfo, VkAllocationCallbacks* pAllocator, VkDebugUtilsMessengerEXT* pMessenger) 
             => _vkCreateDebugUtilsMessengerExtPtr(instance, pCreateInfo, pAllocator, pMessenger);
@@ -28,6 +29,8 @@ namespace Tea2D.Graphics.Vulkan
         [Conditional("DEBUG")]
         public static void SetupDebugMessenger(VulkanDebugUtilsMessengerCreateInfo info, VkInstance instance, ref VkDebugUtilsMessengerEXT ext)
         {
+            _callbackDelegate = info.CallbackHandler;
+
             VkDebugUtilsMessageTypeFlagsEXT messageType = default;
 
             if (info.GeneralMessageTypeEnabled)
@@ -44,16 +47,16 @@ namespace Tea2D.Graphics.Vulkan
                 sType = VkStructureType.VK_STRUCTURE_TYPE_DEBUG_UTILS_MESSENGER_CREATE_INFO_EXT,
                 messageSeverity = ToVkDebugUtilsMessageSeverityFlagsExt(info.LogLevel),
                 messageType = messageType,
-                pfnUserCallback = Marshal.GetFunctionPointerForDelegate(CallbackDelegate)
+                pfnUserCallback = Marshal.GetFunctionPointerForDelegate(_callbackDelegate)
             };
 
-            VkDebugUtilsMessengerEXT debugMessenger = default;
-            var functionPointer = VulkanNative.vkGetInstanceProcAddr(instance, (byte*) Marshal.StringToHGlobalAnsi("vkCreateDebugUtilsMessengerEXT"));
+            var debugMessenger = VkDebugUtilsMessengerEXT.Null;
+            var functionPointer = VulkanNative.vkGetInstanceProcAddr(instance, (byte*) Marshal.StringToHGlobalAnsi(nameof(VkCreateDebugUtilsMessengerExt)));
             if (functionPointer == IntPtr.Zero)
                 //TODO: log error and throw
                 return;
 
-            _vkCreateDebugUtilsMessengerExtPtr = Marshal.GetDelegateForFunctionPointer<vkCreateDebugUtilsMessengerEXTDelegate>(functionPointer);
+            _vkCreateDebugUtilsMessengerExtPtr = Marshal.GetDelegateForFunctionPointer<VkCreateDebugUtilsMessengerExtDelegate>(functionPointer);
             var result = VkCreateDebugUtilsMessengerExt(instance, &createInfo, null, &debugMessenger);
             VulkanUtils.CheckError(result);
 
@@ -63,31 +66,13 @@ namespace Tea2D.Graphics.Vulkan
         [Conditional("DEBUG")]
         public static void DestroyDebugMessenger(VkInstance instance, VkDebugUtilsMessengerEXT debugMessenger)
         {
-            var functionPointer = VulkanNative.vkGetInstanceProcAddr(instance, (byte*) Marshal.StringToHGlobalAnsi("vkDestroyDebugUtilsMessengerEXT"));
+            var functionPointer = VulkanNative.vkGetInstanceProcAddr(instance, (byte*) Marshal.StringToHGlobalAnsi(nameof(VkDestroyDebugUtilsMessengerExt)));
             if (functionPointer == IntPtr.Zero) 
                 //TODO: log error and throw
                 return;
 
-            _vkDestroyDebugUtilsMessengerExtPtr = Marshal.GetDelegateForFunctionPointer<vkDestroyDebugUtilsMessengerEXTDelegate>(functionPointer);
+            _vkDestroyDebugUtilsMessengerExtPtr = Marshal.GetDelegateForFunctionPointer<VkDestroyDebugUtilsMessengerExtDelegate>(functionPointer);
             VkDestroyDebugUtilsMessengerExt(instance, debugMessenger, null);
-        }
-
-        private static VkBool32 DebugCallback(
-            VkDebugUtilsMessageSeverityFlagsEXT messageSeverity,
-            VkDebugUtilsMessageTypeFlagsEXT messageType,
-            VkDebugUtilsMessengerCallbackDataEXT pCallbackData,
-            void* pUserData)
-        {
-            if (messageSeverity == VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT)
-                Logger.Instance.LogTrace($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-            else if (messageSeverity == VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT)
-                Logger.Instance.LogInfo($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-            else if (messageSeverity == VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
-                Logger.Instance.LogWarning($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-            else
-                Logger.Instance.LogError($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-
-            return false;
         }
 
         private static VkDebugUtilsMessageSeverityFlagsEXT ToVkDebugUtilsMessageSeverityFlagsExt(LogLevel logLevel)

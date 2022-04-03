@@ -9,5 +9,7 @@ namespace Tea2D.Graphics.Vulkan
         public bool GeneralMessageTypeEnabled;
         public bool ValidationMessageTypeEnabled;
         public bool PerformanceMessageTypeEnabled;
+
+        public DebugCallbackDelegate CallbackHandler;
     }
 }
