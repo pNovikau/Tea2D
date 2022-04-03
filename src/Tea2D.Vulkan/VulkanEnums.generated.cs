@@ -1635,587 +1635,2095 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkAccessFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkAccessIndirectCommandReadBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkAccessIndexReadBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkAccessVertexAttributeReadBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkAccessUniformReadBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkAccessInputAttachmentReadBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkAccessShaderReadBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkAccessShaderWriteBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkAccessColorAttachmentReadBit = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkAccessColorAttachmentWriteBit = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkAccessDepthStencilAttachmentReadBit = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkAccessDepthStencilAttachmentWriteBit = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkAccessTransferReadBit = 2048,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkAccessTransferWriteBit = 4096,
+
+        /// <summary>
+        /// Hex value 0x00002000
+        /// <summary>
         VkAccessHostReadBit = 8192,
+
+        /// <summary>
+        /// Hex value 0x00004000
+        /// <summary>
         VkAccessHostWriteBit = 16384,
+
+        /// <summary>
+        /// Hex value 0x00008000
+        /// <summary>
         VkAccessMemoryReadBit = 32768,
+
+        /// <summary>
+        /// Hex value 0x00010000
+        /// <summary>
         VkAccessMemoryWriteBit = 65536,
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkAccessNone = 0,
+
+        /// <summary>
+        /// Hex value 0x02000000
+        /// <summary>
         VkAccessTransformFeedbackWriteBitExt = 33554432,
+
+        /// <summary>
+        /// Hex value 0x04000000
+        /// <summary>
         VkAccessTransformFeedbackCounterReadBitExt = 67108864,
+
+        /// <summary>
+        /// Hex value 0x08000000
+        /// <summary>
         VkAccessTransformFeedbackCounterWriteBitExt = 134217728,
+
+        /// <summary>
+        /// Hex value 0x00100000
+        /// <summary>
         VkAccessConditionalRenderingReadBitExt = 1048576,
+
+        /// <summary>
+        /// Hex value 0x00080000
+        /// <summary>
         VkAccessColorAttachmentReadNoncoherentBitExt = 524288,
+
+        /// <summary>
+        /// Hex value 0x00200000
+        /// <summary>
         VkAccessAccelerationStructureReadBitKhr = 2097152,
+
+        /// <summary>
+        /// Hex value 0x00400000
+        /// <summary>
         VkAccessAccelerationStructureWriteBitKhr = 4194304,
+
+        /// <summary>
+        /// Hex value 0x01000000
+        /// <summary>
         VkAccessFragmentDensityMapReadBitExt = 16777216,
+
+        /// <summary>
+        /// Hex value 0x00800000
+        /// <summary>
         VkAccessFragmentShadingRateAttachmentReadBitKhr = 8388608,
+
+        /// <summary>
+        /// Hex value 0x00020000
+        /// <summary>
         VkAccessCommandPreprocessReadBitNv = 131072,
+
+        /// <summary>
+        /// Hex value 0x00040000
+        /// <summary>
         VkAccessCommandPreprocessWriteBitNv = 262144,
+
+        /// <summary>
+        /// Hex value 0x00800000
+        /// <summary>
         VkAccessShadingRateImageReadBitNv = 8388608,
+
+        /// <summary>
+        /// Hex value 0x00200000
+        /// <summary>
         VkAccessAccelerationStructureReadBitNv = 2097152,
+
+        /// <summary>
+        /// Hex value 0x00400000
+        /// <summary>
         VkAccessAccelerationStructureWriteBitNv = 4194304,
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkAccessNoneKhr = 0,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkAccessFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkImageAspectFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkImageAspectColorBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkImageAspectDepthBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkImageAspectStencilBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkImageAspectMetadataBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkImageAspectPlane0Bit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkImageAspectPlane1Bit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkImageAspectPlane2Bit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkImageAspectNone = 0,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkImageAspectMemoryPlane0BitExt = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkImageAspectMemoryPlane1BitExt = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkImageAspectMemoryPlane2BitExt = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkImageAspectMemoryPlane3BitExt = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkImageAspectPlane0BitKhr = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkImageAspectPlane1BitKhr = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkImageAspectPlane2BitKhr = 64,
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkImageAspectNoneKhr = 0,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkImageAspectFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkFormatFeatureFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkFormatFeatureSampledImageBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkFormatFeatureStorageImageBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkFormatFeatureStorageImageAtomicBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkFormatFeatureUniformTexelBufferBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkFormatFeatureStorageTexelBufferBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkFormatFeatureStorageTexelBufferAtomicBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkFormatFeatureVertexBufferBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkFormatFeatureColorAttachmentBit = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkFormatFeatureColorAttachmentBlendBit = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkFormatFeatureDepthStencilAttachmentBit = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkFormatFeatureBlitSrcBit = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkFormatFeatureBlitDstBit = 2048,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkFormatFeatureSampledImageFilterLinearBit = 4096,
+
+        /// <summary>
+        /// Hex value 0x00004000
+        /// <summary>
         VkFormatFeatureTransferSrcBit = 16384,
+
+        /// <summary>
+        /// Hex value 0x00008000
+        /// <summary>
         VkFormatFeatureTransferDstBit = 32768,
+
+        /// <summary>
+        /// Hex value 0x00020000
+        /// <summary>
         VkFormatFeatureMidpointChromaSamplesBit = 131072,
+
+        /// <summary>
+        /// Hex value 0x00040000
+        /// <summary>
         VkFormatFeatureSampledImageYcbcrConversionLinearFilterBit = 262144,
+
+        /// <summary>
+        /// Hex value 0x00080000
+        /// <summary>
         VkFormatFeatureSampledImageYcbcrConversionSeparateReconstructionFilterBit = 524288,
+
+        /// <summary>
+        /// Hex value 0x00100000
+        /// <summary>
         VkFormatFeatureSampledImageYcbcrConversionChromaReconstructionExplicitBit = 1048576,
+
+        /// <summary>
+        /// Hex value 0x00200000
+        /// <summary>
         VkFormatFeatureSampledImageYcbcrConversionChromaReconstructionExplicitForceableBit = 2097152,
+
+        /// <summary>
+        /// Hex value 0x00400000
+        /// <summary>
         VkFormatFeatureDisjointBit = 4194304,
+
+        /// <summary>
+        /// Hex value 0x00800000
+        /// <summary>
         VkFormatFeatureCositedChromaSamplesBit = 8388608,
+
+        /// <summary>
+        /// Hex value 0x00010000
+        /// <summary>
         VkFormatFeatureSampledImageFilterMinmaxBit = 65536,
+
+        /// <summary>
+        /// Hex value 0x00002000
+        /// <summary>
         VkFormatFeatureSampledImageFilterCubicBitImg = 8192,
+
+        /// <summary>
+        /// Hex value 0x20000000
+        /// <summary>
         VkFormatFeatureAccelerationStructureVertexBufferBitKhr = 536870912,
+
+        /// <summary>
+        /// Hex value 0x01000000
+        /// <summary>
         VkFormatFeatureFragmentDensityMapBitExt = 16777216,
+
+        /// <summary>
+        /// Hex value 0x40000000
+        /// <summary>
         VkFormatFeatureFragmentShadingRateAttachmentBitKhr = 1073741824,
+
+        /// <summary>
+        /// Hex value 0x00004000
+        /// <summary>
         VkFormatFeatureTransferSrcBitKhr = 16384,
+
+        /// <summary>
+        /// Hex value 0x00008000
+        /// <summary>
         VkFormatFeatureTransferDstBitKhr = 32768,
+
+        /// <summary>
+        /// Hex value 0x00010000
+        /// <summary>
         VkFormatFeatureSampledImageFilterMinmaxBitExt = 65536,
+
+        /// <summary>
+        /// Hex value 0x00020000
+        /// <summary>
         VkFormatFeatureMidpointChromaSamplesBitKhr = 131072,
+
+        /// <summary>
+        /// Hex value 0x00040000
+        /// <summary>
         VkFormatFeatureSampledImageYcbcrConversionLinearFilterBitKhr = 262144,
+
+        /// <summary>
+        /// Hex value 0x00080000
+        /// <summary>
         VkFormatFeatureSampledImageYcbcrConversionSeparateReconstructionFilterBitKhr = 524288,
+
+        /// <summary>
+        /// Hex value 0x00100000
+        /// <summary>
         VkFormatFeatureSampledImageYcbcrConversionChromaReconstructionExplicitBitKhr = 1048576,
+
+        /// <summary>
+        /// Hex value 0x00200000
+        /// <summary>
         VkFormatFeatureSampledImageYcbcrConversionChromaReconstructionExplicitForceableBitKhr = 2097152,
+
+        /// <summary>
+        /// Hex value 0x00400000
+        /// <summary>
         VkFormatFeatureDisjointBitKhr = 4194304,
+
+        /// <summary>
+        /// Hex value 0x00800000
+        /// <summary>
         VkFormatFeatureCositedChromaSamplesBitKhr = 8388608,
+
+        /// <summary>
+        /// Hex value 0x00002000
+        /// <summary>
         VkFormatFeatureSampledImageFilterCubicBitExt = 8192,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkFormatFeatureFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkImageCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkImageCreateSparseBindingBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkImageCreateSparseResidencyBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkImageCreateSparseAliasedBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkImageCreateMutableFormatBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkImageCreateCubeCompatibleBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkImageCreateAliasBit = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkImageCreateSplitInstanceBindRegionsBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkImageCreate2dArrayCompatibleBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkImageCreateBlockTexelViewCompatibleBit = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkImageCreateExtendedUsageBit = 256,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkImageCreateProtectedBit = 2048,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkImageCreateDisjointBit = 512,
+
+        /// <summary>
+        /// Hex value 0x00002000
+        /// <summary>
         VkImageCreateCornerSampledBitNv = 8192,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkImageCreateSampleLocationsCompatibleDepthBitExt = 4096,
+
+        /// <summary>
+        /// Hex value 0x00004000
+        /// <summary>
         VkImageCreateSubsampledBitExt = 16384,
+
+        /// <summary>
+        /// Hex value 0x00008000
+        /// <summary>
         VkImageCreateFragmentDensityMapOffsetBitQcom = 32768,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkImageCreateSplitInstanceBindRegionsBitKhr = 64,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkImageCreate2dArrayCompatibleBitKhr = 32,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkImageCreateBlockTexelViewCompatibleBitKhr = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkImageCreateExtendedUsageBitKhr = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkImageCreateDisjointBitKhr = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkImageCreateAliasBitKhr = 1024,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkImageCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkSampleCountFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSampleCount1Bit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkSampleCount2Bit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkSampleCount4Bit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkSampleCount8Bit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkSampleCount16Bit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkSampleCount32Bit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkSampleCount64Bit = 64,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSampleCountFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkImageUsageFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkImageUsageTransferSrcBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkImageUsageTransferDstBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkImageUsageSampledBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkImageUsageStorageBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkImageUsageColorAttachmentBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkImageUsageDepthStencilAttachmentBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkImageUsageTransientAttachmentBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkImageUsageInputAttachmentBit = 128,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkImageUsageFragmentDensityMapBitExt = 512,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkImageUsageFragmentShadingRateAttachmentBitKhr = 256,
+
+        /// <summary>
+        /// Hex value 0x00040000
+        /// <summary>
         VkImageUsageInvocationMaskBitHuawei = 262144,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkImageUsageShadingRateImageBitNv = 256,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkImageUsageFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkMemoryHeapFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkMemoryHeapDeviceLocalBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkMemoryHeapMultiInstanceBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkMemoryHeapMultiInstanceBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkMemoryHeapFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkMemoryPropertyFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkMemoryPropertyDeviceLocalBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkMemoryPropertyHostVisibleBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkMemoryPropertyHostCoherentBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkMemoryPropertyHostCachedBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkMemoryPropertyLazilyAllocatedBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkMemoryPropertyProtectedBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkMemoryPropertyDeviceCoherentBitAmd = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkMemoryPropertyDeviceUncachedBitAmd = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkMemoryPropertyRdmaCapableBitNv = 256,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkMemoryPropertyFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkQueueFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkQueueGraphicsBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkQueueComputeBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkQueueTransferBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkQueueSparseBindingBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkQueueProtectedBit = 16,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkQueueFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkDeviceQueueCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDeviceQueueCreateProtectedBit = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDeviceQueueCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkPipelineStageFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineStageTopOfPipeBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPipelineStageDrawIndirectBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkPipelineStageVertexInputBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkPipelineStageVertexShaderBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkPipelineStageTessellationControlShaderBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkPipelineStageTessellationEvaluationShaderBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkPipelineStageGeometryShaderBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkPipelineStageFragmentShaderBit = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkPipelineStageEarlyFragmentTestsBit = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkPipelineStageLateFragmentTestsBit = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkPipelineStageColorAttachmentOutputBit = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkPipelineStageComputeShaderBit = 2048,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkPipelineStageTransferBit = 4096,
+
+        /// <summary>
+        /// Hex value 0x00002000
+        /// <summary>
         VkPipelineStageBottomOfPipeBit = 8192,
+
+        /// <summary>
+        /// Hex value 0x00004000
+        /// <summary>
         VkPipelineStageHostBit = 16384,
+
+        /// <summary>
+        /// Hex value 0x00008000
+        /// <summary>
         VkPipelineStageAllGraphicsBit = 32768,
+
+        /// <summary>
+        /// Hex value 0x00010000
+        /// <summary>
         VkPipelineStageAllCommandsBit = 65536,
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkPipelineStageNone = 0,
+
+        /// <summary>
+        /// Hex value 0x01000000
+        /// <summary>
         VkPipelineStageTransformFeedbackBitExt = 16777216,
+
+        /// <summary>
+        /// Hex value 0x00040000
+        /// <summary>
         VkPipelineStageConditionalRenderingBitExt = 262144,
+
+        /// <summary>
+        /// Hex value 0x02000000
+        /// <summary>
         VkPipelineStageAccelerationStructureBuildBitKhr = 33554432,
+
+        /// <summary>
+        /// Hex value 0x00200000
+        /// <summary>
         VkPipelineStageRayTracingShaderBitKhr = 2097152,
+
+        /// <summary>
+        /// Hex value 0x00080000
+        /// <summary>
         VkPipelineStageTaskShaderBitNv = 524288,
+
+        /// <summary>
+        /// Hex value 0x00100000
+        /// <summary>
         VkPipelineStageMeshShaderBitNv = 1048576,
+
+        /// <summary>
+        /// Hex value 0x00800000
+        /// <summary>
         VkPipelineStageFragmentDensityProcessBitExt = 8388608,
+
+        /// <summary>
+        /// Hex value 0x00400000
+        /// <summary>
         VkPipelineStageFragmentShadingRateAttachmentBitKhr = 4194304,
+
+        /// <summary>
+        /// Hex value 0x00020000
+        /// <summary>
         VkPipelineStageCommandPreprocessBitNv = 131072,
+
+        /// <summary>
+        /// Hex value 0x00400000
+        /// <summary>
         VkPipelineStageShadingRateImageBitNv = 4194304,
+
+        /// <summary>
+        /// Hex value 0x00200000
+        /// <summary>
         VkPipelineStageRayTracingShaderBitNv = 2097152,
+
+        /// <summary>
+        /// Hex value 0x02000000
+        /// <summary>
         VkPipelineStageAccelerationStructureBuildBitNv = 33554432,
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkPipelineStageNoneKhr = 0,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPipelineStageFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkSparseMemoryBindFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSparseMemoryBindMetadataBit = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSparseMemoryBindFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkSparseImageFormatFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSparseImageFormatSingleMiptailBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkSparseImageFormatAlignedMipSizeBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkSparseImageFormatNonstandardBlockSizeBit = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSparseImageFormatFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkFenceCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkFenceCreateSignaledBit = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkFenceCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkEventCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkEventCreateDeviceOnlyBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkEventCreateDeviceOnlyBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkEventCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkQueryPipelineStatisticFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkQueryPipelineStatisticInputAssemblyVerticesBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkQueryPipelineStatisticInputAssemblyPrimitivesBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkQueryPipelineStatisticVertexShaderInvocationsBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkQueryPipelineStatisticGeometryShaderInvocationsBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkQueryPipelineStatisticGeometryShaderPrimitivesBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkQueryPipelineStatisticClippingInvocationsBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkQueryPipelineStatisticClippingPrimitivesBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkQueryPipelineStatisticFragmentShaderInvocationsBit = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkQueryPipelineStatisticTessellationControlShaderPatchesBit = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkQueryPipelineStatisticTessellationEvaluationShaderInvocationsBit = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkQueryPipelineStatisticComputeShaderInvocationsBit = 1024,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkQueryPipelineStatisticFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkQueryResultFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkQueryResult64Bit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkQueryResultWaitBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkQueryResultWithAvailabilityBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkQueryResultPartialBit = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkQueryResultFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkBufferCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkBufferCreateSparseBindingBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkBufferCreateSparseResidencyBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkBufferCreateSparseAliasedBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkBufferCreateProtectedBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkBufferCreateDeviceAddressCaptureReplayBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkBufferCreateDeviceAddressCaptureReplayBitExt = 16,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkBufferCreateDeviceAddressCaptureReplayBitKhr = 16,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkBufferCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkBufferUsageFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkBufferUsageTransferSrcBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkBufferUsageTransferDstBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkBufferUsageUniformTexelBufferBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkBufferUsageStorageTexelBufferBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkBufferUsageUniformBufferBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkBufferUsageStorageBufferBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkBufferUsageIndexBufferBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkBufferUsageVertexBufferBit = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkBufferUsageIndirectBufferBit = 256,
+
+        /// <summary>
+        /// Hex value 0x00020000
+        /// <summary>
         VkBufferUsageShaderDeviceAddressBit = 131072,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkBufferUsageTransformFeedbackBufferBitExt = 2048,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkBufferUsageTransformFeedbackCounterBufferBitExt = 4096,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkBufferUsageConditionalRenderingBitExt = 512,
+
+        /// <summary>
+        /// Hex value 0x00080000
+        /// <summary>
         VkBufferUsageAccelerationStructureBuildInputReadOnlyBitKhr = 524288,
+
+        /// <summary>
+        /// Hex value 0x00100000
+        /// <summary>
         VkBufferUsageAccelerationStructureStorageBitKhr = 1048576,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkBufferUsageShaderBindingTableBitKhr = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkBufferUsageRayTracingBitNv = 1024,
+
+        /// <summary>
+        /// Hex value 0x00020000
+        /// <summary>
         VkBufferUsageShaderDeviceAddressBitExt = 131072,
+
+        /// <summary>
+        /// Hex value 0x00020000
+        /// <summary>
         VkBufferUsageShaderDeviceAddressBitKhr = 131072,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkBufferUsageFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkImageViewCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkImageViewCreateFragmentDensityMapDynamicBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkImageViewCreateFragmentDensityMapDeferredBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkImageViewCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkPipelineCacheCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineCacheCreateExternallySynchronizedBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineCacheCreateExternallySynchronizedBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPipelineCacheCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkColorComponentFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkColorComponentRBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkColorComponentGBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkColorComponentBBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkColorComponentABit = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkColorComponentFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkPipelineCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineCreateDisableOptimizationBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPipelineCreateAllowDerivativesBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkPipelineCreateDerivativeBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkPipelineCreateViewIndexFromDeviceIndexBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkPipelineCreateDispatchBaseBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkPipelineCreateFailOnPipelineCompileRequiredBit = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkPipelineCreateEarlyReturnOnFailureBit = 512,
+
+        /// <summary>
+        /// Hex value 0x00200000
+        /// <summary>
         VkPipelineCreateRenderingFragmentShadingRateAttachmentBitKhr = 2097152,
+
+        /// <summary>
+        /// Hex value 0x00400000
+        /// <summary>
         VkPipelineCreateRenderingFragmentDensityMapAttachmentBitExt = 4194304,
+
+        /// <summary>
+        /// Hex value 0x00004000
+        /// <summary>
         VkPipelineCreateRayTracingNoNullAnyHitShadersBitKhr = 16384,
+
+        /// <summary>
+        /// Hex value 0x00008000
+        /// <summary>
         VkPipelineCreateRayTracingNoNullClosestHitShadersBitKhr = 32768,
+
+        /// <summary>
+        /// Hex value 0x00010000
+        /// <summary>
         VkPipelineCreateRayTracingNoNullMissShadersBitKhr = 65536,
+
+        /// <summary>
+        /// Hex value 0x00020000
+        /// <summary>
         VkPipelineCreateRayTracingNoNullIntersectionShadersBitKhr = 131072,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkPipelineCreateRayTracingSkipTrianglesBitKhr = 4096,
+
+        /// <summary>
+        /// Hex value 0x00002000
+        /// <summary>
         VkPipelineCreateRayTracingSkipAabbsBitKhr = 8192,
+
+        /// <summary>
+        /// Hex value 0x00080000
+        /// <summary>
         VkPipelineCreateRayTracingShaderGroupHandleCaptureReplayBitKhr = 524288,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkPipelineCreateDeferCompileBitNv = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkPipelineCreateCaptureStatisticsBitKhr = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkPipelineCreateCaptureInternalRepresentationsBitKhr = 128,
+
+        /// <summary>
+        /// Hex value 0x00040000
+        /// <summary>
         VkPipelineCreateIndirectBindableBitNv = 262144,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkPipelineCreateLibraryBitKhr = 2048,
+
+        /// <summary>
+        /// Hex value 0x00100000
+        /// <summary>
         VkPipelineCreateRayTracingAllowMotionBitNv = 1048576,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkPipelineCreateDispatchBase = 16,
+
+        /// <summary>
+        /// Hex value 0x00200000
+        /// <summary>
         VkPipelineRasterizationStateCreateFragmentShadingRateAttachmentBitKhr = 2097152,
+
+        /// <summary>
+        /// Hex value 0x00400000
+        /// <summary>
         VkPipelineRasterizationStateCreateFragmentDensityMapAttachmentBitExt = 4194304,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkPipelineCreateViewIndexFromDeviceIndexBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkPipelineCreateDispatchBaseKhr = 16,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkPipelineCreateFailOnPipelineCompileRequiredBitExt = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkPipelineCreateEarlyReturnOnFailureBitExt = 512,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPipelineCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkPipelineShaderStageCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineShaderStageCreateAllowVaryingSubgroupSizeBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPipelineShaderStageCreateRequireFullSubgroupsBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineShaderStageCreateAllowVaryingSubgroupSizeBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPipelineShaderStageCreateRequireFullSubgroupsBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPipelineShaderStageCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkShaderStageFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkShaderStageVertexBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkShaderStageTessellationControlBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkShaderStageTessellationEvaluationBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkShaderStageGeometryBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkShaderStageFragmentBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkShaderStageComputeBit = 32,
+
+        /// <summary>
+        /// Hex value 0x0000001f
+        /// <summary>
         VkShaderStageAllGraphics = 31,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkShaderStageAll = 2147483647,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkShaderStageRaygenBitKhr = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkShaderStageAnyHitBitKhr = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkShaderStageClosestHitBitKhr = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkShaderStageMissBitKhr = 2048,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkShaderStageIntersectionBitKhr = 4096,
+
+        /// <summary>
+        /// Hex value 0x00002000
+        /// <summary>
         VkShaderStageCallableBitKhr = 8192,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkShaderStageTaskBitNv = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkShaderStageMeshBitNv = 128,
+
+        /// <summary>
+        /// Hex value 0x00004000
+        /// <summary>
         VkShaderStageSubpassShadingBitHuawei = 16384,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkShaderStageRaygenBitNv = 256,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkShaderStageAnyHitBitNv = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkShaderStageClosestHitBitNv = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkShaderStageMissBitNv = 2048,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkShaderStageIntersectionBitNv = 4096,
+
+        /// <summary>
+        /// Hex value 0x00002000
+        /// <summary>
         VkShaderStageCallableBitNv = 8192,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkShaderStageFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkCullModeFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkCullModeNone = 0,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkCullModeFrontBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkCullModeBackBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000003
+        /// <summary>
         VkCullModeFrontAndBack = 3,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkCullModeFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkPipelineDepthStencilStateCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineDepthStencilStateCreateRasterizationOrderAttachmentDepthAccessBitArm = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPipelineDepthStencilStateCreateRasterizationOrderAttachmentStencilAccessBitArm = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPipelineDepthStencilStateCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkPipelineColorBlendStateCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineColorBlendStateCreateRasterizationOrderAttachmentAccessBitArm = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPipelineColorBlendStateCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkSamplerCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSamplerCreateSubsampledBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkSamplerCreateSubsampledCoarseReconstructionBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSamplerCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkDescriptorPoolCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDescriptorPoolCreateFreeDescriptorSetBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDescriptorPoolCreateUpdateAfterBindBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDescriptorPoolCreateHostOnlyBitValve = 4,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDescriptorPoolCreateUpdateAfterBindBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDescriptorPoolCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkDescriptorSetLayoutCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDescriptorSetLayoutCreateUpdateAfterBindPoolBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDescriptorSetLayoutCreatePushDescriptorBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDescriptorSetLayoutCreateHostOnlyPoolBitValve = 4,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDescriptorSetLayoutCreateUpdateAfterBindPoolBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDescriptorSetLayoutCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkAttachmentDescriptionFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkAttachmentDescriptionMayAliasBit = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkAttachmentDescriptionFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkDependencyFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDependencyByRegionBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDependencyDeviceGroupBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDependencyViewLocalBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDependencyViewLocalBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDependencyDeviceGroupBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDependencyFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkFramebufferCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkFramebufferCreateImagelessBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkFramebufferCreateImagelessBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkFramebufferCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkRenderPassCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkRenderPassCreateTransformBitQcom = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkRenderPassCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkSubpassDescriptionFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSubpassDescriptionPerViewAttributesBitNvx = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkSubpassDescriptionPerViewPositionXOnlyBitNvx = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkSubpassDescriptionFragmentRegionBitQcom = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkSubpassDescriptionShaderResolveBitQcom = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkSubpassDescriptionRasterizationOrderAttachmentColorAccessBitArm = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkSubpassDescriptionRasterizationOrderAttachmentDepthAccessBitArm = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkSubpassDescriptionRasterizationOrderAttachmentStencilAccessBitArm = 64,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSubpassDescriptionFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkCommandPoolCreateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkCommandPoolCreateTransientBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkCommandPoolCreateResetCommandBufferBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkCommandPoolCreateProtectedBit = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkCommandPoolCreateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkCommandPoolResetFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkCommandPoolResetReleaseResourcesBit = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkCommandPoolResetFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkCommandBufferUsageFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkCommandBufferUsageOneTimeSubmitBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkCommandBufferUsageRenderPassContinueBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkCommandBufferUsageSimultaneousUseBit = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkCommandBufferUsageFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkQueryControlFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkQueryControlPreciseBit = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkQueryControlFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkCommandBufferResetFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkCommandBufferResetReleaseResourcesBit = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkCommandBufferResetFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkStencilFaceFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkStencilFaceFrontBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkStencilFaceBackBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000003
+        /// <summary>
         VkStencilFaceFrontAndBack = 3,
+
+        /// <summary>
+        /// Hex value 0x00000003
+        /// <summary>
         VkStencilFrontAndBack = 3,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkStencilFaceFlagBitsMaxEnum = 2147483647,
     }
 
@@ -2281,147 +3789,515 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkSubgroupFeatureFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSubgroupFeatureBasicBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkSubgroupFeatureVoteBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkSubgroupFeatureArithmeticBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkSubgroupFeatureBallotBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkSubgroupFeatureShuffleBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkSubgroupFeatureShuffleRelativeBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkSubgroupFeatureClusteredBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkSubgroupFeatureQuadBit = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkSubgroupFeaturePartitionedBitNv = 256,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSubgroupFeatureFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkPeerMemoryFeatureFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPeerMemoryFeatureCopySrcBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPeerMemoryFeatureCopyDstBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkPeerMemoryFeatureGenericSrcBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkPeerMemoryFeatureGenericDstBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPeerMemoryFeatureCopySrcBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPeerMemoryFeatureCopyDstBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkPeerMemoryFeatureGenericSrcBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkPeerMemoryFeatureGenericDstBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPeerMemoryFeatureFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkMemoryAllocateFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkMemoryAllocateDeviceMaskBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkMemoryAllocateDeviceAddressBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkMemoryAllocateDeviceAddressCaptureReplayBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkMemoryAllocateDeviceMaskBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkMemoryAllocateDeviceAddressBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkMemoryAllocateDeviceAddressCaptureReplayBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkMemoryAllocateFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkExternalMemoryHandleTypeFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalMemoryHandleTypeOpaqueFdBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalMemoryHandleTypeOpaqueWin32Bit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalMemoryHandleTypeOpaqueWin32KmtBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkExternalMemoryHandleTypeD3d11TextureBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkExternalMemoryHandleTypeD3d11TextureKmtBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkExternalMemoryHandleTypeD3d12HeapBit = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkExternalMemoryHandleTypeD3d12ResourceBit = 64,
+
+        /// <summary>
+        /// Hex value 0x00000200
+        /// <summary>
         VkExternalMemoryHandleTypeDmaBufBitExt = 512,
+
+        /// <summary>
+        /// Hex value 0x00000400
+        /// <summary>
         VkExternalMemoryHandleTypeAndroidHardwareBufferBitAndroid = 1024,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkExternalMemoryHandleTypeHostAllocationBitExt = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkExternalMemoryHandleTypeHostMappedForeignMemoryBitExt = 256,
+
+        /// <summary>
+        /// Hex value 0x00000800
+        /// <summary>
         VkExternalMemoryHandleTypeZirconVmoBitFuchsia = 2048,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkExternalMemoryHandleTypeRdmaAddressBitNv = 4096,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalMemoryHandleTypeOpaqueFdBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalMemoryHandleTypeOpaqueWin32BitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalMemoryHandleTypeOpaqueWin32KmtBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkExternalMemoryHandleTypeD3d11TextureBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkExternalMemoryHandleTypeD3d11TextureKmtBitKhr = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkExternalMemoryHandleTypeD3d12HeapBitKhr = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkExternalMemoryHandleTypeD3d12ResourceBitKhr = 64,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkExternalMemoryHandleTypeFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkExternalMemoryFeatureFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalMemoryFeatureDedicatedOnlyBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalMemoryFeatureExportableBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalMemoryFeatureImportableBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalMemoryFeatureDedicatedOnlyBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalMemoryFeatureExportableBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalMemoryFeatureImportableBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkExternalMemoryFeatureFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkExternalFenceHandleTypeFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalFenceHandleTypeOpaqueFdBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalFenceHandleTypeOpaqueWin32Bit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalFenceHandleTypeOpaqueWin32KmtBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkExternalFenceHandleTypeSyncFdBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalFenceHandleTypeOpaqueFdBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalFenceHandleTypeOpaqueWin32BitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalFenceHandleTypeOpaqueWin32KmtBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkExternalFenceHandleTypeSyncFdBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkExternalFenceHandleTypeFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkExternalFenceFeatureFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalFenceFeatureExportableBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalFenceFeatureImportableBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalFenceFeatureExportableBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalFenceFeatureImportableBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkExternalFenceFeatureFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkFenceImportFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkFenceImportTemporaryBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkFenceImportTemporaryBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkFenceImportFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkSemaphoreImportFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSemaphoreImportTemporaryBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSemaphoreImportTemporaryBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSemaphoreImportFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkExternalSemaphoreHandleTypeFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalSemaphoreHandleTypeOpaqueFdBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalSemaphoreHandleTypeOpaqueWin32Bit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalSemaphoreHandleTypeOpaqueWin32KmtBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkExternalSemaphoreHandleTypeD3d12FenceBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkExternalSemaphoreHandleTypeSyncFdBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkExternalSemaphoreHandleTypeZirconEventBitFuchsia = 128,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkExternalSemaphoreHandleTypeD3d11FenceBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalSemaphoreHandleTypeOpaqueFdBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalSemaphoreHandleTypeOpaqueWin32BitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalSemaphoreHandleTypeOpaqueWin32KmtBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkExternalSemaphoreHandleTypeD3d12FenceBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkExternalSemaphoreHandleTypeSyncFdBitKhr = 16,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkExternalSemaphoreHandleTypeFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkExternalSemaphoreFeatureFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalSemaphoreFeatureExportableBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalSemaphoreFeatureImportableBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalSemaphoreFeatureExportableBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalSemaphoreFeatureImportableBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkExternalSemaphoreFeatureFlagBitsMaxEnum = 2147483647,
     }
 
@@ -2498,88 +4374,300 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkResolveModeFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkResolveModeNone = 0,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkResolveModeSampleZeroBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkResolveModeAverageBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkResolveModeMinBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkResolveModeMaxBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000000
+        /// <summary>
         VkResolveModeNoneKhr = 0,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkResolveModeSampleZeroBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkResolveModeAverageBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkResolveModeMinBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkResolveModeMaxBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkResolveModeFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkDescriptorBindingFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDescriptorBindingUpdateAfterBindBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDescriptorBindingUpdateUnusedWhilePendingBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDescriptorBindingPartiallyBoundBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkDescriptorBindingVariableDescriptorCountBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDescriptorBindingUpdateAfterBindBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDescriptorBindingUpdateUnusedWhilePendingBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDescriptorBindingPartiallyBoundBitExt = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkDescriptorBindingVariableDescriptorCountBitExt = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDescriptorBindingFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkSemaphoreWaitFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSemaphoreWaitAnyBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSemaphoreWaitAnyBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSemaphoreWaitFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkPipelineCreationFeedbackFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineCreationFeedbackValidBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPipelineCreationFeedbackApplicationPipelineCacheHitBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkPipelineCreationFeedbackBasePipelineAccelerationBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPipelineCreationFeedbackValidBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPipelineCreationFeedbackApplicationPipelineCacheHitBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkPipelineCreationFeedbackBasePipelineAccelerationBitExt = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPipelineCreationFeedbackFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkToolPurposeFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkToolPurposeValidationBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkToolPurposeProfilingBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkToolPurposeTracingBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkToolPurposeAdditionalFeaturesBit = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkToolPurposeModifyingFeaturesBit = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkToolPurposeDebugReportingBitExt = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkToolPurposeDebugMarkersBitExt = 64,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkToolPurposeValidationBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkToolPurposeProfilingBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkToolPurposeTracingBitExt = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkToolPurposeAdditionalFeaturesBitExt = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkToolPurposeModifyingFeaturesBitExt = 16,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkToolPurposeFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkSubmitFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSubmitProtectedBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSubmitProtectedBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSubmitFlagBitsMaxEnum = 2147483647,
     }
 
     [Flags]
     internal enum VkRenderingFlagBits
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkRenderingContentsSecondaryCommandBuffersBit = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkRenderingSuspendingBit = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkRenderingResumingBit = 4,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkRenderingContentsSecondaryCommandBuffersBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkRenderingSuspendingBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkRenderingResumingBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkRenderingFlagBitsMaxEnum = 2147483647,
     }
 
@@ -2620,54 +4708,170 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkSurfaceTransformFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSurfaceTransformIdentityBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkSurfaceTransformRotate90BitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkSurfaceTransformRotate180BitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkSurfaceTransformRotate270BitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkSurfaceTransformHorizontalMirrorBitKhr = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkSurfaceTransformHorizontalMirrorRotate90BitKhr = 32,
+
+        /// <summary>
+        /// Hex value 0x00000040
+        /// <summary>
         VkSurfaceTransformHorizontalMirrorRotate180BitKhr = 64,
+
+        /// <summary>
+        /// Hex value 0x00000080
+        /// <summary>
         VkSurfaceTransformHorizontalMirrorRotate270BitKhr = 128,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkSurfaceTransformInheritBitKhr = 256,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSurfaceTransformFlagBitsMaxEnumKhr = 2147483647,
     }
 
     [Flags]
     internal enum VkCompositeAlphaFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkCompositeAlphaOpaqueBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkCompositeAlphaPreMultipliedBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkCompositeAlphaPostMultipliedBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkCompositeAlphaInheritBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkCompositeAlphaFlagBitsMaxEnumKhr = 2147483647,
     }
 
     [Flags]
     internal enum VkSwapchainCreateFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSwapchainCreateSplitInstanceBindRegionsBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkSwapchainCreateProtectedBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkSwapchainCreateMutableFormatBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSwapchainCreateFlagBitsMaxEnumKhr = 2147483647,
     }
 
     [Flags]
     internal enum VkDeviceGroupPresentModeFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDeviceGroupPresentModeLocalBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDeviceGroupPresentModeRemoteBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDeviceGroupPresentModeSumBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkDeviceGroupPresentModeLocalMultiDeviceBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDeviceGroupPresentModeFlagBitsMaxEnumKhr = 2147483647,
     }
 
     [Flags]
     internal enum VkDisplayPlaneAlphaFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDisplayPlaneAlphaOpaqueBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDisplayPlaneAlphaGlobalBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDisplayPlaneAlphaPerPixelBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkDisplayPlaneAlphaPerPixelPremultipliedBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDisplayPlaneAlphaFlagBitsMaxEnumKhr = 2147483647,
     }
 
@@ -2712,16 +4916,40 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkPerformanceCounterDescriptionFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPerformanceCounterDescriptionPerformanceImpactingBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPerformanceCounterDescriptionConcurrentlyImpactedBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkPerformanceCounterDescriptionPerformanceImpactingKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkPerformanceCounterDescriptionConcurrentlyImpactedKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPerformanceCounterDescriptionFlagBitsMaxEnumKhr = 2147483647,
     }
 
     [Flags]
     internal enum VkAcquireProfilingLockFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkAcquireProfilingLockFlagBitsMaxEnumKhr = 2147483647,
     }
 
@@ -2808,11 +5036,35 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkDebugReportFlagBitsEXT
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDebugReportInformationBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDebugReportWarningBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDebugReportPerformanceWarningBitExt = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkDebugReportErrorBitExt = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkDebugReportDebugBitExt = 16,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDebugReportFlagBitsMaxEnumExt = 2147483647,
     }
 
@@ -2834,19 +5086,55 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkExternalMemoryHandleTypeFlagBitsNV
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalMemoryHandleTypeOpaqueWin32BitNv = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalMemoryHandleTypeOpaqueWin32KmtBitNv = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalMemoryHandleTypeD3d11ImageBitNv = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkExternalMemoryHandleTypeD3d11ImageKmtBitNv = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkExternalMemoryHandleTypeFlagBitsMaxEnumNv = 2147483647,
     }
 
     [Flags]
     internal enum VkExternalMemoryFeatureFlagBitsNV
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkExternalMemoryFeatureDedicatedOnlyBitNv = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkExternalMemoryFeatureExportableBitNv = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkExternalMemoryFeatureImportableBitNv = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkExternalMemoryFeatureFlagBitsMaxEnumNv = 2147483647,
     }
 
@@ -2860,15 +5148,35 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkConditionalRenderingFlagBitsEXT
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkConditionalRenderingInvertedBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkConditionalRenderingFlagBitsMaxEnumExt = 2147483647,
     }
 
     [Flags]
     internal enum VkSurfaceCounterFlagBitsEXT
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSurfaceCounterVblankBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkSurfaceCounterVblankExt = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkSurfaceCounterFlagBitsMaxEnumExt = 2147483647,
     }
 
@@ -2923,19 +5231,55 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkDebugUtilsMessageSeverityFlagBitsEXT
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDebugUtilsMessageSeverityVerboseBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkDebugUtilsMessageSeverityInfoBitExt = 16,
+
+        /// <summary>
+        /// Hex value 0x00000100
+        /// <summary>
         VkDebugUtilsMessageSeverityWarningBitExt = 256,
+
+        /// <summary>
+        /// Hex value 0x00001000
+        /// <summary>
         VkDebugUtilsMessageSeverityErrorBitExt = 4096,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDebugUtilsMessageSeverityFlagBitsMaxEnumExt = 2147483647,
     }
 
     [Flags]
     internal enum VkDebugUtilsMessageTypeFlagBitsEXT
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDebugUtilsMessageTypeGeneralBitExt = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDebugUtilsMessageTypeValidationBitExt = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDebugUtilsMessageTypePerformanceBitExt = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDebugUtilsMessageTypeFlagBitsMaxEnumExt = 2147483647,
     }
 
@@ -3041,48 +5385,160 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkGeometryFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkGeometryOpaqueBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkGeometryNoDuplicateAnyHitInvocationBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkGeometryOpaqueBitNv = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkGeometryNoDuplicateAnyHitInvocationBitNv = 2,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkGeometryFlagBitsMaxEnumKhr = 2147483647,
     }
 
     [Flags]
     internal enum VkGeometryInstanceFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkGeometryInstanceTriangleFacingCullDisableBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkGeometryInstanceTriangleFlipFacingBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkGeometryInstanceForceOpaqueBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkGeometryInstanceForceNoOpaqueBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkGeometryInstanceTriangleFrontCounterclockwiseBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkGeometryInstanceTriangleCullDisableBitNv = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkGeometryInstanceTriangleFrontCounterclockwiseBitNv = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkGeometryInstanceForceOpaqueBitNv = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkGeometryInstanceForceNoOpaqueBitNv = 8,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkGeometryInstanceFlagBitsMaxEnumKhr = 2147483647,
     }
 
     [Flags]
     internal enum VkBuildAccelerationStructureFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkBuildAccelerationStructureAllowUpdateBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkBuildAccelerationStructureAllowCompactionBitKhr = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkBuildAccelerationStructurePreferFastTraceBitKhr = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkBuildAccelerationStructurePreferFastBuildBitKhr = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkBuildAccelerationStructureLowMemoryBitKhr = 16,
+
+        /// <summary>
+        /// Hex value 0x00000020
+        /// <summary>
         VkBuildAccelerationStructureMotionBitNv = 32,
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkBuildAccelerationStructureAllowUpdateBitNv = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkBuildAccelerationStructureAllowCompactionBitNv = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkBuildAccelerationStructurePreferFastTraceBitNv = 4,
+
+        /// <summary>
+        /// Hex value 0x00000008
+        /// <summary>
         VkBuildAccelerationStructurePreferFastBuildBitNv = 8,
+
+        /// <summary>
+        /// Hex value 0x00000010
+        /// <summary>
         VkBuildAccelerationStructureLowMemoryBitNv = 16,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkBuildAccelerationStructureFlagBitsMaxEnumKhr = 2147483647,
     }
 
     [Flags]
     internal enum VkPipelineCompilerControlFlagBitsAMD
     {
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkPipelineCompilerControlFlagBitsMaxEnumAmd = 2147483647,
     }
 
@@ -3142,6 +5598,10 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkShaderCorePropertiesFlagBitsAMD
     {
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkShaderCorePropertiesFlagBitsMaxEnumAmd = 2147483647,
     }
 
@@ -3232,16 +5692,40 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkIndirectStateFlagBitsNV
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkIndirectStateFlagFrontfaceBitNv = 1,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkIndirectStateFlagBitsMaxEnumNv = 2147483647,
     }
 
     [Flags]
     internal enum VkIndirectCommandsLayoutUsageFlagBitsNV
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkIndirectCommandsLayoutUsageExplicitPreprocessBitNv = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkIndirectCommandsLayoutUsageIndexedSequencesBitNv = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkIndirectCommandsLayoutUsageUnorderedSequencesBitNv = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkIndirectCommandsLayoutUsageFlagBitsMaxEnumNv = 2147483647,
     }
 
@@ -3258,9 +5742,25 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkDeviceDiagnosticsConfigFlagBitsNV
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkDeviceDiagnosticsConfigEnableShaderDebugInfoBitNv = 1,
+
+        /// <summary>
+        /// Hex value 0x00000002
+        /// <summary>
         VkDeviceDiagnosticsConfigEnableResourceTrackingBitNv = 2,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkDeviceDiagnosticsConfigEnableAutomaticCheckpointsBitNv = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkDeviceDiagnosticsConfigFlagBitsMaxEnumNv = 2147483647,
     }
 
@@ -3321,8 +5821,20 @@ namespace Tea2D.Vulkan
     [Flags]
     internal enum VkAccelerationStructureCreateFlagBitsKHR
     {
+
+        /// <summary>
+        /// Hex value 0x00000001
+        /// <summary>
         VkAccelerationStructureCreateDeviceAddressCaptureReplayBitKhr = 1,
+
+        /// <summary>
+        /// Hex value 0x00000004
+        /// <summary>
         VkAccelerationStructureCreateMotionBitNv = 4,
+
+        /// <summary>
+        /// Hex value 0x7fffffff
+        /// <summary>
         VkAccelerationStructureCreateFlagBitsMaxEnumKhr = 2147483647,
     }
 

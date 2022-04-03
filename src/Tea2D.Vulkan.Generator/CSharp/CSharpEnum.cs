@@ -42,7 +42,7 @@ namespace Tea2D.Vulkan.Generator.CSharp
                 Name.EndsWith("FlagBitsNN");
 
             if (isBitmask)
-            {
+            { 
                 writer.WriteLine("[Flags]");
             }
 
@@ -54,6 +54,14 @@ namespace Tea2D.Vulkan.Generator.CSharp
                     if (((CppEnumItem) enumItem.CppElement).Name == "VK_STRUCTURE_TYPE_SURFACE_CAPABILITIES_2_EXT")
                         continue;
 
+                    if (isBitmask)
+                    {
+                        writer.WriteLine();
+                        writer.WriteLine("/// <summary>");
+                        writer.WriteLine($"/// Hex value 0x{enumItem.Value:x8}");
+                        writer.WriteLine("/// <summary>");
+                    }
+                    
                     enumItem.Write(writer);
                 }
             }
