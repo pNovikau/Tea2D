@@ -6,7 +6,6 @@ using Tea2D.Core.Diagnostics.Logging;
 
 namespace Tea2D.Graphics.Vulkan
 {
-    //TODO: rework!!!
     public sealed class DebugMessenger : IDisposable
     {
         private readonly VkInstance _instance;
@@ -20,7 +19,7 @@ namespace Tea2D.Graphics.Vulkan
 
         [Conditional("DEBUG")]
         // ReSharper disable once RedundantAssignment
-        public static unsafe void SetupDebugMessenger(ref VkInstance instance, ref DebugMessenger debugMessenger)
+        public static void SetupDebugMessenger(ref VkInstance instance, ref DebugMessenger debugMessenger)
         {
             var messengerExt = VkDebugUtilsMessengerEXT.Null;
             
@@ -36,43 +35,14 @@ namespace Tea2D.Graphics.Vulkan
             debugMessenger = new DebugMessenger(instance, messengerExt);
         }
         
-        private static unsafe VkBool32 HandleCallback(
-            VkDebugUtilsMessageSeverityFlagsEXT messageSeverity,
-            VkDebugUtilsMessageTypeFlagsEXT messageType,
-            VkDebugUtilsMessengerCallbackDataEXT pCallbackData,
-            void* pUserData)
+        private static void HandleCallback(string message, LogLevel logLevel)
         {
-            switch (messageSeverity)
-            {
-                case VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT:
-                    Logger.Instance.LogTrace($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-                    break;
-                case VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT:
-                    Logger.Instance.LogInfo($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-                    break;
-                case VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT:
-                    Logger.Instance.LogWarning($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-                    break;
-                default:
-                    Logger.Instance.LogError($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-                    break;
-            }
-
-            return false;
-        }
-        
-        private static unsafe string GetString(byte* stringStart)
-        {
-            var characters = 0;
-            while (stringStart[characters] != 0)
-                characters++;
-
-            return Encoding.UTF8.GetString(stringStart, characters);
+            Logger.Instance.Log(in logLevel, $"VulkanApi.DebugCallback: Validation layer `{message}`");
         }
 
         public void Dispose()
         {
-            VulkanApi.DestroyDebugMessenger(_instance, _debugMessenger);
+            VulkanApi.DestroyDebugMessenger(in _instance, in _debugMessenger);
         }
     }
 }

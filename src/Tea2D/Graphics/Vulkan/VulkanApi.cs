@@ -67,6 +67,20 @@ namespace Tea2D.Graphics.Vulkan
 
             return extensions;
         }
+        
+        public static Span<VkPhysicalDevice> EnumeratePhysicalDevices(ref VkInstance instance)
+        {
+            uint deviceCount;
+            VulkanNative.vkEnumeratePhysicalDevices(instance, &deviceCount, null);
+            
+            if (deviceCount == 0)
+                return Span<VkPhysicalDevice>.Empty;
+            
+            var physicalDevices = stackalloc VkPhysicalDevice[(int) deviceCount];
+            VulkanNative.vkEnumeratePhysicalDevices(instance, &deviceCount, physicalDevices);
+
+            return new Span<VkPhysicalDevice>(physicalDevices, (int) deviceCount);
+        }
 
 
         [Conditional("DEBUG")]

@@ -10,5 +10,6 @@ namespace Tea2D.Core.Diagnostics.Logging
         void LogWarning(ReadOnlySpan<char> message);
         void LogError(ReadOnlySpan<char> message);
         void LogFatal(ReadOnlySpan<char> message);
+        void Log(in LogLevel level, ReadOnlySpan<char> message);
     }
 }

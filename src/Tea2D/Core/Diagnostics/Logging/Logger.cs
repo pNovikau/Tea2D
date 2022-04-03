@@ -23,8 +23,7 @@ namespace Tea2D.Core.Diagnostics.Logging
 
         public void LogFatal(ReadOnlySpan<char> message) => Log(LogLevel.Fatal, message);
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static void Log(in LogLevel level, ReadOnlySpan<char> message)
+        public void Log(in LogLevel level, ReadOnlySpan<char> message)
         {
             Debug.Assert(!Monitor.IsEntered(Lock));
 
