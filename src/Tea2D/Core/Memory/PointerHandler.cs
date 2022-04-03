@@ -24,7 +24,6 @@ namespace Tea2D.Core.Memory
         public static bool operator ==(PointerHandler<T> left, PointerHandler<T> right) => left._pointer == right._pointer;
         public static bool operator !=(PointerHandler<T> left, PointerHandler<T> right) => !(left == right);
 
-        public static implicit operator Span<T>(PointerHandler<T> pointerHandler) => new(pointerHandler._pointer, 0);
         public static explicit operator T*(PointerHandler<T> pointerHandler) => pointerHandler._pointer;
 
         public void Dispose() => _pointer = null;

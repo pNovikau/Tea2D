@@ -6,7 +6,7 @@ using SdlWindow = Silk.NET.SDL.Window;
 
 namespace Tea2D.Graphics.SDL
 {
-    public static class SdlApi
+    public static unsafe class SdlApi
     {
         private static readonly Sdl Sdl; 
         
@@ -16,7 +16,7 @@ namespace Tea2D.Graphics.SDL
             Sdl = SdlProvider.SDL.Value;
         }
 
-        public static unsafe PointerHandler<SdlWindow> CreateWindow(WindowFlags flags)
+        public static PointerHandler<SdlWindow> CreateWindow(WindowFlags flags)
         {
             var windowPointer = Sdl.CreateWindow(string.Empty, Sdl.WindowposUndefined, Sdl.WindowposUndefined, 640, 480, (uint) flags);
 
@@ -37,28 +37,28 @@ namespace Tea2D.Graphics.SDL
 
         public static void WarpMouseInWindow(ref PointerHandler<SdlWindow> pointerHandler, Vector2I vector)
         {
-            Sdl.WarpMouseInWindow(pointerHandler, vector.X, vector.Y);
+            Sdl.WarpMouseInWindow((SdlWindow*)pointerHandler, vector.X, vector.Y);
         }
 
         public static bool IsWindowVisible(ref PointerHandler<SdlWindow> pointerHandler)
         {
-            return (Sdl.GetWindowFlags(pointerHandler) & (uint) WindowFlags.WindowShown) != 0;
+            return (Sdl.GetWindowFlags((SdlWindow*)pointerHandler) & (uint) WindowFlags.WindowShown) != 0;
         }
 
         public static void SetWindowVisibility(ref PointerHandler<SdlWindow> pointerHandler, bool isVisible)
         {
             if (isVisible)
-                Sdl.ShowWindow(pointerHandler);
+                Sdl.ShowWindow((SdlWindow*)pointerHandler);
             else
-                Sdl.HideWindow(pointerHandler);
+                Sdl.HideWindow((SdlWindow*)pointerHandler);
         }
 
         public static bool IsWindowFocused(ref PointerHandler<SdlWindow> pointerHandler)
         {
-            return (Sdl.GetWindowFlags(pointerHandler) & (uint) WindowFlags.WindowInputFocus) != 0;
+            return (Sdl.GetWindowFlags((SdlWindow*)pointerHandler) & (uint) WindowFlags.WindowInputFocus) != 0;
         }
 
-        public static unsafe string GetWindowTitle(ref PointerHandler<SdlWindow> pointerHandler)
+        public static string GetWindowTitle(ref PointerHandler<SdlWindow> pointerHandler)
         {
             return Sdl.GetWindowTitleS((SdlWindow*)pointerHandler);
         }
@@ -67,12 +67,27 @@ namespace Tea2D.Graphics.SDL
         {
             //TODO: rework!!!
             var str = new string(title);
-            Sdl.SetWindowTitle(pointerHandler, str);
+            Sdl.SetWindowTitle((SdlWindow*)pointerHandler, str);
+        }
+
+        public static Vector2I GetWindowPosition(ref PointerHandler<SdlWindow> pointerHandler)
+        {
+            var x = 0;
+            var y = 0;
+
+            Sdl.GetWindowPosition((SdlWindow*)pointerHandler, ref x, ref y);
+
+            return new Vector2I(x, y);
+        }
+
+        public static void SetWindowPosition(ref PointerHandler<SdlWindow> pointerHandler, Vector2I vector)
+        {
+            Sdl.SetWindowPosition((SdlWindow*)pointerHandler, vector.X, vector.Y);
         }
 
         public static void DestroyWindow(ref PointerHandler<SdlWindow> pointerHandler)
         {
-            Sdl.DestroyWindow(pointerHandler);
+            Sdl.DestroyWindow((SdlWindow*)pointerHandler);
         }
     }
 }

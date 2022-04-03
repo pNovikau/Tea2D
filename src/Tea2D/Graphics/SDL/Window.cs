@@ -33,6 +33,12 @@ namespace Tea2D.Graphics.SDL
 
         #region IWindow
 
+        public Vector2I Position
+        {
+            get => SdlApi.GetWindowPosition(ref _windowPointerHandler);
+            set => SdlApi.SetWindowPosition(ref _windowPointerHandler, value);
+        }
+        
         public Vector2I CursorPosition
         {
             get => SdlApi.GetMouseState();

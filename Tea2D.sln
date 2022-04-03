@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D", "src\Tea2D\Tea2D.cs
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.Tests", "test\Tea2D.Tests\Tea2D.Tests.csproj", "{522941FF-F479-4E97-B700-9E788A32203F}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{59DC496F-12D1-4F2F-B366-3FC48255E4F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGame", "examples\SimpleGame\SimpleGame.csproj", "{3B583D46-A616-4C87-AF67-071E7252652A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,12 @@ Global
 		{522941FF-F479-4E97-B700-9E788A32203F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{522941FF-F479-4E97-B700-9E788A32203F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{522941FF-F479-4E97-B700-9E788A32203F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B583D46-A616-4C87-AF67-071E7252652A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B583D46-A616-4C87-AF67-071E7252652A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B583D46-A616-4C87-AF67-071E7252652A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B583D46-A616-4C87-AF67-071E7252652A}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{3B583D46-A616-4C87-AF67-071E7252652A} = {59DC496F-12D1-4F2F-B366-3FC48255E4F7}
 	EndGlobalSection
 EndGlobal

@@ -1,13 +1,15 @@
 ﻿using System;
 using Silk.NET.SDL;
 using Tea2D.Common;
+using Tea2D.Graphics;
 
-public delegate void WindowEventHandler<TEvent>(object sender, in TEvent @event) where TEvent : struct;
+public delegate void WindowEventHandler<TEvent>(IWindow sender, in TEvent @event) where TEvent : struct;
 
 namespace Tea2D.Graphics
 {
     public interface IWindow : IDisposable
     {
+        Vector2I Position { get; set; }
         Vector2I CursorPosition { get; set; }
         bool Visible { get; set; }
         bool Focused { get; }
