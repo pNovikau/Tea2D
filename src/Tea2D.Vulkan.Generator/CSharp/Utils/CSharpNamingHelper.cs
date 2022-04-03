@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 
 namespace Tea2D.Vulkan.Generator.CSharp.Utils
 {
@@ -6,13 +7,13 @@ namespace Tea2D.Vulkan.Generator.CSharp.Utils
     {
         public const string UnsafeKeyword = "unsafe";
         public const string FixedKeyword = "fixed";
+        public const string ObjectKeyword = "object";
 
-        public static string NormalizeFiledName(string name, CSharpElementVisibility visibility)
+        public static string NormalizeFiledName(string name)
         {
-            if (visibility == CSharpElementVisibility.Public)
-                return char.ToUpper(name[0]) + name.Substring(1);
-
-            return '_' + name;
+            return name.Equals(ObjectKeyword, StringComparison.OrdinalIgnoreCase)
+                ? '@' + name
+                : name;
         }
 
         public static string NormalizeEnumItemName(string name)

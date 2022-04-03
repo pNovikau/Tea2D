@@ -28,7 +28,7 @@ namespace Tea2D.Vulkan.Generator
 
                 sourceWriter.WriteLine();
             }
-
+            
             IDisposable? enumBlock = null;
             foreach (var cppField in compilation.Fields)
             {

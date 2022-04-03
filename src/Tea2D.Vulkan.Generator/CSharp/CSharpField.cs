@@ -28,7 +28,7 @@ namespace Tea2D.Vulkan.Generator.CSharp
             }
         }
 
-        public string Name => CSharpNamingHelper.NormalizeFiledName(_cppField.Name, Visibility);
+        public string Name => CSharpNamingHelper.NormalizeFiledName(_cppField.Name);
         public CSharpType Type { get; }
 
         public bool IsCanBeFixed =>
