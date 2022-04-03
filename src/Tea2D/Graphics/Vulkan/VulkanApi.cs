@@ -7,7 +7,7 @@ using Tea2D.Core.Diagnostics.Logging;
 
 namespace Tea2D.Graphics.Vulkan
 {
-    internal static unsafe class VulkanApi
+    internal static unsafe partial class VulkanApi
     {
         private static readonly string[] ValidationLayers = {"VK_LAYER_KHRONOS_validation"};
 
@@ -54,6 +54,7 @@ namespace Tea2D.Graphics.Vulkan
 
             return vulkanInstance;
         }
+
 
         public static string[] GetRequiredInstanceExtensions()
         {
@@ -105,28 +106,7 @@ namespace Tea2D.Graphics.Vulkan
                 Logger.Instance.Debug($"VulkanApi: Extension `{GetString(extensions[i].extensionName)}` version `{extensions[i].specVersion}`");
             }
         }
-        
-        private delegate VkBool32 DebugCallbackDelegate(VkDebugUtilsMessageSeverityFlagsEXT messageSeverity, VkDebugUtilsMessageTypeFlagsEXT messageType, VkDebugUtilsMessengerCallbackDataEXT pCallbackData, void* pUserData);
-        private static DebugCallbackDelegate CallbackDelegate = new DebugCallbackDelegate(DebugCallback);
 
-        private static VkBool32 DebugCallback(
-            VkDebugUtilsMessageSeverityFlagsEXT messageSeverity, 
-            VkDebugUtilsMessageTypeFlagsEXT messageType, 
-            VkDebugUtilsMessengerCallbackDataEXT pCallbackData, 
-            void* pUserData)
-        {
-            if (messageSeverity == VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_VERBOSE_BIT_EXT)
-                Logger.Instance.LogTrace($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-            else if (messageSeverity == VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_INFO_BIT_EXT)
-                Logger.Instance.LogInfo($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-            else if (messageSeverity == VkDebugUtilsMessageSeverityFlagsEXT.VK_DEBUG_UTILS_MESSAGE_SEVERITY_WARNING_BIT_EXT)
-                Logger.Instance.LogWarning($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-            else
-                Logger.Instance.LogError($"VulkanApi.DebugCallback: Validation layer `{GetString(pCallbackData.pMessage)}`");
-
-            return false;
-        }
-        
         private static bool CheckValidationLayerSupport()
         {
             uint layerCount;
@@ -158,7 +138,10 @@ namespace Tea2D.Graphics.Vulkan
                 }
 
                 if (!layerFound)
+                {
+                    Logger.Instance.LogError($"VulkanApi: Validation layer `{ValidationLayers[i]}` missing");
                     return false;
+                }
             }
 
             return true;

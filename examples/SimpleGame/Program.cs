@@ -12,6 +12,8 @@ namespace SimpleGame
             Console.WriteLine("Hello");
             var provider = new VulkanInstanceProvider();
             var instance = provider.Instance.Value;
+            
+            instance.Dispose();
         }
         
         /*public static void Main()
