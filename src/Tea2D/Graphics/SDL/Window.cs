@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using Silk.NET.SDL;
 using Tea2D.Common;
 using Tea2D.Core.Diagnostics.Logging;
@@ -12,6 +12,7 @@ namespace Tea2D.Graphics.SDL
         private static readonly ILogger Logger = Core.Diagnostics.Logging.Logger.Instance;
 
         private PointerHandler<SdlWindow> _windowPointerHandler;
+        private PointerHandler<Renderer> _rendererPointerHandler;
 
         static Window()
         {
@@ -29,6 +30,8 @@ namespace Tea2D.Graphics.SDL
                 //TODO: log and throw exception
                 Logger.LogFatal("Error");
             }
+
+            _rendererPointerHandler = SdlApi.GetRenderer(ref _windowPointerHandler);
         }
 
         #region IWindow
@@ -60,6 +63,10 @@ namespace Tea2D.Graphics.SDL
             get => SdlApi.GetWindowTitle(ref _windowPointerHandler);
             set => SdlApi.SetWindowTitle(ref _windowPointerHandler, value);
         }
+
+        public event WindowEventHandler Update;
+
+        void IWindow.Update() => Update?.Invoke(this);
 
         public event WindowEventHandler<MouseButtonEvent> ButtonPressed;
         public event WindowEventHandler<MouseButtonEvent> ButtonReleased;
@@ -117,4 +124,4 @@ namespace Tea2D.Graphics.SDL
 
         #endregion
     }
-}
+}*/

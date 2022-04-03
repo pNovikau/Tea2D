@@ -1,8 +1,9 @@
-﻿using System;
+﻿/*using System;
 using Silk.NET.SDL;
 using Tea2D.Common;
 using Tea2D.Graphics;
 
+public delegate void WindowEventHandler(IWindow sender);
 public delegate void WindowEventHandler<TEvent>(IWindow sender, in TEvent @event) where TEvent : struct;
 
 namespace Tea2D.Graphics
@@ -18,6 +19,7 @@ namespace Tea2D.Graphics
         string Title { get; set; }
 
         bool DispatchEvent(in Event @event);
+        void Update();
 
         event WindowEventHandler<MouseButtonEvent> ButtonPressed;
         event WindowEventHandler<MouseButtonEvent> ButtonReleased;
@@ -26,4 +28,4 @@ namespace Tea2D.Graphics
         event WindowEventHandler<WindowEvent> FocusGained;
         event WindowEventHandler<WindowEvent> FocusLost;
     }
-}
+}*/

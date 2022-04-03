@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Silk.NET.SDL;
@@ -77,4 +77,4 @@ namespace Tea2D.Graphics.SDL
             CurrentWindow = null;
         }
     }
-}
+}*/

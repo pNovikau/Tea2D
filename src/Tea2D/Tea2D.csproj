@@ -6,8 +6,16 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Silk.NET.SDL" Version="2.13.0" />
-      <PackageReference Include="Silk.NET.Windowing" Version="2.13.0" />
+      <PackageReference Include="Evergine.Bindings.Vulkan" Version="2022.3.1.2" />
+      <PackageReference Include="glfw-net" Version="3.3.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <!-- IMPORTANT!!! -->
+      <!-- Add x64 and x32 support -->
+      <None Include="..\..\lib\glfw.dll">
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      </None>
     </ItemGroup>
 
 </Project>

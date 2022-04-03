@@ -1,16 +1,20 @@
 // See https://aka.ms/new-console-template for more information
 
 using System;
-using Silk.NET.SDL;
-using Tea2D.Graphics;
-using Tea2D.Graphics.SDL;
-using Window = Tea2D.Graphics.SDL.Window;
+using Tea2D.Graphics.Vulkan;
 
 namespace SimpleGame
 {
-    public class Program
+    public unsafe class Program
     {
         public static void Main()
+        {
+            Console.WriteLine("Hello");
+            var provider = new VulkanInstanceProvider();
+            var instance = provider.Instance.Value;
+        }
+        
+        /*public static void Main()
         {
             Console.WriteLine("Hello, World!");
 
@@ -43,12 +47,26 @@ namespace SimpleGame
             application.RegisterWindow(window1);
             application.RegisterWindow(window2);
             application.RegisterWindow(window3);
+
+            window1.Update += sender =>
+            {
+                var renderer = SdlProvider.SDL.Value.CreateRenderer((SdlWindow*) sender.PointerHandle, -1, (uint)RendererFlags.RendererAccelerated | (uint)RendererFlags.RendererPresentvsync);
+
+                SdlProvider.SDL.Value.RenderClear(renderer);
+                
+                SdlProvider.SDL.Value.RenderDrawLine(renderer, 0, 0, 100, 100);
+                
+                SdlProvider.SDL.Value.RenderPresent(renderer);
+            };
             
             bool @break = false;
 
             while (@break == false)
             {
                 application.DispatchEvents();
+
+                foreach (var window in application.Windows) 
+                    window.Update();
             }
             
             application.Dispose();
@@ -82,6 +100,6 @@ namespace SimpleGame
         public static void ButtonReleased(IWindow sender, in MouseButtonEvent @event)
         {
             Console.WriteLine($"[{sender.Title}] Button released: " + @event.Button + " X=" + @event.X + " Y=" + @event.Y);
-        }
+        }*/
     }
 }

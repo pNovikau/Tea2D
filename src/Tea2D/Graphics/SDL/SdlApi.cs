@@ -1,4 +1,4 @@
-﻿using System;
+﻿/*using System;
 using Silk.NET.SDL;
 using Tea2D.Common;
 using Tea2D.Core.Memory;
@@ -35,6 +35,11 @@ namespace Tea2D.Graphics.SDL
             return new Vector2I(x, y);
         }
 
+        public static PointerHandler<Renderer> GetRenderer(ref PointerHandler<SdlWindow> pointerHandler)
+        {
+            return new PointerHandler<Renderer>(Sdl.GetRenderer((SdlWindow*) pointerHandler));
+        }
+        
         public static void WarpMouseInWindow(ref PointerHandler<SdlWindow> pointerHandler, Vector2I vector)
         {
             Sdl.WarpMouseInWindow((SdlWindow*)pointerHandler, vector.X, vector.Y);
@@ -100,4 +105,4 @@ namespace Tea2D.Graphics.SDL
             return new PointerHandler<SdlWindow>(Sdl.GetWindowFromID(id));
         }
     }
-}
+}*/
