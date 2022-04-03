@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Buffers;
 using System.Diagnostics;
 using Tea2D.Core.Diagnostics.Logging;
 
@@ -32,9 +33,9 @@ namespace Tea2D.Core.Memory.Pools
             {
                 if (endIndex >= _rentedArray.Length)
                 {
-                    //TODO: allocate and return new array
-                    //TODO: add log
-                    return default;
+                    _logger.Debug($"ObjectPool<{typeof(T).FullName}>: Allocated a new array");
+
+                    return new RentedSpan<T>(new T[length], -1, length);
                 }
 
                 if (_rentedArray[endIndex])
@@ -60,15 +61,20 @@ namespace Tea2D.Core.Memory.Pools
 
             var span = _array.AsSpan().Slice(fixedIndex, length);
             Array.Fill(_rentedArray, true, fixedIndex, length);
-            
+
+            _logger.Trace($"ObjectPool<{typeof(T).FullName}>: rented an array size of {length} with start index {fixedIndex}");
+
             return new RentedSpan<T>(span, fixedIndex, length);
         }
 
         public void Return(in RentedSpan<T> rentedSpan)
         {
+            if (rentedSpan.StartIndex == -1)
+                return;
+
             Array.Fill(_rentedArray, false, rentedSpan.StartIndex, rentedSpan.Length);
-            
-            //TODO: add log
+
+            _logger.Trace($"ObjectPool<{typeof(T).FullName}>: returned an array size of {rentedSpan.Length} with start index {rentedSpan.StartIndex}");
         }
     }
 }

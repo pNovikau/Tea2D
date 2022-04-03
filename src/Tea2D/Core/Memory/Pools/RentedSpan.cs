@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 namespace Tea2D.Core.Memory.Pools
 {
     [StructLayout(LayoutKind.Sequential)]
+    [DebuggerDisplay("StartIndex: {StartIndex} Length: {Length}")]
     public readonly ref struct RentedSpan<T>
     {
         public readonly Span<T> Span;

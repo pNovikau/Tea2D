@@ -9,5 +9,11 @@ namespace Tea2D.Core.Diagnostics.Logging
         {
             logger.LogTrace(message);
         }
+
+        [System.Diagnostics.Conditional("DEBUG")]
+        public static void Debug(this ILogger logger, ReadOnlySpan<char> message)
+        {
+            logger.LogDebug(message);
+        }
     }
 }
