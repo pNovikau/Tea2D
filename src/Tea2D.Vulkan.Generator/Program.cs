@@ -2,6 +2,7 @@
 
 namespace Tea2D.Vulkan.Generator;
 
+//TODO: figure out how convert `typedef struct`
 //TODO: rework CSharp elements behaviour
 //TODO: create CSharp compilation instead of working with CSharp elements directly
 //TODO: add git submodule for the vulkan headers: https://github.com/KhronosGroup/Vulkan-Headers 
