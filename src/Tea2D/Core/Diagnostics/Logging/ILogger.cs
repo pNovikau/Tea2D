@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Tea2D.Core.Logging
+namespace Tea2D.Core.Diagnostics.Logging
 {
     public interface ILogger
     {

@@ -3,7 +3,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
 
-namespace Tea2D.Core.Logging
+namespace Tea2D.Core.Diagnostics.Logging
 {
     public class Logger : ILogger
     {

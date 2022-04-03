@@ -1,4 +1,4 @@
-﻿namespace Tea2D.Core.Logging
+﻿namespace Tea2D.Core.Diagnostics.Logging
 {
     internal enum LogLevel : byte
     {

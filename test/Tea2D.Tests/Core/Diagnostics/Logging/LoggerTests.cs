@@ -2,10 +2,10 @@
 using System.IO;
 using AutoFixture;
 using FluentAssertions;
-using Tea2D.Core.Logging;
+using Tea2D.Core.Diagnostics.Logging;
 using Xunit;
 
-namespace Tea2D.Tests.Core.Logging
+namespace Tea2D.Tests.Core.Diagnostics.Logging
 {
     public class LoggerTests
     {
