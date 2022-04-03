@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Buffers;
 using System.Diagnostics;
 using Tea2D.Core.Diagnostics.Logging;
 
