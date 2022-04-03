@@ -32,13 +32,6 @@ namespace Tea2D.Core.Memory.Pools
                 index += length;
                 rentedSpaceSpan = rentedSpan.Slice(index, length);
             } while (index < _rentedArray.Length && rentedSpaceSpan.LastIndexOf(true) != -1);
-            
-            while (index < _rentedArray.Length && 
-                   rentedSpaceSpan.LastIndexOf(true) != -1)
-            {
-                index += length;
-                rentedSpaceSpan = rentedSpan.Slice(index, length);
-            }
 
             if (index >= _rentedArray.Length)
             {
