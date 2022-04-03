@@ -1,53 +1,44 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using System.Diagnostics;
 using CppAst;
 
-namespace Tea2D.Vulkan.Generator.CSharp
+namespace Tea2D.Vulkan.Generator.CSharp;
+
+[DebuggerDisplay(nameof(DebuggerDisplay))]
+public class CSharpStruct : CSharpElement
 {
-    public class CSharpStruct : CSharpElement
+    public CSharpStruct(CppClass cppClass) : base(cppClass)
     {
-        private CSharpField[]? _fields;
+        Name = cppClass.Name;
+        IsUnion = cppClass.ClassKind == CppClassKind.Union;
+        Fields = cppClass.Fields
+            .Select(p => new CSharpField(p))
+            .ToArray();
+    }
 
-        public CSharpStruct(CppClass cppClass) : base(cppClass)
-        {
-        }
+    public IEnumerable<CSharpField> Fields { get; }
 
-        public IEnumerable<CSharpField> Fields
+    public string Name { get; }
+
+    public bool IsUnion { get; }
+        
+    private string DebuggerDisplay => $"public partial struct {Name}";
+
+    public override void Write(ISourceWriter writer)
+    {
+        var layoutKind = IsUnion
+            ? "LayoutKind.Explicit"
+            : "LayoutKind.Sequential";
+
+        writer.WriteLine($"[StructLayout({layoutKind})]");
+
+        using (writer.BeginBlock($"public partial struct {Name}"))
         {
-            get
+            foreach (var field in Fields)
             {
-                if (_fields != null)
-                    return _fields;
-
-                _fields = GetCppElement<CppClass>().Fields
-                    .Select(p => new CSharpField(p))
-                    .ToArray();
-
-                return _fields;
-            }
-        }
-
-        public string Name => GetCppElement<CppClass>().Name;
-
-        public bool IsUnion => GetCppElement<CppClass>().ClassKind == CppClassKind.Union;
-
-        public override void Write(ISourceWriter writer)
-        {
-            var layoutKind = IsUnion
-                ? "LayoutKind.Explicit"
-                : "LayoutKind.Sequential";
-
-            writer.WriteLine($"[StructLayout({layoutKind})]");
-
-            using (writer.CreateBlock($"internal partial struct {Name}"))
-            {
-                foreach (var field in Fields)
-                {
-                    if (IsUnion)
-                        writer.WriteLine("[FieldOffset(0)]");
+                if (IsUnion)
+                    writer.WriteLine("[FieldOffset(0)]");
                     
-                    field.Write(writer);
-                }
+                field.Write(writer);
             }
         }
     }

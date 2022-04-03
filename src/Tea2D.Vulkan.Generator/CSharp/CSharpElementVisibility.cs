@@ -1,10 +1,9 @@
-﻿namespace Tea2D.Vulkan.Generator.CSharp
+﻿namespace Tea2D.Vulkan.Generator.CSharp;
+
+public enum CSharpElementVisibility
 {
-    public enum CSharpElementVisibility
-    {
-        Public = 0,
-        Protected = 1,
-        Internal = 2,
-        Private = 3
-    }
+    Public = 0,
+    Protected = 1,
+    Internal = 2,
+    Private = 3
 }

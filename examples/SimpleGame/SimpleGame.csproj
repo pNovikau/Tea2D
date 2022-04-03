@@ -2,13 +2,13 @@
 
     <PropertyGroup>
         <OutputType>Exe</OutputType>
-        <TargetFramework>net5.0</TargetFramework>
-        <LangVersion>9</LangVersion>
+        <TargetFramework>net6.0</TargetFramework>
+        <LangVersion>default</LangVersion>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\Tea2D\Tea2D.csproj" />
+      <ProjectReference Include="..\..\src\Tea2D.Vulkan\Tea2D.Vulkan.csproj" />
     </ItemGroup>
 
 </Project>

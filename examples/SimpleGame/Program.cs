@@ -1,19 +1,23 @@
 // See https://aka.ms/new-console-template for more information
 
 using System;
-using Tea2D.Graphics.Vulkan;
+using System.Runtime.InteropServices;
+using Tea2D.Vulkan;
 
 namespace SimpleGame
 {
+    
     public unsafe class Program
     {
         public static void Main()
         {
-            Console.WriteLine("Hello");
-            var provider = new VulkanInstanceProvider();
-            var instance = provider.Instance.Value;
+            VulkanNative.Initialize();
             
-            instance.Dispose();
+            Console.WriteLine("Hello");
+            //var provider = new VulkanInstanceProvider();
+            //var instance = provider.Instance.Value;
+            //
+            //instance.Dispose();
         }
         
         /*public static void Main()
