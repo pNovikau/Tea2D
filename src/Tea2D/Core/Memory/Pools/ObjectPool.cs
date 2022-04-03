@@ -4,7 +4,6 @@ using Tea2D.Core.Diagnostics.Logging;
 
 namespace Tea2D.Core.Memory.Pools
 {
-    //TODO: cover with tests
     public class ObjectPool<T>
     {
         private readonly ILogger _logger = Logger.Instance;
@@ -24,46 +23,36 @@ namespace Tea2D.Core.Memory.Pools
         {
             Debug.Assert(length > 0, "length > 0");
 
-            var fixedIndex = 0;
-            var startIndex = 0;
-            var endIndex = length - 1;
+            var rentedSpan = _rentedArray.AsSpan();
+            Span<bool> rentedSpaceSpan;
+            var index = length * -1;
 
-            while (startIndex < endIndex)
+            do
             {
-                if (endIndex >= _rentedArray.Length)
-                {
-                    _logger.Debug($"ObjectPool<{typeof(T).FullName}>: Allocated a new array");
-
-                    return new RentedSpan<T>(new T[length], -1, length);
-                }
-
-                if (_rentedArray[endIndex])
-                {
-                    startIndex = endIndex + 1;
-                    endIndex += startIndex;
-
-                    fixedIndex = startIndex;
-                }
-                else if (_rentedArray[startIndex])
-                {
-                    ++startIndex;
-                    ++endIndex;
-
-                    ++fixedIndex;
-                }
-                else
-                {
-                    ++startIndex;
-                    --endIndex;
-                }
+                index += length;
+                rentedSpaceSpan = rentedSpan.Slice(index, length);
+            } while (index < _rentedArray.Length && rentedSpaceSpan.LastIndexOf(true) != -1);
+            
+            while (index < _rentedArray.Length && 
+                   rentedSpaceSpan.LastIndexOf(true) != -1)
+            {
+                index += length;
+                rentedSpaceSpan = rentedSpan.Slice(index, length);
             }
 
-            var span = _array.AsSpan().Slice(fixedIndex, length);
-            Array.Fill(_rentedArray, true, fixedIndex, length);
+            if (index >= _rentedArray.Length)
+            {
+                _logger.Debug($"ObjectPool<{typeof(T).FullName}>: Allocated a new array");
+                
+                return new RentedSpan<T>(new T[length], -1, length);
+            }
 
-            _logger.Trace($"ObjectPool<{typeof(T).FullName}>: rented an array size of {length} with start index {fixedIndex}");
-
-            return new RentedSpan<T>(span, fixedIndex, length);
+            var span = _array.AsSpan().Slice(index, length);
+            rentedSpaceSpan.Fill(true);
+            
+            _logger.Trace($"ObjectPool<{typeof(T).FullName}>: rented an array size of {length} with start index {index}");
+            
+            return new RentedSpan<T>(span, index, length);
         }
 
         public void Return(in RentedSpan<T> rentedSpan)
@@ -71,7 +60,7 @@ namespace Tea2D.Core.Memory.Pools
             if (rentedSpan.StartIndex == -1)
                 return;
 
-            Array.Fill(_rentedArray, false, rentedSpan.StartIndex, rentedSpan.Length);
+            _rentedArray.AsSpan().Slice(rentedSpan.StartIndex, rentedSpan.Length).Fill(false);
 
             _logger.Trace($"ObjectPool<{typeof(T).FullName}>: returned an array size of {rentedSpan.Length} with start index {rentedSpan.StartIndex}");
         }
