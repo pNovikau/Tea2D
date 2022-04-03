@@ -269,11 +269,11 @@ namespace Tea2D.Vulkan
     internal partial struct VkAllocationCallbacks
     {
         public unsafe void* pUserData;
-        public unsafe delegate* unmanaged<void*, nuint, nuint, VkSystemAllocationScope, void*> pfnAllocation;
-        public unsafe delegate* unmanaged<void*, void*, nuint, nuint, VkSystemAllocationScope, void*> pfnReallocation;
+        public unsafe delegate* unmanaged<void*, uint, uint, VkSystemAllocationScope, void*> pfnAllocation;
+        public unsafe delegate* unmanaged<void*, void*, uint, uint, VkSystemAllocationScope, void*> pfnReallocation;
         public unsafe delegate* unmanaged<void*, void*, void> pfnFree;
-        public unsafe delegate* unmanaged<void*, nuint, VkInternalAllocationType, VkSystemAllocationScope, void> pfnInternalAllocation;
-        public unsafe delegate* unmanaged<void*, nuint, VkInternalAllocationType, VkSystemAllocationScope, void> pfnInternalFree;
+        public unsafe delegate* unmanaged<void*, uint, VkInternalAllocationType, VkSystemAllocationScope, void> pfnInternalAllocation;
+        public unsafe delegate* unmanaged<void*, uint, VkInternalAllocationType, VkSystemAllocationScope, void> pfnInternalFree;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -462,7 +462,7 @@ namespace Tea2D.Vulkan
         public unsafe fixed uint maxViewportDimensions[2];
         public unsafe fixed float viewportBoundsRange[2];
         public uint viewportSubPixelBits;
-        public nuint minMemoryMapAlignment;
+        public uint minMemoryMapAlignment;
         public ulong minTexelBufferOffsetAlignment;
         public ulong minUniformBufferOffsetAlignment;
         public ulong minStorageBufferOffsetAlignment;
@@ -881,7 +881,7 @@ namespace Tea2D.Vulkan
         public VkStructureType sType;
         public unsafe void* pNext;
         public VkShaderModuleCreateFlags flags;
-        public nuint codeSize;
+        public uint codeSize;
         public unsafe uint* pCode;
     }
 
@@ -891,7 +891,7 @@ namespace Tea2D.Vulkan
         public VkStructureType sType;
         public unsafe void* pNext;
         public VkPipelineCacheCreateFlags flags;
-        public nuint initialDataSize;
+        public uint initialDataSize;
         public unsafe void* pInitialData;
     }
 
@@ -900,7 +900,7 @@ namespace Tea2D.Vulkan
     {
         public uint constantID;
         public uint offset;
-        public nuint size;
+        public uint size;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -908,7 +908,7 @@ namespace Tea2D.Vulkan
     {
         public uint mapEntryCount;
         public unsafe VkSpecializationMapEntry* pMapEntries;
-        public nuint dataSize;
+        public uint dataSize;
         public unsafe void* pData;
     }
 
@@ -1972,8 +1972,8 @@ namespace Tea2D.Vulkan
         public uint dstArrayElement;
         public uint descriptorCount;
         public VkDescriptorType descriptorType;
-        public nuint offset;
-        public nuint stride;
+        public uint offset;
+        public uint stride;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -4126,7 +4126,7 @@ namespace Tea2D.Vulkan
         public unsafe fixed byte name[256];
         public unsafe fixed byte description[256];
         public uint isText;
-        public nuint dataSize;
+        public uint dataSize;
         public unsafe void* pData;
     }
 
@@ -4198,7 +4198,7 @@ namespace Tea2D.Vulkan
         public VkStructureType sType;
         public unsafe void* pNext;
         public VkDebugReportFlagsEXT flags;
-        public unsafe delegate* unmanaged<VkDebugReportFlagsEXT, VkDebugReportObjectTypeEXT, ulong, nuint, int, byte*, byte*, void*, uint> pfnCallback;
+        public unsafe delegate* unmanaged<VkDebugReportFlagsEXT, VkDebugReportObjectTypeEXT, ulong, uint, int, byte*, byte*, void*, uint> pfnCallback;
         public unsafe void* pUserData;
     }
 
@@ -4228,7 +4228,7 @@ namespace Tea2D.Vulkan
         public VkDebugReportObjectTypeEXT objectType;
         public ulong @object;
         public ulong tagName;
-        public nuint tagSize;
+        public uint tagSize;
         public unsafe void* pTag;
     }
 
@@ -4306,7 +4306,7 @@ namespace Tea2D.Vulkan
     {
         public VkStructureType sType;
         public unsafe void* pNext;
-        public nuint dataSize;
+        public uint dataSize;
         public unsafe void* pData;
     }
 
@@ -4332,9 +4332,9 @@ namespace Tea2D.Vulkan
         public uint blockDimY;
         public uint blockDimZ;
         public uint sharedMemBytes;
-        public nuint paramCount;
+        public uint paramCount;
         public unsafe void** pParams;
-        public nuint extraCount;
+        public uint extraCount;
         public unsafe void** pExtras;
     }
 
@@ -4371,8 +4371,8 @@ namespace Tea2D.Vulkan
         public uint numUsedVgprs;
         public uint numUsedSgprs;
         public uint ldsSizePerLocalWorkGroup;
-        public nuint ldsUsageSizeInBytes;
-        public nuint scratchMemUsageInBytes;
+        public uint ldsUsageSizeInBytes;
+        public uint scratchMemUsageInBytes;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -4738,7 +4738,7 @@ namespace Tea2D.Vulkan
         public VkObjectType objectType;
         public ulong objectHandle;
         public ulong tagName;
-        public nuint tagSize;
+        public uint tagSize;
         public unsafe void* pTag;
     }
 
@@ -4962,7 +4962,7 @@ namespace Tea2D.Vulkan
         public VkStructureType sType;
         public unsafe void* pNext;
         public VkValidationCacheCreateFlagsEXT flags;
-        public nuint initialDataSize;
+        public uint initialDataSize;
         public unsafe void* pInitialData;
     }
 

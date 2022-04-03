@@ -17,7 +17,7 @@ namespace Tea2D.Vulkan.Generator.CSharp.Utils
             ["int64_t"] = "long",
             ["int64_t*"] = "long*",
             ["char"] = "byte",
-            ["size_t"] = "nuint",
+            ["size_t"] = "uint",
             ["DWORD"] = "uint",
 
             // typedef uint32_t VkBool32;
