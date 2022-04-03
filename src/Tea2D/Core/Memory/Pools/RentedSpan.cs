@@ -1,24 +1,22 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 
-namespace Tea2D.Core.Memory.ObjectPool
+namespace Tea2D.Core.Memory.Pools
 {
     [StructLayout(LayoutKind.Sequential)]
-#pragma warning disable 660,661
     public readonly ref struct RentedSpan<T>
-#pragma warning restore 660,661
     {
         public readonly Span<T> Span;
 
         internal readonly int StartIndex;
-        internal readonly int EndIndex;
+        internal readonly int Length;
 
-        public RentedSpan(Span<T> span, int startIndex, int endIndex)
+        public RentedSpan(Span<T> span, int startIndex, int length)
         {
             Span = span;
 
             StartIndex = startIndex;
-            EndIndex = endIndex;
+            Length = length;
         }
 
         public static bool operator !=(RentedSpan<T> left, RentedSpan<T> right) => !(left == right);
@@ -26,13 +24,13 @@ namespace Tea2D.Core.Memory.ObjectPool
         public static bool operator ==(RentedSpan<T> left, RentedSpan<T> right)
         {
             return left.Span == right.Span &&
-                   left.EndIndex == right.EndIndex &&
+                   left.Length == right.Length &&
                    left.StartIndex == right.StartIndex;
         }
 
         public void Dispose()
         {
-            SimpleArrayPool<T>.Instance.Return(this);
+            ObjectPool<T>.Instance.Return(in this);
         }
     }
 }
