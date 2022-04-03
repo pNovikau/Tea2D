@@ -2,6 +2,7 @@
 
 namespace Tea2D.Graphics.SDL.Events
 {
+    //TODO: rework Event system
     public interface IWindowEvent
     {
         Event Event { init; }
