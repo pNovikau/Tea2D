@@ -3,15 +3,14 @@ using Silk.NET.SDL;
 using Tea2D.Common;
 using Tea2D.Core.Diagnostics.Logging;
 using Tea2D.Core.Memory;
-using Tea2D.Graphics.SDL.Events;
 using SdlWindow = Silk.NET.SDL.Window;
 
 namespace Tea2D.Graphics.SDL
 {
     public class Window : IWindow
     {
-        private static readonly ILogger Logger = Core.Diagnostics.Logging.Logger.Instance; 
-        
+        private static readonly ILogger Logger = Core.Diagnostics.Logging.Logger.Instance;
+
         private PointerHandler<SdlWindow> _windowPointerHandler;
 
         static Window()
@@ -54,28 +53,48 @@ namespace Tea2D.Graphics.SDL
             set => SdlApi.SetWindowTitle(ref _windowPointerHandler, value);
         }
 
+        public event WindowEventHandler<MouseButtonEvent> ButtonPressed;
+        public event WindowEventHandler<MouseButtonEvent> ButtonReleased;
+        public event WindowEventHandler<KeyboardEvent> KeyPressed;
+        public event WindowEventHandler<KeyboardEvent> KeyReleased;
 
-        #endregion
-        
-        public event EventHandler<MouseButtonPressEvent> ButtonPress;
-        public event EventHandler<MouseButtonReleaseEvent> ButtonRelease;
-        
         public bool DispatchEvent(in Event @event)
         {
-            var eventDispatcher = new EventDispatcher(@event);
+            switch ((EventType)@event.Type)
+            {
+                case EventType.Mousebuttondown:
+                    ButtonPressed?.Invoke(this, in @event.Button);
+                    break;
 
-            return eventDispatcher.Dispatch<MouseButtonPressEvent>(OnMouseButtonPressed) ||
-                   eventDispatcher.Dispatch<MouseButtonReleaseEvent>(OnMouseButtonReleased);
+                case EventType.Mousebuttonup:
+                    ButtonReleased?.Invoke(this, in @event.Button);
+                    break;
+
+                case EventType.Keydown:
+                    KeyPressed?.Invoke(this, in @event.Key);
+                    break;
+
+                case EventType.Keyup:
+                    KeyReleased?.Invoke(this, in @event.Key);
+                    break;
+
+                default:
+                    return false;
+            }
+
+            return true;
         }
 
-        private void OnMouseButtonPressed(MouseButtonPressEvent obj) => ButtonPress?.Invoke(this, obj);
-        private void OnMouseButtonReleased(MouseButtonReleaseEvent obj) => ButtonRelease?.Invoke(this, obj);
+        #endregion
 
         #region IDisposable
 
+        //TODO: handle finalize
         public void Dispose()
         {
             SdlApi.DestroyWindow(ref _windowPointerHandler);
+            _windowPointerHandler.Dispose();
+
             GC.SuppressFinalize(this);
         }
 
