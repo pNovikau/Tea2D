@@ -22,7 +22,7 @@ namespace Tea2D.Graphics.SDL
 
             return windowPointer != null
                 ? new PointerHandler<SdlWindow>(windowPointer)
-                : PointerHandler<SdlWindow>.Null;
+                : PointerHandler.Null<SdlWindow>();
         }
 
         public static Vector2I GetMouseState()
@@ -88,6 +88,16 @@ namespace Tea2D.Graphics.SDL
         public static void DestroyWindow(ref PointerHandler<SdlWindow> pointerHandler)
         {
             Sdl.DestroyWindow((SdlWindow*)pointerHandler);
+        }
+
+        public static int PollEvent(ref Event @event)
+        {
+            return Sdl.PollEvent(ref @event);
+        }
+
+        public static PointerHandler<SdlWindow> GetWindowFromId(uint id)
+        {
+            return new PointerHandler<SdlWindow>(Sdl.GetWindowFromID(id));
         }
     }
 }

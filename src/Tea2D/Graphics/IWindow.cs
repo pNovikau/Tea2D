@@ -9,10 +9,12 @@ namespace Tea2D.Graphics
 {
     public interface IWindow : IDisposable
     {
+        IntPtr PointerHandle { get; }
+
         Vector2I Position { get; set; }
         Vector2I CursorPosition { get; set; }
         bool Visible { get; set; }
-        bool Focused { get; }
+        bool IsFocused { get; }
         string Title { get; set; }
 
         bool DispatchEvent(in Event @event);

@@ -24,7 +24,7 @@ namespace Tea2D.Graphics.SDL
 
             _windowPointerHandler = SdlApi.CreateWindow(flags);
 
-            if (_windowPointerHandler == PointerHandler<SdlWindow>.Null)
+            if (_windowPointerHandler == PointerHandler.Null<SdlWindow>())
             {
                 //TODO: log and throw exception
                 Logger.LogFatal("Error");
@@ -32,6 +32,8 @@ namespace Tea2D.Graphics.SDL
         }
 
         #region IWindow
+
+        public IntPtr PointerHandle => _windowPointerHandler;
 
         public Vector2I Position
         {
@@ -51,7 +53,7 @@ namespace Tea2D.Graphics.SDL
             set => SdlApi.SetWindowVisibility(ref _windowPointerHandler, value);
         }
 
-        public bool Focused => SdlApi.IsWindowFocused(ref _windowPointerHandler);
+        public bool IsFocused => SdlApi.IsWindowFocused(ref _windowPointerHandler);
 
         public string Title
         {
@@ -63,6 +65,8 @@ namespace Tea2D.Graphics.SDL
         public event WindowEventHandler<MouseButtonEvent> ButtonReleased;
         public event WindowEventHandler<KeyboardEvent> KeyPressed;
         public event WindowEventHandler<KeyboardEvent> KeyReleased;
+        public event WindowEventHandler<WindowEvent> FocusGained;
+        public event WindowEventHandler<WindowEvent> FocusLost;
 
         public bool DispatchEvent(in Event @event)
         {
@@ -82,6 +86,13 @@ namespace Tea2D.Graphics.SDL
 
                 case EventType.Keyup:
                     KeyReleased?.Invoke(this, in @event.Key);
+                    break;
+                
+                case EventType.Windowevent:
+                    if ((WindowEventID) @event.Window.Event == WindowEventID.WindoweventFocusGained)
+                        FocusGained?.Invoke(this, in @event.Window);
+                    else if ((WindowEventID) @event.Window.Event == WindowEventID.WindoweventFocusLost)
+                        FocusLost?.Invoke(this, in @event.Window);
                     break;
 
                 default:

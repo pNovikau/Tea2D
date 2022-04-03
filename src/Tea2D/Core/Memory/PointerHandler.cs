@@ -2,11 +2,15 @@
 
 namespace Tea2D.Core.Memory
 {
+    public static class PointerHandler
+    {
+        public static PointerHandler<T> Null<T>() where T : unmanaged
+            => new();
+    }
+    
     public unsafe struct PointerHandler<T> : IDisposable
         where T : unmanaged
     {
-        public static readonly PointerHandler<T> Null = new();
-
         private T* _pointer;
 
         public PointerHandler(T* pointer)
@@ -24,8 +28,11 @@ namespace Tea2D.Core.Memory
         public static bool operator ==(PointerHandler<T> left, PointerHandler<T> right) => left._pointer == right._pointer;
         public static bool operator !=(PointerHandler<T> left, PointerHandler<T> right) => !(left == right);
 
+        public static implicit operator IntPtr(PointerHandler<T> pointerHandler) => (IntPtr)pointerHandler._pointer;
         public static explicit operator T*(PointerHandler<T> pointerHandler) => pointerHandler._pointer;
 
         public void Dispose() => _pointer = null;
+
+        public override string ToString() => _pointer->ToString();
     }
 }
