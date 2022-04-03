@@ -23,5 +23,7 @@ namespace Tea2D.Graphics
         event WindowEventHandler<MouseButtonEvent> ButtonReleased;
         event WindowEventHandler<KeyboardEvent> KeyPressed;
         event WindowEventHandler<KeyboardEvent> KeyReleased;
+        event WindowEventHandler<WindowEvent> FocusGained;
+        event WindowEventHandler<WindowEvent> FocusLost;
     }
 }
