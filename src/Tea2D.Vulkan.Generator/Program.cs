@@ -5,15 +5,15 @@ namespace Tea2D.Vulkan.Generator;
 //TODO: figure out how convert `typedef struct`
 //TODO: rework CSharp elements behaviour
 //TODO: create CSharp compilation instead of working with CSharp elements directly
-//TODO: add git submodule for the vulkan headers: https://github.com/KhronosGroup/Vulkan-Headers 
 
 public static class Program
 {
     public static void Main(string[] args)
     {
         var tea2DVulkanProjectPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "Tea2D.Vulkan", "Generated");
+        var headerDirectoryPath = Path.Combine(AppContext.BaseDirectory, "..", "..", "..", "..", "..", "external_lib", "Vulkan-Headers");
 
-        var headerFile = Path.Combine(AppContext.BaseDirectory, "include", "vulkan", "vulkan.h");
+        var headerFile = Path.Combine(headerDirectoryPath, "include", "vulkan", "vulkan.h");
         var compilation = CppParser.ParseFile(headerFile);
 
         var vulkanGlobalUsingsFile = Path.Combine(tea2DVulkanProjectPath, "Vulkan.GlobalUsings.generated.cs");

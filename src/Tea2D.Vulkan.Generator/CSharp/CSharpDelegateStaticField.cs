@@ -24,7 +24,7 @@ public class CSharpDelegateStaticField : CSharpElement
     public CSharpDelegateType Type { get; }
     public CSharpType ReturnType { get; }
 
-    private new string DebuggerDisplay => ToString();
+    private string DebuggerDisplay => ToString();
 
     public override void Write(ISourceWriter writer)
     {
