@@ -12,37 +12,4 @@
       <PackageReference Include="CppAst" Version="0.8.0" />
     </ItemGroup>
 
-    <ItemGroup>
-        <None Update="include\vk_video\*.h">
-            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="include\vulkan\vulkan_video_codec_h264std.h">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="include\vulkan\vulkan_video_codec_h264std_decode.h">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="include\vulkan\vulkan_video_codec_h264std_encode.h">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="include\vulkan\vulkan_video_codec_h265std.h">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="include\vulkan\vulkan_video_codec_h265std_decode.h">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="include\vulkan\vulkan_video_codec_h265std_encode.h">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-        <None Update="include\vulkan\vulkan_video_codecs_common.h">
-          <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
-    
-    <ItemGroup>
-      <None Update="include\vulkan\*.h">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-    </ItemGroup>
-
 </Project>

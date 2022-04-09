@@ -7,14 +7,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <!-- IMPORTANT!!! -->
-        <!-- Add x64 and x32 support -->
-        <None Include="..\..\lib\glfw.dll">
-            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </None>
-    </ItemGroup>
-
-    <ItemGroup>
       <Folder Include="Generated" />
     </ItemGroup>
 
