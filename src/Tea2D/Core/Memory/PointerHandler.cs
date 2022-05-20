@@ -7,7 +7,7 @@ namespace Tea2D.Core.Memory
         public static PointerHandler<T> Null<T>() where T : unmanaged
             => new();
     }
-    
+
     public unsafe struct PointerHandler<T> : IDisposable
         where T : unmanaged
     {

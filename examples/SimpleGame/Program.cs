@@ -16,7 +16,7 @@ namespace SimpleGame
 
             var application = new Application();
 
-            var window1 = new Window {Title = "window1"};
+            var window1 = new Window { Title = "window1" };
             window1.KeyPressed += KeyPressed;
             window1.KeyReleased += KeyReleased;
             window1.ButtonPressed += ButtonPressed;
@@ -24,7 +24,7 @@ namespace SimpleGame
             window1.FocusGained += FocusGained;
             window1.FocusLost += FocusLost;
 
-            var window2 = new Window {Title = "window2"};
+            var window2 = new Window { Title = "window2" };
             window2.KeyPressed += KeyPressed;
             window2.KeyReleased += KeyReleased;
             window2.ButtonPressed += ButtonPressed;
@@ -32,7 +32,7 @@ namespace SimpleGame
             window2.FocusGained += FocusGained;
             window2.FocusLost += FocusLost;
 
-            var window3 = new Window {Title = "window3"};
+            var window3 = new Window { Title = "window3" };
             window3.KeyPressed += KeyPressed;
             window3.KeyReleased += KeyReleased;
             window3.ButtonPressed += ButtonPressed;
@@ -43,22 +43,22 @@ namespace SimpleGame
             application.RegisterWindow(window1);
             application.RegisterWindow(window2);
             application.RegisterWindow(window3);
-            
+
             bool @break = false;
 
             while (@break == false)
             {
                 application.DispatchEvents();
             }
-            
+
             application.Dispose();
         }
-        
+
         public static void FocusGained(IWindow sender, in WindowEvent @event)
         {
             Console.WriteLine($"[{sender.Title}] Focus gained.");
         }
-        
+
         public static void FocusLost(IWindow sender, in WindowEvent @event)
         {
             Console.WriteLine($"[{sender.Title}] Focus lost.");

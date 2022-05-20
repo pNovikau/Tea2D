@@ -12,7 +12,7 @@ namespace Tea2D.Core.Memory.Pools
         private readonly bool[] _rentedArray;
 
         public static readonly ObjectPool<T> Instance = new();
-        
+
         private ObjectPool()
         {
             _array = new T[1024 * 1024];
@@ -36,15 +36,15 @@ namespace Tea2D.Core.Memory.Pools
             if (index >= _rentedArray.Length)
             {
                 _logger.Debug($"ObjectPool<{typeof(T).FullName}>: Allocated a new array");
-                
+
                 return new RentedSpan<T>(new T[length], -1, length);
             }
 
             var span = _array.AsSpan().Slice(index, length);
             rentedSpaceSpan.Fill(true);
-            
+
             _logger.Trace($"ObjectPool<{typeof(T).FullName}>: rented an array size of {length} with start index {index}");
-            
+
             return new RentedSpan<T>(span, index, length);
         }
 

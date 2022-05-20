@@ -8,8 +8,8 @@ namespace Tea2D.Graphics.SDL
 {
     public static unsafe class SdlApi
     {
-        private static readonly Sdl Sdl; 
-        
+        private static readonly Sdl Sdl;
+
         static SdlApi()
         {
             SdlProvider.InitFlags = Sdl.InitEverything;
@@ -18,7 +18,7 @@ namespace Tea2D.Graphics.SDL
 
         public static PointerHandler<SdlWindow> CreateWindow(WindowFlags flags)
         {
-            var windowPointer = Sdl.CreateWindow(string.Empty, Sdl.WindowposUndefined, Sdl.WindowposUndefined, 640, 480, (uint) flags);
+            var windowPointer = Sdl.CreateWindow(string.Empty, Sdl.WindowposUndefined, Sdl.WindowposUndefined, 640, 480, (uint)flags);
 
             return windowPointer != null
                 ? new PointerHandler<SdlWindow>(windowPointer)
@@ -42,7 +42,7 @@ namespace Tea2D.Graphics.SDL
 
         public static bool IsWindowVisible(ref PointerHandler<SdlWindow> pointerHandler)
         {
-            return (Sdl.GetWindowFlags((SdlWindow*)pointerHandler) & (uint) WindowFlags.WindowShown) != 0;
+            return (Sdl.GetWindowFlags((SdlWindow*)pointerHandler) & (uint)WindowFlags.WindowShown) != 0;
         }
 
         public static void SetWindowVisibility(ref PointerHandler<SdlWindow> pointerHandler, bool isVisible)
@@ -55,7 +55,7 @@ namespace Tea2D.Graphics.SDL
 
         public static bool IsWindowFocused(ref PointerHandler<SdlWindow> pointerHandler)
         {
-            return (Sdl.GetWindowFlags((SdlWindow*)pointerHandler) & (uint) WindowFlags.WindowInputFocus) != 0;
+            return (Sdl.GetWindowFlags((SdlWindow*)pointerHandler) & (uint)WindowFlags.WindowInputFocus) != 0;
         }
 
         public static string GetWindowTitle(ref PointerHandler<SdlWindow> pointerHandler)

@@ -225,7 +225,7 @@ namespace Tea2D.Core.Collections
             public bool MoveNext()
             {
                 var list = _list;
-                
+
                 if (_index < list._size)
                 {
                     _current = list.Items[_index];

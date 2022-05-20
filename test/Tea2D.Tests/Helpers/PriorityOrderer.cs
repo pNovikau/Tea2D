@@ -10,7 +10,7 @@ namespace Tea2D.Tests.Helpers
         public IEnumerable<TTestCase> OrderTestCases<TTestCase>(IEnumerable<TTestCase> testCases) where TTestCase : ITestCase
         {
             return testCases
-                .Select(p => new {TestCase = p, Priority = GetTestCasePriority(p.TestMethod)})
+                .Select(p => new { TestCase = p, Priority = GetTestCasePriority(p.TestMethod) })
                 .OrderByDescending(p => p.Priority)
                 .Select(p => p.TestCase);
         }

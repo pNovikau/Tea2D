@@ -34,5 +34,10 @@ namespace Tea2D.Core.Memory.Pools
         {
             ObjectPool<T>.Instance.Return(in this);
         }
+
+        public override bool Equals(object obj)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
