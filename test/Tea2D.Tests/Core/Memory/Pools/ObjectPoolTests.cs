@@ -24,7 +24,7 @@ namespace Tea2D.Tests.Core.Memory.Pools
             var expected = value.AsSpan().Contains(true);
             expected.Should().BeFalse();
         }
-        
+
         [Theory]
         [MemberData(nameof(RentData))]
         public void Rent_With_Using_When_All_Ok_Should_Rreturn_Array(int length)
@@ -33,7 +33,7 @@ namespace Tea2D.Tests.Core.Memory.Pools
 
             rentedSpan.Span.Length.Should().Be(length);
         }
-        
+
         [Theory]
         [MemberData(nameof(RentData))]
         public void Rent_With_Return_When_All_Ok_Should_Rreturn_Array(int length)
@@ -41,10 +41,10 @@ namespace Tea2D.Tests.Core.Memory.Pools
             var rentedSpan = ObjectPool<object>.Instance.Rent(length);
 
             rentedSpan.Span.Length.Should().Be(length);
-            
+
             ObjectPool<object>.Instance.Return(in rentedSpan);
         }
-        
+
         [Fact]
         [TestPriority(-1)]
         public void When_After_Test_Should_Be_Empty_Pool()

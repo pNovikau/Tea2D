@@ -38,7 +38,7 @@ namespace Tea2D.Core.Diagnostics.Logging
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static string LogLevelToString(in LogLevel level)
         {
-// disable missing default section warning 
+            // disable missing default section warning 
 #pragma warning disable 8509
             return level switch
 #pragma warning restore 8509

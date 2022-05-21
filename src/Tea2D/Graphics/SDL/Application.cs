@@ -15,7 +15,7 @@ namespace Tea2D.Graphics.SDL
 
         public IReadOnlyCollection<IWindow> Windows => _windows.Values;
 
-        public void RegisterWindow<TWindow>(TWindow window) 
+        public void RegisterWindow<TWindow>(TWindow window)
             where TWindow : IWindow
         {
             Debug.Assert(window != null, "window != null");
@@ -23,7 +23,7 @@ namespace Tea2D.Graphics.SDL
             _windows.Add(window.PointerHandle, window);
         }
 
-        public void UnregisterWindow<TWindow>(TWindow window) 
+        public void UnregisterWindow<TWindow>(TWindow window)
             where TWindow : IWindow
         {
             Debug.Assert(window != null, "window != null");
@@ -38,7 +38,7 @@ namespace Tea2D.Graphics.SDL
             while (SdlApi.PollEvent(ref @event) > 0)
             {
                 var windowPointerHandler = PointerHandler.Null<SdlWindow>();
-                
+
                 switch ((EventType)@event.Type)
                 {
                     case EventType.Mousebuttondown:
@@ -50,17 +50,17 @@ namespace Tea2D.Graphics.SDL
                     case EventType.Keyup:
                         windowPointerHandler = SdlApi.GetWindowFromId(@event.Key.WindowID);
                         break;
-                    
+
                     case EventType.Windowevent:
                         windowPointerHandler = SdlApi.GetWindowFromId(@event.Button.WindowID);
 
-                        if ((WindowEventID) @event.Window.Event == WindowEventID.WindoweventFocusGained)
+                        if ((WindowEventID)@event.Window.Event == WindowEventID.WindoweventFocusGained)
                             CurrentWindow = _windows[windowPointerHandler];
-                        else if ((WindowEventID) @event.Window.Event == WindowEventID.WindoweventFocusLost)
+                        else if ((WindowEventID)@event.Window.Event == WindowEventID.WindoweventFocusLost)
                             CurrentWindow = null;
                         break;
                 }
-                
+
                 if (windowPointerHandler == PointerHandler.Null<SdlWindow>())
                     continue;
 
@@ -70,7 +70,7 @@ namespace Tea2D.Graphics.SDL
 
         public void Dispose()
         {
-            foreach (var (_, window) in _windows) 
+            foreach (var (_, window) in _windows)
                 window.Dispose();
 
             _windows.Clear();

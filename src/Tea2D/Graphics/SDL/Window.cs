@@ -40,7 +40,7 @@ namespace Tea2D.Graphics.SDL
             get => SdlApi.GetWindowPosition(ref _windowPointerHandler);
             set => SdlApi.SetWindowPosition(ref _windowPointerHandler, value);
         }
-        
+
         public Vector2I CursorPosition
         {
             get => SdlApi.GetMouseState();
@@ -87,11 +87,11 @@ namespace Tea2D.Graphics.SDL
                 case EventType.Keyup:
                     KeyReleased?.Invoke(this, in @event.Key);
                     break;
-                
+
                 case EventType.Windowevent:
-                    if ((WindowEventID) @event.Window.Event == WindowEventID.WindoweventFocusGained)
+                    if ((WindowEventID)@event.Window.Event == WindowEventID.WindoweventFocusGained)
                         FocusGained?.Invoke(this, in @event.Window);
-                    else if ((WindowEventID) @event.Window.Event == WindowEventID.WindoweventFocusLost)
+                    else if ((WindowEventID)@event.Window.Event == WindowEventID.WindoweventFocusLost)
                         FocusLost?.Invoke(this, in @event.Window);
                     break;
 
