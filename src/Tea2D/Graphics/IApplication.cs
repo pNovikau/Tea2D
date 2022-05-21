@@ -3,6 +3,11 @@ using System.Collections.Generic;
 
 namespace Tea2D.Graphics
 {
+    public interface IWindow
+    {
+        
+    }
+
     public interface IApplication : IDisposable
     {
         IWindow CurrentWindow { get; }
