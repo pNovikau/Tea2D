@@ -7,8 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <PackageReference Include="Silk.NET.SDL" Version="2.13.0" />
-      <PackageReference Include="Silk.NET.Windowing" Version="2.13.0" />
+      <PackageReference Include="SFML.Net" Version="2.5.0" />
     </ItemGroup>
 
 </Project>

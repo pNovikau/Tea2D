@@ -42,6 +42,14 @@ public ref struct ValueString
         _span = _buffer[..(_span.Length + 1)];
     }
 
+    public void Append(int value)
+    {
+        value.TryFormat(_buffer[_span.Length..], out var charsWritten);
+
+        Debug.Assert(_buffer.Length >= _span.Length + charsWritten);
+        _span = _buffer[..(_span.Length + charsWritten)];
+    }
+
     public void Append(ReadOnlySpan<char> @string)
     {
         Debug.Assert(_buffer.Length >= @string.Length + _span.Length);
@@ -96,6 +104,14 @@ public ref struct ValueString
 
         buffer.CopyTo(_buffer);
         _span = _buffer[..bufferIndex];
+    }
+
+    public void Remove(int startIndex)
+    {
+        Debug.Assert(startIndex < _span.Length);
+        Debug.Assert(startIndex > 0);
+
+        _span = _buffer[..startIndex];
     }
 
     public void Trim()
