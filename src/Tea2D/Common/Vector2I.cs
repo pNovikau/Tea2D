@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace Tea2D.Common
 {
     [StructLayout(LayoutKind.Sequential)]
-    [DebuggerDisplay("[Vector2I] X({X}) Y({Y})")]
+    [DebuggerDisplay("{ToString}")]
     public struct Vector2I : IEquatable<Vector2I>
     {
         public int X;
@@ -28,7 +28,7 @@ namespace Tea2D.Common
         public static bool operator ==(Vector2I v1, Vector2I v2) => v1.Equals(v2);
         public static bool operator !=(Vector2I v1, Vector2I v2) => !v1.Equals(v2);
 
-        public override string ToString() => $"[Vector2F] X({X}) Y({Y})";
+        public override string ToString() => $"[{nameof(Vector2I)}] X({X}) Y({Y})";
 
         public bool Equals(Vector2I other) =>
             X.Equals(other.X) &&

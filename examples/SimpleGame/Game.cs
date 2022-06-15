@@ -1,19 +1,18 @@
 ﻿using System;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using SimpleGame.Entities;
 using SimpleGame.Systems;
 using Tea2D;
+using Tea2D.Common;
 using Tea2D.Core;
-using Tea2D.Core.Encoders;
 using Tea2D.Core.Encoders.Text;
 using Tea2D.Core.Memory;
 using Tea2D.Ecs;
+using Tea2D.Graphics;
 
 namespace SimpleGame;
 
@@ -24,8 +23,10 @@ public class Game
 
     public void Init()
     {
-        _window = new RenderWindow(new VideoMode(1200, 600), "Tea2D");
-        _window.SetFramerateLimit(60);
+        ApplicationProvider.Application.RegisterRenderWindow(new Vector2U(1200, 600), "Tea2D");
+        
+        //_window = new RenderWindow(new VideoMode(1200, 600), "Tea2D");
+        //_window.SetFramerateLimit(60);
         _gameWorld = new GameWorld();
 
         var context = new GameContext
@@ -39,10 +40,8 @@ public class Game
 
         _gameWorld.Initialize(context);
 
-        for (int i = 0; i < 10000; i++)
-        {
+        for (int i = 0; i < 10000; i++) 
             _gameWorld.CreateRectangle();
-        }
     }
 
     public void Run()
@@ -57,11 +56,11 @@ public class Game
         var title = new ValueString("Tea2D: 0", stackalloc char[255]);
         var fpsCounter = new FpsCounter(context.GameTime);
 
-        while (_window.IsOpen)
+        while (ApplicationProvider.Application.IsRunning)
         {
-            _window.DispatchEvents();
+            ApplicationProvider.Application.DispatchEvents();
+            ApplicationProvider.Application.CurrentRenderWindow!.Clear();
 
-            _window.Clear();
             title.Remove(7);
 
             foreach (var system in _gameWorld.SystemManager.Systems)
@@ -70,9 +69,9 @@ public class Game
             context.GameTime.Update();
 
             title.Append(fpsCounter.Fps);
-            _window.SetTitle(ref title);
+            ApplicationProvider.Application.CurrentRenderWindow.SetTitle(ref title);
             
-            _window.Display();
+            ApplicationProvider.Application.CurrentRenderWindow.Display();
         }
     }
 }
