@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Text;
@@ -9,6 +10,8 @@ using SimpleGame.Entities;
 using SimpleGame.Systems;
 using Tea2D;
 using Tea2D.Core;
+using Tea2D.Core.Encoders;
+using Tea2D.Core.Encoders.Text;
 using Tea2D.Core.Memory;
 using Tea2D.Ecs;
 
@@ -76,15 +79,13 @@ public class Game
 
 public static class SfmlApiExtensions
 {
-    private static readonly Encoding Encoding = new UTF32Encoding();
-    private static readonly Encoder Encoder = Encoding.GetEncoder();
-
+    //[SkipLocalsInit]
     public static void SetTitle(this Window window, ref ValueString title)
     {
         // Copy the title to a null-terminated UTF-32 byte array
         title.Append('\0');
-        Span<byte> titleAsUtf32 = stackalloc byte[Encoder.GetByteCount(title, true)];
-        Encoder.GetBytes(title, titleAsUtf32, true);
+        Span<byte> titleAsUtf32 = stackalloc byte[EncoderProvider.Utf32.GetByteCount(title)];
+        EncoderProvider.Utf32.GetBytes(title, titleAsUtf32);
 
         unsafe
         {
@@ -95,12 +96,13 @@ public static class SfmlApiExtensions
         }
     }
 
+    //[SkipLocalsInit]
     public static void SetDisplayedText(this Text text, ref ValueString title)
     {
         // Copy the title to a null-terminated UTF-32 byte array
         title.Append('\0');
-        Span<byte> titleAsUtf32 = stackalloc byte[Encoder.GetByteCount(title, true)];
-        Encoder.GetBytes(title, titleAsUtf32, true);
+        Span<byte> titleAsUtf32 = stackalloc byte[EncoderProvider.Utf32.GetByteCount(title)];
+        EncoderProvider.Utf32.GetBytes(title, titleAsUtf32);
 
         // Pass it to the C API
         unsafe
