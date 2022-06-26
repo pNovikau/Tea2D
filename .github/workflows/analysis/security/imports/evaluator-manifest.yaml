@@ -1,0 +1,30 @@
+﻿requests:
+  totalNumberOfVulnarabilities:
+    query: SELECT COUNT(1) FROM Issues WHERE Level = 'Error'
+  totalNumberOfLowVulnarabilities:
+    query: SELECT COUNT(*) AS totalNumberOfValnurableDependencies
+      FROM Issues as i INNER JOIN IssueProperties as ip ON i.Id = ip.IssueId
+      WHERE i.Level = 'Error' AND ip.Property = 'score' AND ip.Value <= 4
+  totalNumberOfMediumVulnarabilities:
+    query: SELECT COUNT(*) AS totalNumberOfValnurableDependencies
+      FROM Issues as i INNER JOIN IssueProperties as ip ON i.Id = ip.IssueId
+      WHERE i.Level = 'Error' AND ip.Property = 'score' AND ip.Value > 4 AND ip.Value <= 8
+  totalNumberOfHighVulnarabilities:
+    query: SELECT COUNT(*) AS totalNumberOfValnurableDependencies
+      FROM Issues as i INNER JOIN IssueProperties as ip ON i.Id = ip.IssueId
+      WHERE i.Level = 'Error' AND ip.Property = 'score' AND ip.Value > 8
+  totalNumberOfDependencies:
+    query: SELECT COUNT(DISTINCT il.FilePath) AS totalNumberOfValnurableDependencies
+      FROM Issues as i INNER JOIN IssueLocations as il ON i.Id = il.IssueId
+  totalNumberOfVulnarabelDependencies:
+    query: SELECT COUNT(DISTINCT il.FilePath) AS totalNumberOfValnurableDependencies
+      FROM Issues as i INNER JOIN IssueLocations as il ON i.Id = il.IssueId
+      WHERE i.Level = 'Error'
+  vulnerableDependencies:
+    query: SELECT i.RuleId, i.Message, i.Description, i.DetailsUrl, ip1.Value as Score, ip2.Value as Severity, il.FilePath, ROW_NUMBER() OVER(ORDER BY ip1.Value DESC) AS number
+      FROM Issues as i
+      INNER JOIN IssueLocations as il ON i.Id = il.IssueId
+      INNER JOIN IssueProperties as ip1 ON i.Id = ip1.IssueId AND ip1.Property = 'score'
+      INNER JOIN IssueProperties as ip2 ON i.Id = ip2.IssueId AND ip2.Property = 'severity'
+      WHERE i.Level = 'Error'
+    type: Collection
