@@ -1,0 +1,67 @@
+﻿volumes:
+  artifacts:
+    folderToOutput: ./artifacts
+    targetFolder: /artifacts
+    readOnly: false
+  imports:
+    targetFolder: /imports
+    folderToImport: ./imports
+  source:
+    targetFolder: /src
+    folderToImport: ./src
+    readOnly: false
+activities:
+  owaspDependencyChecker:
+    image: godeltech/owasp-dependency-checker
+    volumes:
+      artifacts:
+        targetFolder: /home/dependencycheck
+    command:
+      - --scan
+      - /src
+      - --format
+      - JSON
+      - --out
+      - /home/dependencycheck
+      - -n
+  owaspDependencyChecker-converter:
+    image: godeltech/codereview.file-converter
+    volumes:
+      artifacts:
+        targetFolder: /artifacts
+    command:
+      - dependencyCheck
+      - --output
+      - /artifacts/owaspDependencyChecker-result.zip
+      - --folder
+      - /artifacts
+      - --mask
+      - 'dependency-check-report.json'
+  owaspDependencyChecker-import-issues:
+    image: godeltech/codereview.evaluator
+    command:
+      - import-issues
+      - --output
+      - /artifacts/owaspDependencyChecker-result.db
+      - --issues
+      - /artifacts/owaspDependencyChecker-result.zip
+  owaspDependencyChecker-evaluator-evaluate:
+    image: godeltech/codereview.evaluator
+    command:
+      - evaluate
+      - --db
+      - /artifacts/owaspDependencyChecker-result.db
+      - --manifest
+      - /imports/evaluator-manifest.yaml
+      - --output
+      - /artifacts/result.json
+  report-template-renderer-liquid:
+    image: godeltech/codereview.template-renderer
+    command:
+      - liquid
+      - --template
+      - /imports/report.html.liquid
+      - --output
+      - /artifacts/report.html
+      - --data
+      - /artifacts/result.json

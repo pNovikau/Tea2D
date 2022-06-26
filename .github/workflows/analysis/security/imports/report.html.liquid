@@ -1,0 +1,187 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+        google.charts.setOnLoadCallback(drawCharts);
+        function drawCharts() {
+            drawVulnarabilitiesChart();
+            drawDependenciesChart();
+        }
+        
+        function drawVulnarabilitiesChart() {
+            const totalCount = {{ totalNumberOfLowVulnarabilities }} + {{ totalNumberOfMediumVulnarabilities }} + {{ totalNumberOfHighVulnarabilities }};
+            const array = [
+                ['BaseScore', 'Value'],
+                ['0 - 4', {{ totalNumberOfLowVulnarabilities }}],
+                ['4 - 8', {{ totalNumberOfMediumVulnarabilities }}],
+                ['8 - 10', {{ totalNumberOfHighVulnarabilities }}],
+            ];
+            const data = google.visualization.arrayToDataTable(array);
+            const options = {
+                title: 'Score rates for vulnarabilities'
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('vulnarabilities-rate-piechart'));
+            chart.draw(data, options);
+        }
+
+        function drawDependenciesChart() {
+            const totalCount = {{ totalNumberOfDependencies }};
+            const array = [
+                ['Type', 'Number'],
+                ['Healthy', {{ totalNumberOfDependencies }} - {{ totalNumberOfVulnarabelDependencies }}],
+                ['Vulnarable', {{ totalNumberOfVulnarabelDependencies }}],
+            ];
+            const data = google.visualization.arrayToDataTable(array);
+            const options = {
+                title: 'Rate of vulnarable dependencies'
+            };
+            const chart = new google.visualization.PieChart(document.getElementById('dependencies-rate-piechart'));
+            chart.draw(data, options);
+        }
+    </script>
+
+    <style>
+        /* Font Definitions */
+        @font-face {
+            font-family: "Cambria Math";
+            panose-1: 2 4 5 3 5 4 6 3 2 4;
+        }
+        @font-face {
+            font-family: Calibri;
+            panose-1: 2 15 5 2 2 2 4 3 2 4;
+        }
+        @font-face {
+            font-family: "Calibri Light";
+            panose-1: 2 15 3 2 2 2 4 3 2 4;
+        }
+        /* Style Definitions */
+        p.MsoNormal, li.MsoNormal, div.MsoNormal {
+            margin: 0 0 8.0pt;
+            line-height: 107%;
+            font-size: 11.0pt;
+            font-family: "Calibri", sans-serif;
+        }
+        h1 {
+            mso-style-link: "Heading 1 Char";
+            margin: 12.0pt 0 0;
+            line-height: 107%;
+            page-break-after: avoid;
+            font-size: 16.0pt;
+            font-family: "Calibri Light", sans-serif;
+            color: #2F5496;
+            font-weight: normal;
+        }
+        h2 {
+            mso-style-link: "Heading 2 Char";
+            margin: 2.0pt;
+            line-height: 107%;
+            page-break-after: avoid;
+            font-size: 13.0pt;
+            font-family: "Calibri Light", sans-serif;
+            color: #2F5496;
+            font-weight: normal;
+        }
+        h3 {
+            mso-style-link: "Heading 3 Char";
+            margin: 2.0pt;
+            line-height: 107%;
+            page-break-after: avoid;
+            font-size: 12.0pt;
+            font-family: "Calibri Light", sans-serif;
+            color: #1F3763;
+            font-weight: normal;
+        }
+        @page WordSection1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in 1.0in 1.0in 1.0in;
+        }
+        div.WordSection1 {
+            page: WordSection1;
+        }
+    </style>
+</head>
+<body>
+<div class=WordSection1>
+    <h1>Overview of Report</h1>
+    
+    <p class=MsoNormal>This report contains details of project dependencie's vulnarability. OWASP Dependency check was used to find vulnarable dependencies.</p>
+    
+    <h2>General information</h2>
+    <p class=MsoNormal>
+        <b>Total number of dependencies:</b> {{ totalNumberOfDependencies }}
+    </p>
+    <p class=MsoNormal>
+        <b>Total number of vulnarabilities:</b> {{ totalNumberOfVulnarabilities }}
+    </p>
+    <table>
+	    <tr>
+           <th>
+                <div id="dependencies-rate-piechart" style="width: 450px; height: 350px;"></div>
+            </th>
+            <th>
+                <div id="vulnarabilities-rate-piechart" style="width: 450px; height: 350px;"></div>
+            </th>
+        </tr>
+	</table>
+    <h2 class=MsoNormal>Vulnarable dependencies</h2>
+    {% for vulnerability in vulnerableDependencies -%}
+    <p># {{ vulnerability.number }}</p>
+    <table class=MsoTableGrid style='width: 900px;margin: 12.0pt 0 0;border-collapse:collapse;border:none'>
+        <tr>
+           <th style='width: 100px;border:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Name</p>
+            </th>
+            <th style='border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ vulnerability.ruleId }}</p>
+            </th>
+        </tr>
+        <tr>
+           <th style='width: 100px;border:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Severity/Score</p>
+            </th>
+            <th style='border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ vulnerability.severity }}/{{ vulnerability.score }}</p>
+            </th>
+        </tr>
+        <tr>
+           <th style='width: 100px;border:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>File Path</p>
+            </th>
+            <th style='border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ vulnerability.filePath }}</p>
+            </th>
+        </tr>
+        <tr>
+           <th style='width: 100px;border:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Cvssv info</p>
+            </th>
+            <th style='border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ vulnerability.message }}</p>
+            </th>
+        </tr>
+        <tr>
+           <th style='width: 100px;border:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Description</p>
+            </th>
+            <th style='border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ vulnerability.description }}</p>
+            </th>
+        </tr>
+        <tr>
+           <th style='width: 100px;border:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Details url</p>
+            </th>
+            <th style='border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <a class=MsoNormal style='margin-bottom:0;line-height:normal' href={{ vulnerability.detailsUrl }}>{{ vulnerability.detailsUrl }}</p>
+            </th>
+        </tr>
+        </table>
+        {% endfor %}
+    
+</div>
+</body>
+</html> 
