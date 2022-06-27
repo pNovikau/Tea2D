@@ -36,34 +36,38 @@ activities:
       - --details
       - /artifacts/stat-converted.cloc.json
       - --output
-      - /artifacts/resharper-issues.db
-  resharper:
-    image: godeltech/codereview.analyzers.inspectcode
+      - /artifacts/roslyn-issues.db
+  roslyn:
+    image: godeltech/codereview.analyzers.roslyn
     timeout: "1:00:00"
     environment:
       SOLUTION_FILE_PATH: /src/{SOLUTION_FILE_PATH}
-  resharper-file-converter-resharper:
+  roslyn-converter:
     image: godeltech/codereview.file-converter
     command:
-      - resharper
+      - roslyn
       - --output
-      - /artifacts/resharper-result.zip
+      - /artifacts/rolsyn-result.zip
       - --folder
-      - /artifacts/result.xml
-  resharper-evaluator-import-issues:
+      - /artifacts
+      - --src
+      - /imports/
+      - --mask
+      - '*.roslyn.json'
+  roslyn-evaluator:
     image: godeltech/codereview.evaluator
     command:
       - import-issues
       - --output
-      - /artifacts/resharper-issues.db
+      - /artifacts/roslyn-issues.db
       - --issues
-      - /artifacts/resharper-result.zip
-  resharper-evaluator-evaluate:
+      - /artifacts/rolsyn-result.zip
+  roslyn-evaluator-evaluate:
     image: godeltech/codereview.evaluator
     command:
       - evaluate
       - --db
-      - /artifacts/resharper-issues.db
+      - /artifacts/roslyn-issues.db
       - --manifest
       - /imports/evaluator-manifest.yaml
       - --output

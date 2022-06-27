@@ -12,7 +12,7 @@
             drawLanguageChart();
             drawIssuesChart();
         }
-        
+
         function drawIssuesChart() {
             let array = [
                 ['Description', 'Count'],
@@ -37,7 +37,7 @@
             const chart = new google.charts.Bar(document.getElementById('issues-chart'));
             chart.draw(data, options);
         }
-        
+
         function drawLanguageChart() {
             const totalCount = {{ totalFilesCount }};
             const array = [
@@ -60,17 +60,17 @@
 
             chart.draw(data, options);
         }
-        
+
         function onLoad() {
             calculateMaintainabilityIndex();
         }
-        
+
         function calculateMaintainabilityIndex() {
             const errorCount = {{ totalErrorCount }};
             const warningCount = {{ totalWarningCount }};
             const infoCount = {{ totalInfoCount }};
 
-            let errorIndex = 
+            let errorIndex =
                 errorCount * 10 +
                 warningCount * 1 +
                 infoCount * 0.1;
@@ -185,23 +185,23 @@
 <body onload="onLoad()">
 <div class=WordSection1>
     <h1>Overview of Report</h1>
-    
+
     <p class=MsoNormal>This report contains details of C# code state. Automated code analysis tools like Roslyn were used to evaluate level of issues.</p>
 
     <h1>Repository Details</h1>
-    
+
     <h2>General information</h2>
-    
+
     <p class=MsoNormal>
-        <b>Maintainability index:</b> <span id="maintainability-index"></span> (5 is the best mark) - <b><span id="maintainability-text"></span></b>
+        <b>Maintainability index:</b> <span id="maintainability-index"></span> (high quality codebase index is equal or higher to 5) - <b><span id="maintainability-text"></span></b>
     </p>
-    
+
     <p class=MsoNormal><b>Source Code Size:</b>
         {{ projectSize.range }}
     </p>
-    
+
     <p class=MsoNormal><b>Programming languages statistics:</b></p>
-    
+
     <div id="language-piechart" style="width: 900px; height: 500px;"></div>
 
     <h2>File Size Details</h2>
@@ -260,8 +260,6 @@
     <p class=MsoNormal>Distribution issues by category:</p>
     <div id="issues-chart" style="width: 900px; height: 500px;"></div>
 
-    <div style="page-break-before:always">&nbsp;</div>
-    
     <h2>Top 10 of most frequent issues</h2>
 
     <p class=MsoNormal>These are the issues which most frequently appear in your source code. Issues with low and medium severity does not cause potential quality issues but may cause inconvenies during </p>
@@ -287,7 +285,7 @@
         {% for issue in topTenFrequentIssues -%}
         <tr>
             <td style='width:52.6pt;border:solid black 1.0pt;border-top:none;padding:0 5.4pt 0 5.4pt'>
-                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>TODO: what should be displayed here?</p>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.ruleId }}</p>
             </td>
             <td style='width:52.6pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
                 <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.level }}</p>
@@ -306,8 +304,7 @@
     </table>
 
     <div style="page-break-before:always">&nbsp;</div>
-    
-    <!-- idk what should be in the table below :( -->
+
     <h2>Top 10 of most severe issues</h2>
     <p class=MsoNormal>Table below contains list of issues which are considered to be potential defects and require attention:</p>
 
@@ -332,7 +329,7 @@
         {% for issue in topTenSevereIssues -%}
         <tr>
             <td style='width:52.6pt;border:solid black 1.0pt;border-top:none;padding:0 5.4pt 0 5.4pt'>
-                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>TODO: what should be displayed here?</p>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.ruleId }}</p>
             </td>
             <td style='width:52.6pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
                 <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.level }}</p>

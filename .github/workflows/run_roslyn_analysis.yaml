@@ -1,4 +1,4 @@
-name: Resharper analysis
+name: Roslyn analysis
 
 on:
   workflow_dispatch:

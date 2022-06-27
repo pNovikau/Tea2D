@@ -35,47 +35,47 @@ requests:
     query: SELECT FilePath, Code, CASE WHEN Code < 100 THEN 'S' WHEN Code > 100 AND Code < 300 THEN 'M' WHEN Code > 300 AND Code < 500 THEN 'L' ELSE 'XL' END Size FROM FileDetails WHERE Language IN ('C#', 'cshtml') ORDER BY Code DESC LIMIT 10
     type: Collection
   topTenFrequentIssues:
-    query: Select Count(1) as Count, Level, Title, Description from Issues GROUP BY Level, Description, Category ORDER BY Count DESC LIMIT 10
+    query: Select Count(1) as Count, RuleId, Level, Title, Message as Description from Issues GROUP BY RuleId ORDER BY Count DESC LIMIT 10
     type: Collection
   topTenSevereIssues:
-    query: Select Count(1) as Count, Level, Title, Description from Issues GROUP BY Level, Description, Category ORDER BY Count DESC LIMIT 10
+    query: SELECT COUNT(1) as Count, RuleId, Level, CASE Level WHEN 'Error' THEN 3 WHEN 'Warning' THEN 2 WHEN 'Info' THEN 1 ELSE 0 END Severity, Title, Message FROM Issues GROUP BY RuleId ORDER BY Severity DESC, Count DESC LIMIT 10
     type: Collection
   topTenIssuesByDescription:
-    query: SELECT Description, Count(1) AS count FROM Issues GROUP BY Description ORDER BY Count DESC LIMIT 10
+    query: SELECT Message As Description, Count(1) AS count FROM Issues GROUP BY Message ORDER BY Count DESC LIMIT 10
     type: Collection
   biggestFileSize:
     query: SELECT Code FROM FileDetails WHERE Language IN ('C#', 'cshtml') ORDER BY Code DESC LIMIT 1
     ranges:
-      <b><span style='color:#6FAC47'>Good</span></b>:
+      <b><span style='color:#6FAC47'>File size is good</span></b>:
         end: 199
-      <b><span style='color:#C45911'>Avearage</span></b>:
+      <b><span style='color:#C45911'>File size is acceptable but should be moved to smaller numbers</span></b>:
         start: 200
         end: 1999
-      <b><span style='color:red'>Too big</span></b>:
+      <b><span style='color:red'>File size is considered to be unmaintainable</span></b>:
         start: 2000
   averageFileSize:
     query: SELECT CAST(AVG(Code) AS INTEGER) as value FROM FileDetails WHERE Language IN ('C#', 'cshtml')
     ranges:
-      <b><span style='color:#6FAC47'>Good</span></b>:
+      <b><span style='color:#6FAC47'>File size is good</span></b>:
         end: 199
-      <b><span style='color:#C45911'>Avearage</span></b>:
+      <b><span style='color:#C45911'>File size is acceptable but should be moved to smaller numbers</span></b>:
         start: 200
         end: 1999
-      <b><span style='color:red'>Too big</span></b>:
+      <b><span style='color:red'>File size is considered to be unmaintainable</span></b>:
         start: 2000
   projectSize:
     query: SELECT COUNT(1) AS count FROM FileDetails WHERE Language IN ('C#', 'cshtml')
     ranges:
-      XS (x <= 1000) - <b><span style='color:#6FAC47'> TODO what should be displayed here? </span></b>:
+      XS (x <= 1000) - <b><span style='color:#6FAC47'> Codebase size is good </span></b>:
         end: 1000
-      S (1000 < x <= 10000) - <b><span style='color:#6FAC47'> TODO what should be displayed here? </span></b>:
+      S (1000 < x <= 10000) - <b><span style='color:#6FAC47'> Codebase size is good </span></b>:
         start: 1001
         end: 10000
-      M (10000 < x <= 100000) - <b><span style='color:#6FAC47'> TODO what should be displayed here? </span></b>:
+      M (10000 < x <= 100000) - <b><span style='color:#6FAC47'> Codebase size is average </span></b>:
         start: 10001
         end: 100000
-      L (100000 < x <= 500000) - <b><span style='color:#C45911'> TODO what should be displayed here? </span></b>:
+      L (100000 < x <= 500000) - <b><span style='color:#C45911'> Codebase size is bad </span></b>:
         start: 100001
         end: 500000
-      XL (500000 < x) - <b><span style='color:red'> TODO what should be displayed here? </span></b>:
+      XL (500000 < x) - <b><span style='color:red'> Codebase size is bad </span></b>:
         start: 500001
