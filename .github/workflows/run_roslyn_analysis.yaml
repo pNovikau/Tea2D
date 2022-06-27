@@ -6,14 +6,14 @@ on:
 jobs:
   run-analysis:
     runs-on: ubuntu-latest
-
+  
     steps:
       - name: Check repository
         uses: actions/checkout@master
         with:
           repository: pNovikau/Tea2D
           path: ./Tea2D
-
+  
       - name: Create codereview.orchestrator container and run
         run: |
           docker image pull alpine:latest
@@ -27,21 +27,49 @@ jobs:
           docker cp ./Tea2D orchestrator:/app/src
           echo "Copy import directory to the container..."
           docker cp ./Tea2D/.github/workflows/analysis/roslyn/imports orchestrator:/app/imports
-
+  
       - name: Running container
         if: success()
         run: docker start -a orchestrator
-
+  
       - name: Exporting artifacts
         if: success()
         run: docker cp orchestrator:/app/artifacts ./artifacts
-
+  
       - name: Archive resharper results
         if: success()
         uses: actions/upload-artifact@v3
         with:
-          name: resharper-report
-          path: ./artifacts/report.html
-
+          name: artifacts
+          path: ./artifacts/roslyn-report.html
+  
       - name: Removing container
         run: docker rm orchestrator
+  
+  upload-report-to-github-page:
+    needs: run-analysis
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check repository tea2d.io
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+          repository: pNovikau/tea2d.io
+          path: ./tea2d.io
+
+      - name: Download roslyn result
+        uses: actions/download-artifact@master
+        with:
+          name: artifacts
+          path: ./artifacts
+
+      - name: Copy and push report to the tea2d.io
+        run: |
+          cp ./artifacts/roslyn-report.html ./tea2d.io/analysis/roslyn-report.html
+          cd ./tea2d.io
+          git config user.name "pNovikau"
+          git config user.email "p.novikau@godeltech.com"
+          git add analysis/roslyn-report.html
+          git commit -m "[run_roslyn_analysis] `date +'%Y-%m-%d %H:%M:%S'`"
+          git push

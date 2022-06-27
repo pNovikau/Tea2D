@@ -40,8 +40,36 @@ jobs:
         if: success()
         uses: actions/upload-artifact@v3
         with:
-          name: security-report
+          name: artifacts
           path: ./artifacts/report.html
 
       - name: Removing container
         run: docker rm orchestrator
+
+  upload-report-to-github-page:
+    needs: run-analysis
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check repository tea2d.io
+        uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.PAT }}
+          repository: pNovikau/tea2d.io
+          path: ./tea2d.io
+
+      - name: Download dependency check result
+        uses: actions/download-artifact@master
+        with:
+          name: artifacts
+          path: ./artifacts
+
+      - name: Copy and push report to the tea2d.io
+        run: |
+          cp ./artifacts/report.html ./tea2d.io/analysis/security-report.html
+          cd ./tea2d.io
+          git config user.name "pNovikau"
+          git config user.email "p.novikau@godeltech.com"
+          git add analysis/security-report.html
+          git commit -m "[run_dependency_check] `date +'%Y-%m-%d %H:%M:%S'`"
+          git push

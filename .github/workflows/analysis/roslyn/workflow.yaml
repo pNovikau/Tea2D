@@ -79,6 +79,6 @@ activities:
       - --template
       - /imports/report.html.liquid
       - --output
-      - /artifacts/report.html
+      - /artifacts/roslyn-report.html
       - --data
       - /artifacts/result.json
