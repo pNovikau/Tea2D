@@ -7,6 +7,12 @@
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
         google.charts.setOnLoadCallback(drawCharts);
+
+        function onLoad() {
+            const date = new Date();
+            document.getElementById('date').textContent = date.toUTCString();
+        }
+        
         function drawCharts() {
             drawVulnarabilitiesChart();
             drawDependenciesChart();
@@ -104,9 +110,9 @@
         }
     </style>
 </head>
-<body>
+<body onload="onLoad()">
 <div class=WordSection1>
-    <h1>Overview of Report</h1>
+    <h1>Overview of Report <span id="date"></span></h1>
     
     <p class=MsoNormal>This report contains details of project dependencie's vulnarability. OWASP Dependency check was used to find vulnarable dependencies.</p>
     
