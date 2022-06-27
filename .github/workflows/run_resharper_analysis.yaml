@@ -1,0 +1,47 @@
+name: Resharper analysis
+
+on:
+  workflow_dispatch:
+
+jobs:
+  run-analysis:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check repository
+        uses: actions/checkout@master
+        with:
+          repository: pNovikau/Tea2D
+          path: ./Tea2D
+
+      - name: Create codereview.orchestrator container and run
+        run: |
+          docker image pull alpine:latest
+          echo "Docker pulling image godeltech/codereview.orchestrator..."
+          docker image pull godeltech/codereview.orchestrator
+          echo "Creating docker container godeltech/codereview.orchestrator..."
+          docker create --name orchestrator -v /var/run/docker.sock:/var/run/docker.sock godeltech/codereview.orchestrator run -f workflow.yaml
+          echo "Copy workflow file to the container..."
+          docker cp ./Tea2D/.github/workflows/analysis/resharper/workflow.yaml orchestrator:/app/workflow.yaml
+          echo "Copy source directory to the container..."
+          docker cp ./Tea2D orchestrator:/app/src
+          echo "Copy import directory to the container..."
+          docker cp ./Tea2D/.github/workflows/analysis/resharper/imports orchestrator:/app/imports
+
+      - name: Running container
+        if: success()
+        run: docker start -a orchestrator
+
+      - name: Exporting artifacts
+        if: success()
+        run: docker cp orchestrator:/app/artifacts ./artifacts
+
+      - name: Archive resharper results
+        if: success()
+        uses: actions/upload-artifact@v3
+        with:
+          name: resharper-report
+          path: ./artifacts/report.html
+
+      - name: Removing container
+        run: docker rm orchestrator
