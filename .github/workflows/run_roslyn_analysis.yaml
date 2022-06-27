@@ -22,11 +22,11 @@ jobs:
           echo "Creating docker container godeltech/codereview.orchestrator..."
           docker create --name orchestrator -v /var/run/docker.sock:/var/run/docker.sock godeltech/codereview.orchestrator run -f workflow.yaml
           echo "Copy workflow file to the container..."
-          docker cp ./Tea2D/.github/workflows/analysis/resharper/workflow.yaml orchestrator:/app/workflow.yaml
+          docker cp ./Tea2D/.github/workflows/analysis/roslyn/workflow.yaml orchestrator:/app/workflow.yaml
           echo "Copy source directory to the container..."
           docker cp ./Tea2D orchestrator:/app/src
           echo "Copy import directory to the container..."
-          docker cp ./Tea2D/.github/workflows/analysis/resharper/imports orchestrator:/app/imports
+          docker cp ./Tea2D/.github/workflows/analysis/roslyn/imports orchestrator:/app/imports
 
       - name: Running container
         if: success()
