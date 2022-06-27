@@ -41,7 +41,7 @@ activities:
     image: godeltech/codereview.analyzers.roslyn
     timeout: "1:00:00"
     environment:
-      SOLUTION_FILE_PATH: /src/{SOLUTION_FILE_PATH}
+      SOLUTION_FILE_PATH: /src/Tea2D.sln
   roslyn-converter:
     image: godeltech/codereview.file-converter
     command:
