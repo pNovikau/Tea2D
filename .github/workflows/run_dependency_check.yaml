@@ -66,10 +66,10 @@ jobs:
 
       - name: Copy and push report to the tea2d.io
         run: |
-          cp ./artifacts/report.html ./tea2d.io/analysis/security-report.html
+          cp ./artifacts/report.html ./tea2d.io/_includes/partials/security-report.njk
           cd ./tea2d.io
           git config user.name "pNovikau"
           git config user.email "p.novikau@godeltech.com"
-          git add analysis/security-report.html
+          git add _includes/partials/security-report.njk
           git commit -m "[run_dependency_check] `date +'%Y-%m-%d %H:%M:%S'`"
           git push
