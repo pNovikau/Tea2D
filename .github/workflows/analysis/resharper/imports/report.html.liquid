@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart', 'bar']});
+        google.charts.setOnLoadCallback(drawCharts);
+
+        function drawCharts() {
+            drawLanguageChart();
+            drawIssuesChart();
+        }
+        
+        function drawIssuesChart() {
+            let array = [
+                ['Description', 'Count'],
+                {% for issue in topTenIssuesByDescription -%}
+                ["{{ issue.description }}", {{ issue.count }}],
+                {% endfor -%}
+            ];
+
+            for (let i = 0; i < array.length; i++) {
+                if (array[i][0].length > 50) {
+                    array[i][0] = array[i][0].substring(0, 49) + '...';
+                }
+            }
+
+            const data = new google.visualization.arrayToDataTable(array);
+            const options = {
+                title: 'Distribution issues by category',
+                bars: 'horizontal',
+                legend: { position: "none" },
+            }
+
+            const chart = new google.charts.Bar(document.getElementById('issues-chart'));
+            chart.draw(data, options);
+        }
+        
+        function drawLanguageChart() {
+            const totalCount = {{ totalFilesCount }};
+            const array = [
+                ['Language', 'Count'],
+                {% for file in topFiveLanguages -%}
+                ['{{ file.language }}', {{ file.count }}],
+                {% endfor -%}
+            ];
+
+            const other = totalCount - array.slice(1, array.length).reduce((partialSum, a) => partialSum + a[1], 0);
+            array.push(["Other", other]);
+
+            const data = google.visualization.arrayToDataTable(array);
+
+            const options = {
+                title: 'Language'
+            };
+
+            const chart = new google.visualization.PieChart(document.getElementById('language-piechart'));
+
+            chart.draw(data, options);
+        }
+        
+        function onLoad() {
+            calculateMaintainabilityIndex();
+        }
+        
+        function calculateMaintainabilityIndex() {
+            const errorCount = {{ totalErrorCount }};
+            const warningCount = {{ totalWarningCount }};
+            const infoCount = {{ totalInfoCount }};
+
+            let errorIndex = 
+                errorCount * 10 +
+                warningCount * 1 +
+                infoCount * 0.1;
+
+            errorIndex = Math.max(errorIndex, 1);
+            errorIndex = {{ totalCodeCount }} / errorIndex;
+            errorIndex = Math.log2(errorIndex);
+            errorIndex = Math.round(errorIndex * 100) / 100;
+
+            document.getElementById('maintainability-index').textContent = errorIndex;
+
+            let spanElement = document.getElementById('maintainability-text');
+            if (errorIndex >= 5) {
+                spanElement.textContent = "This level is considered as good";
+                spanElement.style.color = "#6FAC47";
+            }
+            else if (errorIndex >= 4) {
+                spanElement.textContent = "errorIndex >= 4";
+                spanElement.style.color = "#6FAC47";
+            }
+            else if (errorIndex >= 3) {
+                spanElement.textContent = "errorIndex >= 3";
+                spanElement.style.color = "#6FAC47";
+            }
+            else if (errorIndex >= 2) {
+                spanElement.textContent = "errorIndex >= 2";
+                spanElement.style.color = "#6FAC47";
+            }
+            else if (errorIndex >= 1) {
+                spanElement.textContent = "errorIndex >= 1";
+                spanElement.style.color = "#6FAC47";
+            }
+            else if (errorIndex < 1) {
+                spanElement.textContent = "errorIndex < 1";
+                spanElement.style.color = "#6FAC47";
+            }
+        }
+    </script>
+
+    <style>
+        <!--
+        /* Font Definitions */
+        @font-face {
+            font-family: "Cambria Math";
+            panose-1: 2 4 5 3 5 4 6 3 2 4;
+        }
+
+        @font-face {
+            font-family: Calibri;
+            panose-1: 2 15 5 2 2 2 4 3 2 4;
+        }
+
+        @font-face {
+            font-family: "Calibri Light";
+            panose-1: 2 15 3 2 2 2 4 3 2 4;
+        }
+
+        /* Style Definitions */
+        p.MsoNormal, li.MsoNormal, div.MsoNormal {
+            margin: 0 0 8.0pt;
+            line-height: 107%;
+            font-size: 11.0pt;
+            font-family: "Calibri", sans-serif;
+        }
+
+        h1 {
+            mso-style-link: "Heading 1 Char";
+            margin: 12.0pt 0 0;
+            line-height: 107%;
+            page-break-after: avoid;
+            font-size: 16.0pt;
+            font-family: "Calibri Light", sans-serif;
+            color: #2F5496;
+            font-weight: normal;
+        }
+
+        h2 {
+            mso-style-link: "Heading 2 Char";
+            margin: 2.0pt 0 0;
+            line-height: 107%;
+            page-break-after: avoid;
+            font-size: 13.0pt;
+            font-family: "Calibri Light", sans-serif;
+            color: #2F5496;
+            font-weight: normal;
+        }
+
+        h3 {
+            mso-style-link: "Heading 3 Char";
+            margin: 2.0pt 0 0;
+            line-height: 107%;
+            page-break-after: avoid;
+            font-size: 12.0pt;
+            font-family: "Calibri Light", sans-serif;
+            color: #1F3763;
+            font-weight: normal;
+        }
+
+        @page WordSection1 {
+            size: 8.5in 11.0in;
+            margin: 1.0in 1.0in 1.0in 1.0in;
+        }
+
+        div.WordSection1 {
+            page: WordSection1;
+        }
+        -->
+    </style>
+
+</head>
+
+<body onload="onLoad()">
+<div class=WordSection1>
+    <h1>Overview of Report</h1>
+    
+    <p class=MsoNormal>This report contains details of C# code state. Automated code analysis tools like Roslyn were used to evaluate level of issues.</p>
+
+    <h1>Repository Details</h1>
+    
+    <h2>General information</h2>
+    
+    <p class=MsoNormal>
+        <b>Maintainability index:</b> <span id="maintainability-index"></span> (5 is the best mark) - <b><span id="maintainability-text"></span></b>
+    </p>
+    
+    <p class=MsoNormal><b>Source Code Size:</b>
+        {{ projectSize.range }}
+    </p>
+    
+    <p class=MsoNormal><b>Programming languages statistics:</b></p>
+    
+    <div id="language-piechart" style="width: 900px; height: 500px;"></div>
+
+    <h2>File Size Details</h2>
+
+    <p class=MsoNormal>
+        <b>Total files found:</b> {{ totalLanguagesFilesCount.value }} - {{ totalLanguagesFilesCount.range }}
+    </p>
+
+    <p class=MsoNormal>
+        <b>Biggest file size:</b> {{ biggestFileSize.value }} (LoC) - {{ biggestFileSize.range }}
+    </p>
+
+    <p class=MsoNormal>
+        <b>Average file size: </b> {{ averageFileSize.value }} (LoC) - {{ averageFileSize.range }}
+    </p>
+
+    <h3>Top 10 biggest files for primary development language (C#, cshtml)</h3>
+
+    <table class=MsoTableGrid style='border-collapse:collapse;border:none'>
+        <tr>
+            <td style='width:117.0pt;border:solid black 1.0pt; padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'><b>File Name</b></p>
+            </td>
+            <td style='width:117.0pt;border:solid black 1.0pt; border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'><b>Size</b></p>
+            </td>
+            <td style='width:117.0pt;border:solid black 1.0pt; border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'><b>Lines of Code</b></p>
+            </td>
+            <td style='width:117.0pt;border:solid black 1.0pt; border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'><b>File Page</b></p>
+            </td>
+        </tr>
+        {% for file in topTenBiggestFilesForLanguages -%}
+        <tr>
+            <td style='width:117.0pt;border:solid black 1.0pt; border-top:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ file.filePath | split: "/" | last }}</p>
+            </td>
+            <td style='width:117.0pt;border-top:none;border-left: none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt; padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ file.size }}</p>
+            </td>
+            <td style='width:117.0pt;border-top:none;border-left: none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt; padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ file.code }}</p>
+            </td>
+            <td style='width:117.0pt;border-top:none;border-left: none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt; padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ file.filePath }}</p>
+            </td>
+        </tr>
+        {% endfor -%}
+    </table>
+
+    <div style="page-break-before:always">&nbsp;</div>
+
+    <h2>C# Code Issues</h2>
+
+    <p class=MsoNormal>Distribution issues by category:</p>
+    <div id="issues-chart" style="width: 900px; height: 500px;"></div>
+
+    <div style="page-break-before:always">&nbsp;</div>
+    
+    <h2>Top 10 of most frequent issues</h2>
+
+    <p class=MsoNormal>These are the issues which most frequently appear in your source code. Issues with low and medium severity does not cause potential quality issues but may cause inconvenies during </p>
+
+    <table class=MsoTableGrid style='border-collapse:collapse;border:none'>
+        <tr>
+            <td style='width:52.6pt;border:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Issue ID</p>
+            </td>
+            <td style='width:52.6pt;border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>Severity</p>
+            </td>
+            <td style='width:71.25pt;border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>Title</p>
+            </td>
+            <td style='width:94.55pt;border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>Description</p>
+            </td>
+            <td style='width:197.05pt;border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Count</p>
+            </td>
+        </tr>
+        {% for issue in topTenFrequentIssues -%}
+        <tr>
+            <td style='width:52.6pt;border:solid black 1.0pt;border-top:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>TODO: what should be displayed here?</p>
+            </td>
+            <td style='width:52.6pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.level }}</p>
+            </td>
+            <td style='width:197.05pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.title }}</p>
+            </td>
+            <td style='width:197.05pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.description }}</p>
+            </td>
+            <td style='width:52.6pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.count }}</p>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <div style="page-break-before:always">&nbsp;</div>
+    
+    <!-- idk what should be in the table below :( -->
+    <h2>Top 10 of most severe issues</h2>
+    <p class=MsoNormal>Table below contains list of issues which are considered to be potential defects and require attention:</p>
+
+    <table class=MsoTableGrid style='border-collapse:collapse;border:none'>
+        <tr>
+            <td style='width:52.6pt;border:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Issue ID</p>
+            </td>
+            <td style='width:52.6pt;border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>Severity</p>
+            </td>
+            <td style='width:71.25pt;border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>Title</p>
+            </td>
+            <td style='width:94.55pt;border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>Description</p>
+            </td>
+            <td style='width:197.05pt;border:solid black 1.0pt;border-left:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:107%'>Count</p>
+            </td>
+        </tr>
+        {% for issue in topTenSevereIssues -%}
+        <tr>
+            <td style='width:52.6pt;border:solid black 1.0pt;border-top:none;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>TODO: what should be displayed here?</p>
+            </td>
+            <td style='width:52.6pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.level }}</p>
+            </td>
+            <td style='width:197.05pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.title }}</p>
+            </td>
+            <td style='width:197.05pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.description }}</p>
+            </td>
+            <td style='width:52.6pt;border-top:none;border-left:none;border-bottom:solid black 1.0pt;border-right:solid black 1.0pt;padding:0 5.4pt 0 5.4pt'>
+                <p class=MsoNormal style='margin-bottom:0;line-height:normal'>{{ issue.count }}</p>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+
+    <p class=MsoNormal>In many cases issues specified in the table above require fixes. Please plan technical activities to reduce amount of these issues.</p>
+</div>
+</body>
+</html>

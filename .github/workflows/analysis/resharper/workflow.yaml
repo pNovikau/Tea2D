@@ -1,0 +1,80 @@
+volumes:
+  artifacts:
+    targetFolder: /artifacts
+    folderToOutput: ./artifacts
+    readOnly: false
+  imports:
+    targetFolder: /imports
+    folderToImport: ./imports
+    readOnly: false
+  source:
+    targetFolder: /src
+    folderToImport: ./src
+    readOnly: false
+activities:
+  cloc:
+    image: aldanial/cloc
+    command:
+      - --by-file
+      - --report-file=/artifacts/stat.cloc.json
+      - --json
+      - /src
+  cloc-converter:
+    image: godeltech/codereview.file-converter
+    command:
+      - cloc
+      - --output
+      - /artifacts/stat-converted.cloc.json
+      - --file
+      - /artifacts/stat.cloc.json
+      - --prefix
+      - /src/
+  cloc-evaluator:
+    image: godeltech/codereview.evaluator
+    command:
+      - import-file-details
+      - --details
+      - /artifacts/stat-converted.cloc.json
+      - --output
+      - /artifacts/resharper-issues.db
+  resharper:
+    image: godeltech/codereview.analyzers.inspectcode
+    timeout: "1:00:00"
+    environment:
+      SOLUTION_FILE_PATH: /src/{SOLUTION_FILE_PATH}
+  resharper-file-converter-resharper:
+    image: godeltech/codereview.file-converter
+    command:
+      - resharper
+      - --output
+      - /artifacts/resharper-result.zip
+      - --folder
+      - /artifacts/result.xml
+  resharper-evaluator-import-issues:
+    image: godeltech/codereview.evaluator
+    command:
+      - import-issues
+      - --output
+      - /artifacts/resharper-issues.db
+      - --issues
+      - /artifacts/resharper-result.zip
+  resharper-evaluator-evaluate:
+    image: godeltech/codereview.evaluator
+    command:
+      - evaluate
+      - --db
+      - /artifacts/resharper-issues.db
+      - --manifest
+      - /imports/evaluator-manifest.yaml
+      - --output
+      - /artifacts/result.json
+  report-template-renderer-liquid:
+    image: godeltech/codereview.template-renderer
+    command:
+      - liquid
+      - --template
+      - /imports/report.html.liquid
+      - --output
+      - /artifacts/report.html
+      - --data
+      - /artifacts/result.json
