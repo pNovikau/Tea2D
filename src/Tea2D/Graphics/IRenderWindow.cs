@@ -1,3 +1,5 @@
+using SFML.Graphics;
+
 namespace Tea2D.Graphics;
 
 public interface IRenderWindow : IWindow
@@ -7,8 +9,10 @@ public interface IRenderWindow : IWindow
     /// </summary>
     void Clear();
 
-    //TODO:
-    void Draw();
+    /// <summary>
+    /// Draw a drawable object
+    /// </summary>
+    void Draw(IDrawable drawable);
 
     /// <summary>
     /// Display the window on screen

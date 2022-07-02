@@ -1,7 +1,7 @@
 ﻿using System;
 using Tea2D.Ecs;
 
-namespace Tea2D.Core.Collections;
+namespace Tea2D.Common.Collections;
 
 public class UnorderedList<TItem> : IUnorderedList<TItem>
     where TItem : struct, IHasId
@@ -50,6 +50,9 @@ public class UnorderedList<TItem> : IUnorderedList<TItem>
 
     public void Remove(int id)
     {
+        if (_reusableSlotsIndex == _reusableSlots.Length)
+            Array.Resize(ref _reusableSlots, _reusableSlots.Length * 2);
+
         _reusableSlots[_reusableSlotsIndex++] = id;
     }
 

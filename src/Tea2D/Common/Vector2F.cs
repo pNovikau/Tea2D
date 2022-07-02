@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 namespace Tea2D.Common
 {
     [StructLayout(LayoutKind.Sequential)]
-    [DebuggerDisplay("{ToString}")]
+    [DebuggerDisplay("[{nameof(Vector2F)}] X({X}) Y({Y})")]
     public struct Vector2F : IEquatable<Vector2F>
     {
         public float X;

@@ -29,10 +29,6 @@ public ref struct EntityBuilder
     {
         ref var component = ref _componentManager.CreateComponent<TComponent>();
 
-        ref var entity = ref _entityManager.Get(_entityId);
-        entity.Components[IComponent<TComponent>.ComponentType] = component.Id;
-        entity.ComponentsTypes.Add(IComponent<TComponent>.ComponentType);
-
         var args = new EntityComponentEventArgs(_entityId, component.Id, IComponent<TComponent>.ComponentType);
         _entityManager.Events.OnEntityComponentAdded(args);
 

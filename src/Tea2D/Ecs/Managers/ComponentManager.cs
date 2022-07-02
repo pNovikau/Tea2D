@@ -49,6 +49,11 @@ public class ComponentManager : IComponentManager
         componentBucket.Delete(id);
     }
 
+    public void Delete(int componentType, int id)
+    {
+        _components[componentType].Delete(id);
+    }
+
     private IComponentBucket<TComponent> GetComponentBucket<TComponent>()
         where TComponent : struct, IComponent<TComponent>
     {

@@ -13,31 +13,9 @@ namespace Tea2D.Graphics.Sfml.Native;
 internal static unsafe partial class SfmlApi
 {
     [SkipLocalsInit]
-    public static SfmlRenderWindow CreateRenderWindow(Vector2U size, ReadOnlySpan<char> title)
+    public static SfmlRenderWindow CreateRenderWindow(Vector2U size, string title)
     {
-        Span<char> titleWithNullTerminator = stackalloc char[title.Length + 1];
-        title.CopyTo(titleWithNullTerminator);
-        titleWithNullTerminator[title.Length - 1] = '\0';
-
-        var byteCount = EncoderProvider.Utf32.GetByteCount(titleWithNullTerminator);
-        Span<byte> bytes = stackalloc byte[byteCount];
-
-        EncoderProvider.Utf32.GetBytes(titleWithNullTerminator, bytes);
-
-        return CreateRenderWindow(size, bytes);
-    }
-
-    [SkipLocalsInit]
-    public static SfmlRenderWindow CreateRenderWindow(Vector2U size, ref ValueString title)
-    {
-        title.Append('\0');
-
-        var byteCount = EncoderProvider.Utf32.GetByteCount(title);
-        Span<byte> bytes = stackalloc byte[byteCount];
-
-        EncoderProvider.Utf32.GetBytes(title, bytes);
-
-        return CreateRenderWindow(size, bytes);
+        return new SfmlRenderWindow(new VideoMode(size.X, size.Y), title);
     }
 
     [SkipLocalsInit]
@@ -50,17 +28,6 @@ internal static unsafe partial class SfmlApi
         fixed (byte* titlePtr = titleAsUtf32)
         {
             sfWindow_setUnicodeTitle(window.CPointer, (IntPtr)titlePtr);
-        }
-    }
-
-    private static SfmlRenderWindow CreateRenderWindow(Vector2U size, Span<byte> title)
-    {
-        fixed (byte* titlePtr = title)
-        {
-            var settings = new ContextSettings(0, 0);
-            var windowPointer = sfRenderWindow_createUnicode(new VideoMode(size.X, size.Y), (IntPtr)titlePtr, Styles.Default, ref settings);
-
-            return new SfmlRenderWindow(windowPointer);
         }
     }
 

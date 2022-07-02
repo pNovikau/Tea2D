@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using SFML.Graphics;
 using SFML.System;
 using Tea2D.Common;
 using Tea2D.Core.Memory;
@@ -12,9 +13,10 @@ internal class RenderWindow : IRenderWindow
 {
     private readonly SfmlRenderWindow _renderWindow;
 
-    public RenderWindow(Vector2U size, ReadOnlySpan<char> title)
+    public RenderWindow(Vector2U size, string title)
     {
         _renderWindow = SfmlApi.CreateRenderWindow(size, title);
+        _renderWindow.SetFramerateLimit(60);
     }
 
     public Vector2I Position
@@ -31,7 +33,13 @@ internal class RenderWindow : IRenderWindow
 
     public void Clear() => _renderWindow.Clear();
 
-    public void Draw() => throw new NotImplementedException();
+    public void Draw(IDrawable drawable)
+    {
+        Debug.Assert(drawable != null);
+
+        drawable.Draw(this);
+    }
+
     public void Display() => _renderWindow.Display();
 
     public void DispatchEvents() => _renderWindow.DispatchEvents();
@@ -41,4 +49,6 @@ internal class RenderWindow : IRenderWindow
     public void SetTitle(ref ValueString title) => _renderWindow.SetTitle(ref title);
 
     public override string ToString() => $"[{nameof(RenderWindow)}] Size({Size}) Position({Position})";
+
+    internal SfmlRenderWindow GetSfmlRenderWindow() => _renderWindow;
 }

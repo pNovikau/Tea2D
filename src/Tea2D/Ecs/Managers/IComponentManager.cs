@@ -16,4 +16,6 @@ public interface IComponentManager
 
     void Delete<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>;
+
+    void Delete(int componentType, int id);
 }

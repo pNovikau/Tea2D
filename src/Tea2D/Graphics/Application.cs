@@ -12,7 +12,7 @@ internal class Application : IApplication
     public IWindow? CurrentWindow { get; private set; }
     public IRenderWindow? CurrentRenderWindow { get; private set; }
     public IReadOnlyCollection<IWindow> Windows => _windows;
-    public bool IsRunning { get; private set; }
+    public bool IsRunning { get; private set; } = true;
 
     public IWindow RegisterWindow(Vector2U size, string title)
     {

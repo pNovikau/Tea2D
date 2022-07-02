@@ -2,5 +2,5 @@
 
 public static class ApplicationProvider
 {
-    public static IApplication Application = new Application();
+    public static readonly IApplication Application = new Application();
 }

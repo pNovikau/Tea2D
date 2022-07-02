@@ -8,6 +8,4 @@ public struct GameContext
 {
     public GameTime GameTime;
     public IGameWorld GameWorld;
-    public RenderWindow RenderWindow;
-    //public IApplication Application;
 }

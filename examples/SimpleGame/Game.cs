@@ -18,42 +18,38 @@ namespace SimpleGame;
 
 public class Game
 {
-    private RenderWindow _window;
     private IGameWorld _gameWorld;
 
     public void Init()
     {
         ApplicationProvider.Application.RegisterRenderWindow(new Vector2U(1200, 600), "Tea2D");
-        
-        //_window = new RenderWindow(new VideoMode(1200, 600), "Tea2D");
-        //_window.SetFramerateLimit(60);
         _gameWorld = new GameWorld();
 
         var context = new GameContext
         {
-            RenderWindow = _window,
             GameWorld = _gameWorld
         };
 
-        _gameWorld.SystemManager.RegisterSystem<DrawSystem>(context);
+        _gameWorld.SystemManager.RegisterSystem<LifetimeSystem>(context);
+        _gameWorld.SystemManager.RegisterSystem<DestroyEntitySystem>(context);
+        _gameWorld.SystemManager.RegisterSystem<ControlSystem>(context);
         _gameWorld.SystemManager.RegisterSystem<MoveSystem>(context);
+        _gameWorld.SystemManager.RegisterSystem<DrawSystem>(context);
 
         _gameWorld.Initialize(context);
 
-        for (int i = 0; i < 10000; i++) 
-            _gameWorld.CreateRectangle();
+        _gameWorld.CreatePlayer();
     }
 
     public void Run()
     {
         var context = new GameContext
         {
-            RenderWindow = _window,
             GameWorld = _gameWorld,
             GameTime = new GameTime()
         };
 
-        var title = new ValueString("Tea2D: 0", stackalloc char[255]);
+        var title = new ValueString("Tea2D: 0", stackalloc char[15]);
         var fpsCounter = new FpsCounter(context.GameTime);
 
         while (ApplicationProvider.Application.IsRunning)

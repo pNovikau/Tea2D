@@ -43,16 +43,16 @@ public class ComponentsFilter<TComponent> : ComponentsFilter, IEnumerable
             _index = -1;
         }
 
-        public unsafe Span<TComponent> Current
+        public ComponentsTuple<TComponent> Current
         {
             get
             {
                 ref var entity = ref _componentFilter.EntityManager.Get(_componentFilter.EntitiesIds[_index]);
 
                 var componentId = entity.Components[IComponent<TComponent>.ComponentType];
-                ref var component = ref _componentFilter.ComponentManager.GetComponent<TComponent>(componentId);
+                var component = _componentFilter.ComponentManager.GetComponentAsSpan<TComponent>(componentId);
 
-                return new Span<TComponent>(Unsafe.AsPointer(ref component), 1);
+                return new ComponentsTuple<TComponent>(entity.Id, component);
             }
         }
 
@@ -112,7 +112,7 @@ public class ComponentsFilter<TComponent, TComponent1> : ComponentsFilter, IEnum
                 var componentId1 = entity.Components[IComponent<TComponent1>.ComponentType];
                 var component1 = _componentFilter.ComponentManager.GetComponentAsSpan<TComponent1>(componentId1);
 
-                return new ComponentsTuple<TComponent, TComponent1>(component, component1);
+                return new ComponentsTuple<TComponent, TComponent1>(entity.Id, component, component1);
             }
         }
 
@@ -177,7 +177,7 @@ public class ComponentsFilter<TComponent, TComponent1, TComponent2> : Components
                 var componentId2 = entity.Components[IComponent<TComponent2>.ComponentType];
                 var component2 = _componentFilter.ComponentManager.GetComponentAsSpan<TComponent2>(componentId2);
 
-                return new ComponentsTuple<TComponent, TComponent1, TComponent2>(component, component1, component2);
+                return new ComponentsTuple<TComponent, TComponent1, TComponent2>(entity.Id, component, component1, component2);
             }
         }
 
@@ -247,7 +247,7 @@ public class ComponentsFilter<TComponent, TComponent1, TComponent2, TComponent3>
                 var componentId3 = entity.Components[IComponent<TComponent3>.ComponentType];
                 var component3 = _componentFilter.ComponentManager.GetComponentAsSpan<TComponent3>(componentId3);
                 
-                return new ComponentsTuple<TComponent, TComponent1, TComponent2, TComponent3>(component, component1, component2, component3);
+                return new ComponentsTuple<TComponent, TComponent1, TComponent2, TComponent3>(entity.Id, component, component1, component2, component3);
             }
         }
 
