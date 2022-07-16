@@ -1,6 +1,8 @@
 ﻿using Tea2D.Common;
+using Tea2D.Graphics;
+using Tea2D.Graphics.Sfml;
 
-namespace Tea2D.Graphics.Sfml;
+namespace Tea2D.Window.Sfml;
 
 public class Mouse : IMouse
 {

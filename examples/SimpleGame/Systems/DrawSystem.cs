@@ -20,7 +20,7 @@ public class DrawSystem : Tea2D.Ecs.Systems.System
         {
             ref var drawableComponent = ref drawableComponentSpan[0];
 
-            ApplicationProvider.Application.CurrentRenderWindow!.Draw(drawableComponent.Drawable);
+            //ApplicationProvider.Application.CurrentRenderWindow!.Draw(drawableComponent.Drawable);
         }
     }
 }

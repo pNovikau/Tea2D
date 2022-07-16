@@ -1,4 +1,4 @@
-﻿namespace Tea2D.Graphics;
+﻿namespace Tea2D.Window;
 
 public interface IKeyboard
 {

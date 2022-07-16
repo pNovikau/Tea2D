@@ -7,6 +7,7 @@ using Tea2D.Common;
 using Tea2D.Common.Math;
 using Tea2D.Ecs.ComponentFilters;
 using Tea2D.Graphics;
+using Tea2D.Window;
 
 namespace SimpleGame.Systems;
 

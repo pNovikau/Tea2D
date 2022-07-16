@@ -18,7 +18,7 @@ internal class Application : IApplication
     {
         Debug.Assert(IsRunning);
 
-        var window = new Window(size, title);
+        var window = new Sfml.Window(size, title);
         CurrentWindow ??= window;
 
         _windows.Add(window);

@@ -1,4 +1,4 @@
-﻿namespace Tea2D.Graphics.Sfml;
+﻿namespace Tea2D.Window.Sfml;
 
 public class Keyboard : IKeyboard
 {

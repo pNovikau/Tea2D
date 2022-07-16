@@ -30,10 +30,4 @@ internal static unsafe partial class SfmlApi
             sfWindow_setUnicodeTitle(window.CPointer, (IntPtr)titlePtr);
         }
     }
-
-    [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-    private static extern IntPtr sfRenderWindow_createUnicode(VideoMode mode, IntPtr title, Styles style, ref ContextSettings @params);
-
-    [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
-    static extern void sfRenderWindow_setUnicodeTitle(IntPtr cPointer, IntPtr title);
 }

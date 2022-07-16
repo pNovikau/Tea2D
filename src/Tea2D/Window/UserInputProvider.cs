@@ -1,6 +1,6 @@
-﻿using Tea2D.Graphics.Sfml;
+﻿using Tea2D.Window.Sfml;
 
-namespace Tea2D.Graphics;
+namespace Tea2D.Window;
 
 public static class UserInputProvider
 {
