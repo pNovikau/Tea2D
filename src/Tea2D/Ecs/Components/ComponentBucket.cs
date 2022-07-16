@@ -1,4 +1,5 @@
 using System;
+using Tea2D.Core.Diagnostics.Logging;
 
 namespace Tea2D.Ecs.Components;
 
@@ -28,14 +29,17 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
 
         if (_freeComponentsIndex != 0)
         {
-            id = _freeComponents[_freeComponentsIndex--];
+            id = _freeComponents[--_freeComponentsIndex];
 
             _components[id] = new TComponent { Id = id };
             return ref _components[id];
         }
 
         if (_componentIndex + 1 >= _components.Length)
+        {
+            Logger.Instance.LogDebug($"ComponentBucket<{typeof(TComponent).Name}> components array resized");
             Array.Resize(ref _components, _components.Length * 2);
+        }
 
         id = _componentIndex++;
 
@@ -45,19 +49,15 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
 
     public void Delete(int id)
     {
-        if (id == _componentIndex - 1)
-        {
-            --_componentIndex;
-
-            return;
-        }
-
         if (_freeComponentsIndex + 1 >= _freeComponents.Length)
+        {
+            Logger.Instance.LogDebug($"ComponentBucket<{typeof(TComponent).Name}> free components array resized");
             Array.Resize(ref _freeComponents, _freeComponents.Length * 2);
+        }
 
         _freeComponents[_freeComponentsIndex++] = id;
     }
 
-    public Span<TComponent> AsSpan() => _components.AsSpan()[.._componentIndex];
-    public Memory<TComponent> AsMemory() => _components.AsMemory()[.._componentIndex];
+    public Span<TComponent> AsSpan() => _components.AsSpan();
+    public Memory<TComponent> AsMemory() => _components.AsMemory();
 }

@@ -1,4 +1,4 @@
-namespace Tea2D.Core.Collections;
+namespace Tea2D.Common.Collections;
 
 public interface IUnorderedList<TItem>
 {

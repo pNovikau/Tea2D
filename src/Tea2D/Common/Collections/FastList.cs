@@ -5,7 +5,7 @@ using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
-namespace Tea2D.Core.Collections
+namespace Tea2D.Common.Collections
 {
     [DebuggerDisplay("Count = {" + nameof(Count) + "}")]
     public class FastList<T> : IList<T>, IReadOnlyList<T>

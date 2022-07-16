@@ -4,5 +4,5 @@ public abstract class System : ISystem
 {
     public virtual void Initialize(GameContext context) { }
 
-    public abstract void Update(GameContext context);
+    public abstract void Update(in GameContext context);
 }

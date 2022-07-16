@@ -1,6 +1,6 @@
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using Tea2D.Core.Collections;
 using Tea2D.Ecs.Managers;
 using Tea2D.Ecs.Managers.Events;
 
@@ -10,7 +10,7 @@ public abstract class ComponentsFilter : IComponentFilter
 {
     private readonly int[] _componentTypes;
 
-    protected readonly FastList<int> EntitiesIds = new(255);
+    protected readonly List<int> EntitiesIds = new(255);
     protected readonly IEntityManager EntityManager;
     protected readonly IComponentManager ComponentManager;
 
@@ -53,8 +53,11 @@ public abstract class ComponentsFilter : IComponentFilter
 
     protected virtual bool OnEntityComponentAdded(ref EntityComponentEventArgs args)
     {
-        if (!IsEntityContainsAllComponents(args.EntityId))
+        if (Array.IndexOf(_componentTypes, args.ComponentType) == -1 ||
+            !IsEntityContainsAllComponents(args.EntityId))
+        {
             return false;
+        }
 
         EntitiesIds.Add(args.EntityId);
         return true;
@@ -74,9 +77,9 @@ public abstract class ComponentsFilter : IComponentFilter
         ref var entity = ref EntityManager.Get(entityId);
         var counter = 0;
 
-        for (int i = 0; i < entity.ComponentsTypes.Count; i++)
+        foreach (var t in _componentTypes)
         {
-            if (Array.IndexOf(_componentTypes, entity.ComponentsTypes[i]) != -1)
+            if (entity.ComponentTypes[t])
                 ++counter;
         }
 

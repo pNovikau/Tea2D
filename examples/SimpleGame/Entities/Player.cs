@@ -1,22 +1,16 @@
-﻿using System;
-using SFML.Graphics;
+﻿using SFML.Graphics;
 using SFML.System;
 using SimpleGame.Components;
-using Tea2D.Common;
 using Tea2D.Ecs;
 
 namespace SimpleGame.Entities;
 
 public static class Player
 {
-    private static Font Font = new Font(@"C:\Work\sandbox\arialbd.ttf");
-    
-    public static void CreateRectangle(this IGameWorld gameWorld)
+    public static void CreatePlayer(this IGameWorld gameWorld)
     {
-        var rnd = new Random();
-        
         var player = gameWorld.AddEntity();
-        var shape = new RectangleShape(new Vector2f(10, 10));
+        var shape = new RectangleShape(new Vector2f(25, 25));
 
         ref var transformComponent = ref player.AddComponent<TransformComponent>();
         transformComponent.Transformable = shape;
@@ -26,14 +20,12 @@ public static class Player
         drawableComponent.Drawable = shape;
 
         ref var moveComponent = ref player.AddComponent<MoveComponent>();
-        moveComponent.Direction = new Vector2F(rnd.NextSingle() * (1f - -1f) + -1f, rnd.NextSingle() * (1f - -1f) + -1f);
-        moveComponent.Velocity = rnd.NextSingle();
+        moveComponent.Velocity = default;
+        moveComponent.Speed = 100f;
 
-#if DEBUG
-        ref var debugComponent = ref player.AddComponent<DrawDebugInformationComponent>();
-        
-        debugComponent.Text = new Text(string.Empty, Font, 9);
-        debugComponent.Text.FillColor = Color.Red;
-#endif
+        player.AddComponent<ControlComponent>();
+
+        ref var gunComponent = ref player.AddComponent<GunComponent>();
+        gunComponent.FireDelayInMilliseconds = 300;
     }
 }
