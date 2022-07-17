@@ -8,6 +8,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{59
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGame", "examples\SimpleGame\SimpleGame.csproj", "{3B583D46-A616-4C87-AF67-071E7252652A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.Vulkan", "src\Tea2D.Vulkan\Tea2D.Vulkan.csproj", "{21527AF1-42AE-4B35-8DAA-B84EC7C68757}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.Sfml.Generator", "src\Tea2D.Sfml.Generator\Tea2D.Sfml.Generator.csproj", "{0708D8C4-CD2B-4A60-9CD7-2C1543049B4F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "utils", "utils", "{A5845898-2BF3-4E51-AEBE-8EF57D3B4897}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,8 +32,17 @@ Global
 		{3B583D46-A616-4C87-AF67-071E7252652A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B583D46-A616-4C87-AF67-071E7252652A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B583D46-A616-4C87-AF67-071E7252652A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{21527AF1-42AE-4B35-8DAA-B84EC7C68757}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{21527AF1-42AE-4B35-8DAA-B84EC7C68757}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{21527AF1-42AE-4B35-8DAA-B84EC7C68757}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{21527AF1-42AE-4B35-8DAA-B84EC7C68757}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0708D8C4-CD2B-4A60-9CD7-2C1543049B4F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0708D8C4-CD2B-4A60-9CD7-2C1543049B4F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0708D8C4-CD2B-4A60-9CD7-2C1543049B4F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0708D8C4-CD2B-4A60-9CD7-2C1543049B4F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3B583D46-A616-4C87-AF67-071E7252652A} = {59DC496F-12D1-4F2F-B366-3FC48255E4F7}
+		{0708D8C4-CD2B-4A60-9CD7-2C1543049B4F} = {A5845898-2BF3-4E51-AEBE-8EF57D3B4897}
 	EndGlobalSection
 EndGlobal

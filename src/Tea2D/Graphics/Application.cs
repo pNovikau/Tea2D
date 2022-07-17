@@ -1,7 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using Tea2D.Common;
-using Tea2D.Graphics.Sfml;
 
 namespace Tea2D.Graphics;
 
@@ -16,28 +16,32 @@ internal class Application : IApplication
 
     public IWindow RegisterWindow(Vector2U size, string title)
     {
-        Debug.Assert(IsRunning);
+        throw new NotImplementedException();
 
-        var window = new Sfml.Window(size, title);
-        CurrentWindow ??= window;
-
-        _windows.Add(window);
-
-        return window;
+        //Debug.Assert(IsRunning);
+        //
+        //var window = new Window(size, title);
+        //CurrentWindow ??= window;
+        //
+        //_windows.Add(window);
+        //
+        //return window;
     }
 
     public IRenderWindow RegisterRenderWindow(Vector2U size, string title)
     {
-        Debug.Assert(IsRunning);
-        Debug.Assert(CurrentRenderWindow == null);
+        throw new NotImplementedException();
 
-        var renderWindow = new RenderWindow(size, title);
-        CurrentWindow ??= renderWindow;
-        CurrentRenderWindow ??= renderWindow;
-
-        _windows.Add(renderWindow);
-
-        return renderWindow;
+        //Debug.Assert(IsRunning);
+        //Debug.Assert(CurrentRenderWindow == null);
+        //
+        //var renderWindow = new RenderWindow(size, title);
+        //CurrentWindow ??= renderWindow;
+        //CurrentRenderWindow ??= renderWindow;
+        //
+        //_windows.Add(renderWindow);
+        //
+        //return renderWindow;
     }
 
     public void Stop()
