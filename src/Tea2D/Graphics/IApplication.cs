@@ -1,21 +1,20 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Tea2D.Graphics
+namespace Tea2D.Graphics;
+
+public interface IWindow
 {
-    public interface IWindow
-    {
         
-    }
+}
 
-    public interface IApplication : IDisposable
-    {
-        IWindow CurrentWindow { get; }
-        IReadOnlyCollection<IWindow> Windows { get; }
+public interface IApplication : IDisposable
+{
+    IWindow CurrentWindow { get; }
+    IReadOnlyCollection<IWindow> Windows { get; }
 
-        void RegisterWindow<TWindow>(TWindow window) where TWindow : IWindow;
-        void UnregisterWindow<TWindow>(TWindow window) where TWindow : IWindow;
+    void RegisterWindow<TWindow>(TWindow window) where TWindow : IWindow;
+    void UnregisterWindow<TWindow>(TWindow window) where TWindow : IWindow;
 
-        void DispatchEvents();
-    }
+    void DispatchEvents();
 }
