@@ -26,7 +26,7 @@ public static class Player
         drawableComponent.Drawable = shape;
 
         ref var moveComponent = ref player.AddComponent<MoveComponent>();
-        moveComponent.Direction = new Vector2F(rnd.NextSingle() * (1f - -1f) + -1f, rnd.NextSingle() * (1f - -1f) + -1f);
+        moveComponent.Direction = new Vector2<float>(rnd.NextSingle() * (1f - -1f) + -1f, rnd.NextSingle() * (1f - -1f) + -1f);
         moveComponent.Velocity = rnd.NextSingle();
 
 #if DEBUG

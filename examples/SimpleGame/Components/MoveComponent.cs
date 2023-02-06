@@ -7,6 +7,6 @@ public struct MoveComponent : IComponent<MoveComponent>
 {
     public int Id { get; init; }
 
-    public Vector2F Direction;
+    public Vector2<float> Direction;
     public float Velocity;
 }
