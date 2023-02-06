@@ -26,7 +26,7 @@ public class DrawSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
-        foreach (var (_, drawableComponentSpan) in _filter)
+        foreach (var (_, _, drawableComponentSpan) in _filter)
         {
             ref var drawableComponent = ref drawableComponentSpan[0];
 
@@ -36,7 +36,7 @@ public class DrawSystem : Tea2D.Ecs.Systems.System
         var str = new ValueString(stackalloc char[100]);
         
 #if DEBUG
-        foreach (var (debugComponentSpan, transformComponentSpan) in _debugFilter)
+        foreach (var (_, debugComponentSpan, transformComponentSpan) in _debugFilter)
         {
             ref var debugComponent = ref debugComponentSpan[0];
             ref var transformComponent = ref transformComponentSpan[0];

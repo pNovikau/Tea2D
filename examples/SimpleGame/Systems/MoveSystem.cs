@@ -16,7 +16,7 @@ public class MoveSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
-        foreach (var (moveComponentSpan, transformComponentSpan) in _filter)
+        foreach (var (_, moveComponentSpan, transformComponentSpan) in _filter)
         {
             ref var moveComponent = ref moveComponentSpan[0];
             ref var transformComponent = ref transformComponentSpan[0];

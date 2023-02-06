@@ -8,6 +8,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "examples", "examples", "{59
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGame", "examples\SimpleGame\SimpleGame.csproj", "{3B583D46-A616-4C87-AF67-071E7252652A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.SourceGenerators", "src\Tea2D.SourceGenerators\Tea2D.SourceGenerators.csproj", "{64208451-EB0E-41EC-B63B-F78963D8809B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -26,6 +28,10 @@ Global
 		{3B583D46-A616-4C87-AF67-071E7252652A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3B583D46-A616-4C87-AF67-071E7252652A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3B583D46-A616-4C87-AF67-071E7252652A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64208451-EB0E-41EC-B63B-F78963D8809B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64208451-EB0E-41EC-B63B-F78963D8809B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64208451-EB0E-41EC-B63B-F78963D8809B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64208451-EB0E-41EC-B63B-F78963D8809B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3B583D46-A616-4C87-AF67-071E7252652A} = {59DC496F-12D1-4F2F-B366-3FC48255E4F7}
