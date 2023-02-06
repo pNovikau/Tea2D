@@ -1,38 +1,37 @@
 ﻿using System;
 
-namespace Tea2D.Core.Memory
+namespace Tea2D.Core.Memory;
+
+public static class PointerHandler
 {
-    public static class PointerHandler
+    public static PointerHandler<T> Null<T>() where T : unmanaged
+        => new();
+}
+
+public unsafe struct PointerHandler<T> : IDisposable
+    where T : unmanaged
+{
+    private T* _pointer;
+
+    public PointerHandler(T* pointer)
     {
-        public static PointerHandler<T> Null<T>() where T : unmanaged
-            => new();
+        _pointer = pointer;
     }
 
-    public unsafe struct PointerHandler<T> : IDisposable
-        where T : unmanaged
-    {
-        private T* _pointer;
+    public bool Equals(PointerHandler<T> other) => _pointer == other._pointer;
 
-        public PointerHandler(T* pointer)
-        {
-            _pointer = pointer;
-        }
+    public override bool Equals(object obj) => obj is PointerHandler<T> other && Equals(other);
 
-        public bool Equals(PointerHandler<T> other) => _pointer == other._pointer;
+    // ReSharper disable once NonReadonlyMemberInGetHashCode
+    public override int GetHashCode() => HashCode.Combine((long)_pointer);
 
-        public override bool Equals(object obj) => obj is PointerHandler<T> other && Equals(other);
+    public static bool operator ==(PointerHandler<T> left, PointerHandler<T> right) => left._pointer == right._pointer;
+    public static bool operator !=(PointerHandler<T> left, PointerHandler<T> right) => !(left == right);
 
-        // ReSharper disable once NonReadonlyMemberInGetHashCode
-        public override int GetHashCode() => HashCode.Combine((long)_pointer);
+    public static implicit operator IntPtr(PointerHandler<T> pointerHandler) => (IntPtr)pointerHandler._pointer;
+    public static explicit operator T*(PointerHandler<T> pointerHandler) => pointerHandler._pointer;
 
-        public static bool operator ==(PointerHandler<T> left, PointerHandler<T> right) => left._pointer == right._pointer;
-        public static bool operator !=(PointerHandler<T> left, PointerHandler<T> right) => !(left == right);
+    public void Dispose() => _pointer = null;
 
-        public static implicit operator IntPtr(PointerHandler<T> pointerHandler) => (IntPtr)pointerHandler._pointer;
-        public static explicit operator T*(PointerHandler<T> pointerHandler) => pointerHandler._pointer;
-
-        public void Dispose() => _pointer = null;
-
-        public override string ToString() => _pointer->ToString();
-    }
+    public override string ToString() => _pointer->ToString();
 }

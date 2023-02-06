@@ -1,12 +1,11 @@
-﻿namespace Tea2D.Core.Diagnostics.Logging
+﻿namespace Tea2D.Core.Diagnostics.Logging;
+
+internal enum LogLevel : byte
 {
-    internal enum LogLevel : byte
-    {
-        Trace,
-        Debug,
-        Info,
-        Warning,
-        Error,
-        Fatal
-    }
+    Trace,
+    Debug,
+    Info,
+    Warning,
+    Error,
+    Fatal
 }
