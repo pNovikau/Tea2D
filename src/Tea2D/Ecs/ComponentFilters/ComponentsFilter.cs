@@ -29,29 +29,27 @@ public abstract class ComponentsFilter : IComponentFilter
         ComponentManager = componentManager;
     }
 
-    protected virtual bool OnEntityAdded(ref EntityEventArgs args)
+    private bool OnEntityAdded(ref EntityEventArgs args)
     {
-        if (IsEntityContainsAllComponents(args.EntityId))
-        {
-            EntitiesIds.Add(args.EntityId);
-            return true;
-        }
+        if (!IsEntityContainsAllComponents(args.EntityId)) 
+            return false;
 
-        return false;
+        EntitiesIds.Add(args.EntityId);
+        return true;
+
     }
 
-    protected virtual bool OnEntityRemoved(ref EntityEventArgs args)
+    private bool OnEntityRemoved(ref EntityEventArgs args)
     {
-        if (IsEntityContainsAllComponents(args.EntityId))
-        {
-            EntitiesIds.Remove(args.EntityId);
-            return true;
-        }
+        if (!IsEntityContainsAllComponents(args.EntityId)) 
+            return false;
 
-        return false;
+        EntitiesIds.Remove(args.EntityId);
+        return true;
+
     }
 
-    protected virtual bool OnEntityComponentAdded(ref EntityComponentEventArgs args)
+    private bool OnEntityComponentAdded(ref EntityComponentEventArgs args)
     {
         if (!IsEntityContainsAllComponents(args.EntityId))
             return false;
@@ -60,7 +58,7 @@ public abstract class ComponentsFilter : IComponentFilter
         return true;
     }
 
-    protected virtual bool OnEntityComponentRemoved(ref EntityComponentEventArgs args)
+    private bool OnEntityComponentRemoved(ref EntityComponentEventArgs args)
     {
         if (Array.IndexOf(_componentTypes, args.ComponentType) == -1)
             return false;
@@ -72,15 +70,15 @@ public abstract class ComponentsFilter : IComponentFilter
     private bool IsEntityContainsAllComponents(int entityId)
     {
         ref var entity = ref EntityManager.Get(entityId);
-        var counter = 0;
 
-        for (int i = 0; i < entity.ComponentsTypes.Count; i++)
+        var length = _componentTypes.Length;
+        for (var i = 0; i < length; i++)
         {
-            if (Array.IndexOf(_componentTypes, entity.ComponentsTypes[i]) != -1)
-                ++counter;
+            if (entity.Components[_componentTypes[i]] == -1)
+                return false;
         }
 
-        return counter == _componentTypes.Length;
+        return true;
     }
 
     public void Dispose()

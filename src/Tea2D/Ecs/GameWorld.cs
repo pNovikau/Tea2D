@@ -17,14 +17,19 @@ public class GameWorld : IGameWorld
 
     public void Initialize(GameContext context)
     {
-        foreach (var system in SystemManager.Systems) 
+        foreach (var system in SystemManager.Systems)
             system.Initialize(context);
     }
 
-    public EntityBuilder AddEntity()
+    public EntityApi AddEntity()
     {
         ref var entity = ref EntityManager.Create();
 
-        return new EntityBuilder(entity.Id, EntityManager, ComponentManager);
+        return new EntityApi(entity.Id, EntityManager, ComponentManager);
+    }
+
+    public EntityApi GetEntity(int entityId)
+    {
+        return new EntityApi(entityId, EntityManager, ComponentManager);
     }
 }

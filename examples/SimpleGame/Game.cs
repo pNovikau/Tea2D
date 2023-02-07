@@ -39,7 +39,7 @@ public class Game
 
         _gameWorld.Initialize(context);
 
-        for (int i = 0; i < 10000; i++)
+        for (var i = 0; i < 10000; i++)
         {
             _gameWorld.CreateRectangle();
         }
