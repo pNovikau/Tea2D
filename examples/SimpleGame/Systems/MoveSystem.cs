@@ -16,10 +16,10 @@ public class MoveSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
-        foreach (var (_, moveComponentSpan, transformComponentSpan) in _filter)
+        foreach (var (_, moveComponentRef, transformComponentRef) in _filter)
         {
-            ref var moveComponent = ref moveComponentSpan[0];
-            ref var transformComponent = ref transformComponentSpan[0];
+            ref var moveComponent = ref moveComponentRef.Value;
+            ref var transformComponent = ref transformComponentRef.Value;
 
             transformComponent.Transformable.Position = new Vector2f(
                 transformComponent.Transformable.Position.X + (moveComponent.Direction.X * moveComponent.Velocity),

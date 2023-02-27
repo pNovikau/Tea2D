@@ -133,7 +133,7 @@
                     for (var i = 0; i < genericParameters.Length; i++)
                     {
                         builder.AppendLineFormat("var componentId{0} = entity.Components[global::Tea2D.Ecs.Components.IComponent<{1}>.ComponentType];", i, genericParameters[i]);
-                        builder.AppendLineFormat("var component{0} = _componentFilter.ComponentManager.GetComponentAsSpan<{1}>(componentId{0});", i, genericParameters[i]);
+                        builder.AppendLineFormat("var component{0} = _componentFilter.ComponentManager.GetComponentAsRef<{1}>(componentId{0});", i, genericParameters[i]);
                         builder.AppendLine();
                     }
 
