@@ -26,9 +26,9 @@ public class DrawSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
-        foreach (var (_, _, drawableComponentSpan) in _filter)
+        foreach (var (_, _, drawableComponentRef) in _filter)
         {
-            ref var drawableComponent = ref drawableComponentSpan[0];
+            ref var drawableComponent = ref drawableComponentRef.Value;
 
             context.RenderWindow.Draw(drawableComponent.Drawable);
         }
@@ -36,10 +36,10 @@ public class DrawSystem : Tea2D.Ecs.Systems.System
         var str = new ValueString(stackalloc char[100]);
         
 #if DEBUG
-        foreach (var (_, debugComponentSpan, transformComponentSpan) in _debugFilter)
+        foreach (var (_, debugComponentRef, transformComponentRef) in _debugFilter)
         {
-            ref var debugComponent = ref debugComponentSpan[0];
-            ref var transformComponent = ref transformComponentSpan[0];
+            ref var debugComponent = ref debugComponentRef.Value;
+            ref var transformComponent = ref transformComponentRef.Value;
 
             debugComponent.Text.Position = transformComponent.Transformable.Position + new Vector2f(-15, -15);
             

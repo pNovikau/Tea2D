@@ -9,7 +9,8 @@ public interface IComponentBucket
 
 public interface IComponentBucket<TComponent> : IComponentBucket
 {
-    ref TComponent GetComponent();
+    ref TComponent CreateComponent();
+    ref TComponent GetComponent(int id);
     Span<TComponent> AsSpan();
     Memory<TComponent> AsMemory();
 }

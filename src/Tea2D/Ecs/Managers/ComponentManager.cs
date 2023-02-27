@@ -1,5 +1,6 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
+using System.Runtime.CompilerServices;
+using CommunityToolkit.HighPerformance;
 using Tea2D.Ecs.Components;
 
 namespace Tea2D.Ecs.Managers;
@@ -13,29 +14,24 @@ public class ComponentManager : IComponentManager
     {
         var componentBucket = GetComponentBucket<TComponent>();
 
-        return ref componentBucket.GetComponent();
+        return ref componentBucket.CreateComponent();
     }
 
     public ref TComponent GetComponent<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>
     {
         var componentBucket = GetComponentBucket<TComponent>();
-        var componentBucketSpan = componentBucket.AsSpan();
 
-        Debug.Assert(id < componentBucketSpan.Length);
-
-        return ref componentBucketSpan[id];
+        return ref componentBucket.GetComponent(id);
     }
 
-    public Span<TComponent> GetComponentAsSpan<TComponent>(int id)
+    public unsafe Ref<TComponent> GetComponentAsRef<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>
     {
         var componentBucket = GetComponentBucket<TComponent>();
-        var componentBucketSpan = componentBucket.AsSpan();
+        ref var component = ref componentBucket.GetComponent(id);
 
-        Debug.Assert(id < componentBucketSpan.Length);
-
-        return componentBucketSpan[id..(id + 1)];
+        return new Ref<TComponent>(Unsafe.AsPointer(ref component));
     }
 
     public void Delete<TComponent>(int id)

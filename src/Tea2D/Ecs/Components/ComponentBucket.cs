@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics;
 
 namespace Tea2D.Ecs.Components;
 
@@ -22,7 +23,7 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
         _freeComponentsIndex = 0;
     }
 
-    public ref TComponent GetComponent()
+    public ref TComponent CreateComponent()
     {
         int id;
 
@@ -40,6 +41,13 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
         id = _componentIndex++;
 
         _components[id] = new TComponent { Id = id };
+        return ref _components[id];
+    }
+
+    public ref TComponent GetComponent(int id)
+    {
+        Debug.Assert(id >= 0);
+
         return ref _components[id];
     }
 
