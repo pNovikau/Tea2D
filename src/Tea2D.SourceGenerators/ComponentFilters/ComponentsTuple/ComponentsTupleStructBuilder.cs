@@ -73,7 +73,7 @@
 
                 for (var i = 0; i < genericParameters.Length; i++)
                 {
-                    builder.AppendFormat("global::System.Span<{0}> component{1}", genericParameters[i], i);
+                    builder.AppendFormat("out global::System.Span<{0}> component{1}", genericParameters[i], i);
                     builder.AppendLine(genericParameters.Length - 1 != i ? "," : ")");
                 }
             }

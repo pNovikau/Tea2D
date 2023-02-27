@@ -1,4 +1,4 @@
-﻿namespace Tea2D.SourceGenerators.ComponentFilters
+﻿namespace Tea2D.SourceGenerators.ComponentFilters.ComponentsFilter
 {
     public static class ComponentFiltersClassBuilder
     {

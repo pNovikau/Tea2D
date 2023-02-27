@@ -5,6 +5,7 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Tea2D.SourceGenerators.ComponentFilters;
+using Tea2D.SourceGenerators.ComponentFilters.ComponentsFilter;
 using Tea2D.SourceGenerators.ComponentFilters.ComponentsTuple;
 
 namespace Tea2D.SourceGenerators
