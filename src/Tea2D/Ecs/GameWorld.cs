@@ -21,6 +21,14 @@ public class GameWorld : IGameWorld
             system.Initialize(context);
     }
 
+    public void Update(GameContext context)
+    {
+        foreach (var system in SystemManager.Systems)
+            system.Update(context);
+
+        context.GameTime.Update();
+    }
+
     public EntityApi AddEntity()
     {
         ref var entity = ref EntityManager.Create();

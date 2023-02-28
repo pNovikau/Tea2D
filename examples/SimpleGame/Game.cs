@@ -25,7 +25,7 @@ public class Game
     public void Init()
     {
         _window = new RenderWindow(new VideoMode(1200, 600), "Tea2D");
-        _window.SetFramerateLimit(60);
+        //_window.SetFramerateLimit(60);
         _gameWorld = new GameWorld();
 
         var context = new GameContext
@@ -63,15 +63,11 @@ public class Game
 
             _window.Clear();
             title.Remove(7);
-
-            foreach (var system in _gameWorld.SystemManager.Systems)
-                system.Update(context);
-
-            context.GameTime.Update();
+            _gameWorld.Update(context);
 
             title.Append(fpsCounter.Fps);
             _window.SetTitle(ref title);
-            
+
             _window.Display();
         }
     }
@@ -79,7 +75,7 @@ public class Game
 
 public static class SfmlApiExtensions
 {
-    //[SkipLocalsInit]
+    [SkipLocalsInit]
     public static void SetTitle(this Window window, ref ValueString title)
     {
         // Copy the title to a null-terminated UTF-32 byte array
@@ -113,10 +109,10 @@ public static class SfmlApiExtensions
             }
         }
     }
-    
+
     [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
     static extern void sfText_setUnicodeString(IntPtr CPointer, IntPtr Text);
-    
+
     [DllImport(CSFML.graphics, CallingConvention = CallingConvention.Cdecl), SuppressUnmanagedCodeSecurity]
     private static extern void sfRenderWindow_setUnicodeTitle(IntPtr CPointer, IntPtr title);
 }

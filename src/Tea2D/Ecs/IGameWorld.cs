@@ -9,6 +9,7 @@ public interface IGameWorld
     IComponentManager ComponentManager { get; }
 
     void Initialize(GameContext context);
+    void Update(GameContext context);
     EntityApi AddEntity();
     EntityApi GetEntity(int entityId);
 }
