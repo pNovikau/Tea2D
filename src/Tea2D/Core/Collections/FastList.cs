@@ -190,22 +190,17 @@ public class FastList<T> : IList<T>, IReadOnlyList<T>
         Capacity = newCapacity;
     }
 
-    public IEnumerator<T> GetEnumerator()
-    {
-        return new Enumerator(this);
-    }
+    public Enumerator GetEnumerator() => new Enumerator(this);
 
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
+    IEnumerator<T> IEnumerable<T>.GetEnumerator() => throw new NotImplementedException();
+    IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
 
     #endregion
 
     #region Enumerator
 
     [StructLayout(LayoutKind.Sequential)]
-    private struct Enumerator : IEnumerator<T>, IDisposable, IEnumerator
+    public struct Enumerator
     {
         private readonly FastList<T> _list;
         private int _index;
@@ -245,9 +240,7 @@ public class FastList<T> : IList<T>, IReadOnlyList<T>
 
         public T Current => _current;
 
-        object IEnumerator.Current => Current;
-
-        void IEnumerator.Reset()
+        public void Reset()
         {
             _index = 0;
             _current = default;

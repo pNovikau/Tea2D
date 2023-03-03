@@ -11,6 +11,13 @@
 
             using var _ = builder.Scope();
 
+            for (var i = 0; i < genericParameters.Length; i++)
+            {
+                builder.AppendLineFormat("private readonly global::Tea2D.Ecs.Components.IComponentBucket<{0}> _componentBucket{1};", genericParameters[i], i);
+            }
+
+            builder.AppendLine();
+            
             AppendConstructor(builder, genericParameters);
             AppendGetEnumerator(builder, genericParameters);
             AppendIEnumeratorGetEnumerator(builder, genericParameters);
@@ -31,6 +38,10 @@
 
                 using (builder.Scope())
                 {
+                    for (var i = 0; i < genericParameters.Length; i++)
+                    {
+                        builder.AppendLineFormat("_componentBucket{1} = componentManager.GetComponentBucket<{0}>();", genericParameters[i], i);
+                    }
                 }
             }
 
@@ -133,18 +144,17 @@
                     for (var i = 0; i < genericParameters.Length; i++)
                     {
                         builder.AppendLineFormat("var componentId{0} = entity.Components[global::Tea2D.Ecs.Components.IComponent<{1}>.ComponentType];", i, genericParameters[i]);
-                        builder.AppendLineFormat("var component{0} = _componentFilter.ComponentManager.GetComponentAsRef<{1}>(componentId{0});", i, genericParameters[i]);
+                        builder.AppendLineFormat("ref var component{0} = ref _componentFilter._componentBucket{0}.GetComponent(componentId{0});", i);
                         builder.AppendLine();
                     }
 
                     builder.AppendFormat("return new global::Tea2D.Ecs.ComponentFilters.ComponentsTuple<{0}>(_componentFilter.EntitiesIds[_index], ", genericParametersString);
                     for (var i = 0; i < genericParameters.Length; i++)
                     {
-                        builder.Append("component");
-                        builder.Append(i);
+                        builder.AppendFormat("new global::CommunityToolkit.HighPerformance.Ref<{0}>(ref component{1})", genericParameters[i], i);
 
                         if (genericParameters.Length - 1 != i)
-                            builder.Append(",");
+                            builder.Append(", ");
                     }
 
                     builder.AppendLine(");");

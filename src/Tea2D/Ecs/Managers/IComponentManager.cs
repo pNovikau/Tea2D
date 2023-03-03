@@ -1,4 +1,3 @@
-using System;
 using CommunityToolkit.HighPerformance;
 using Tea2D.Ecs.Components;
 
@@ -16,5 +15,8 @@ public interface IComponentManager
         where TComponent : struct, IComponent<TComponent>;
 
     void Delete<TComponent>(int id)
+        where TComponent : struct, IComponent<TComponent>;
+
+    IComponentBucket<TComponent> GetComponentBucket<TComponent>()
         where TComponent : struct, IComponent<TComponent>;
 }
