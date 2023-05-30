@@ -1,4 +1,6 @@
-﻿namespace Tea2D.VulkanGenerator;
+﻿using JetBrains.Annotations;
+
+namespace Tea2D.VulkanGenerator;
 
 public class SourceFileWriter : IDisposable
 {
@@ -72,6 +74,20 @@ public class SourceFileWriter : IDisposable
     {
         _writer.Write(_indentString);
         _writer.WriteLine(str);
+    }
+    
+    [StringFormatMethod("format")]
+    public void WriteLineFormat<TArg>(string format, TArg arg)
+    {
+        _writer.Write(_indentString);
+        _writer.WriteLine(format, arg);
+    }
+
+    [StringFormatMethod("format")]
+    public void WriteLineFormat<TArg0, TArg1>(string format, TArg0 arg0, TArg1 arg1)
+    {
+        _writer.Write(_indentString);
+        _writer.WriteLine(format, arg0, arg1);
     }
 
     public void WriteLine() => _writer.WriteLine();

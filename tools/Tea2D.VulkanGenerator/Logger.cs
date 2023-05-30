@@ -1,7 +1,19 @@
 ﻿using System.Globalization;
 
+namespace Tea2D.VulkanGenerator;
+
 internal static class Logger
 {
+    private static readonly object Locker = new();
+
+    private static LogLevel _logLevel = LogLevel.Info;
+
+    public static void Initialize(string logLevel)
+    {
+        if (Enum.TryParse<LogLevel>(logLevel, out var level))
+            _logLevel = level;
+    }
+
     public static void LogTrace(ReadOnlySpan<char> message) => Log(LogLevel.Trace, message);
 
     public static void LogDebug(ReadOnlySpan<char> message) => Log(LogLevel.Debug, message);
@@ -14,20 +26,29 @@ internal static class Logger
 
     public static void LogFatal(ReadOnlySpan<char> message) => Log(LogLevel.Fatal, message);
 
-    private static void Log(in LogLevel level, ReadOnlySpan<char> message)
+    private static void Log(LogLevel level, ReadOnlySpan<char> message)
+    {
+        if (level < _logLevel)
+            return;
+
+        lock (Locker)
+            LogInternal(level, message);
+    }
+    
+    private static void LogInternal(LogLevel level, ReadOnlySpan<char> message)
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.Out.Write(DateTime.Now.ToString(CultureInfo.InvariantCulture));
         Console.Out.Write(' ');
 
         Console.ForegroundColor = ConsoleColor.DarkGray;
-        Console.Write(LogLevelToString(in level));
+        Console.Write(LogLevelToString(level));
 
-        Console.ForegroundColor = GetForegroundColor(in level);
+        Console.ForegroundColor = GetForegroundColor(level);
         Console.Out.WriteLine(message);
     }
 
-    private static ConsoleColor GetForegroundColor(in LogLevel level)
+    private static ConsoleColor GetForegroundColor(LogLevel level)
     {
         return level switch
         {
@@ -40,8 +61,8 @@ internal static class Logger
             _ => throw new ArgumentOutOfRangeException(nameof(level), level, null)
         };
     }
-    
-    private static string LogLevelToString(in LogLevel level)
+
+    private static string LogLevelToString(LogLevel level)
     {
         return level switch
         {
@@ -54,7 +75,7 @@ internal static class Logger
             _ => throw new ArgumentOutOfRangeException(nameof(level), level, null)
         };
     }
-        
+
     private enum LogLevel : byte
     {
         Trace,
