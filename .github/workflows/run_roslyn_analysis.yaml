@@ -8,6 +8,9 @@ jobs:
     runs-on: ubuntu-latest
   
     steps:
+      - name: support longpaths
+        run: git config --system core.longpaths true
+
       - name: Check repository
         uses: actions/checkout@master
         with:
