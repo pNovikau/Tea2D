@@ -1,8 +1,16 @@
+using System;
+
 namespace Tea2D.Ecs;
 
-public record struct Entity() : IHasId
+public struct Entity : IHasId
 {
-    public readonly int[] Components = new int[255];
+    public readonly int[] Components;
+
+    public Entity()
+    {
+        Components = new int[255];
+        Array.Fill(Components, -1);
+    }
 
     public int Id { get; init; } = default;
 }

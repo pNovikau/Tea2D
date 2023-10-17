@@ -4,16 +4,9 @@ namespace Tea2D.Ecs;
 
 public class GameWorld : IGameWorld
 {
-    public GameWorld()
-    {
-        EntityManager = new EntityManager();
-        SystemManager = new SystemManager();
-        ComponentManager = new ComponentManager();
-    }
-
-    public IEntityManager EntityManager { get; }
-    public ISystemManager SystemManager { get; }
-    public IComponentManager ComponentManager { get; }
+    public IEntityManager EntityManager { get; } = new EntityManager();
+    public ISystemManager SystemManager { get; } = new SystemManager();
+    public IComponentManager ComponentManager { get; } = new ComponentManager();
 
     public void Initialize(GameContext context)
     {

@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using CommunityToolkit.HighPerformance;
+using Tea2D.Diagnostics;
 using Tea2D.Ecs.Components;
 
 namespace Tea2D.Ecs.Managers;
@@ -13,7 +14,11 @@ public class ComponentManager : IComponentManager
     {
         var componentBucket = GetComponentBucket<TComponent>();
 
-        return ref componentBucket.CreateComponent();
+        ref var component = ref componentBucket.CreateComponent();
+
+        Metrics.Components<TComponent>.Increment();
+
+        return ref component;
     }
 
     public ref TComponent GetComponent<TComponent>(int id)
@@ -42,6 +47,8 @@ public class ComponentManager : IComponentManager
 
         var componentBucket = (IComponentBucket<TComponent>)_components[index];
         componentBucket.Delete(id);
+
+        Metrics.Components<TComponent>.Decrement();
     }
 
     public IComponentBucket<TComponent> GetComponentBucket<TComponent>()

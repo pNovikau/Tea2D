@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using CommunityToolkit.HighPerformance;
 
 namespace Tea2D.Core.Memory;
 
@@ -261,6 +262,8 @@ public ref struct ValueString
     }
 
     public static implicit operator ReadOnlySpan<char>(ValueString valueString) => valueString._span;
+
+    public override int GetHashCode() => _span.GetDjb2HashCode();
 
     public override string ToString() => IsEmpty ? string.Empty : new string(_span);
 }
