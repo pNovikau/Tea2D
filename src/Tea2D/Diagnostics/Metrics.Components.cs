@@ -1,4 +1,5 @@
-﻿using System.Diagnostics.Metrics;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.Diagnostics.Metrics;
 
 namespace Tea2D.Diagnostics;
 
@@ -8,6 +9,7 @@ public static partial class Metrics
     {
         private const string CounterName = "components." + nameof(TComponent);
 
+        [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
         private static readonly Counter<long> Counter = Meter.CreateCounter<long>(CounterName);
 
         public static void Increment()
