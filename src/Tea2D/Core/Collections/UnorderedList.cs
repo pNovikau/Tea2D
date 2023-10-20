@@ -14,7 +14,8 @@ public class UnorderedList<TItem> : IUnorderedList<TItem>
     private int[] _reusableSlots;
     private int _reusableSlotsIndex;
 
-    public UnorderedList() : this(DefaultCapacity) { }
+    public UnorderedList() : this(DefaultCapacity)
+    { }
 
     public UnorderedList(int capacity)
     {
@@ -50,6 +51,9 @@ public class UnorderedList<TItem> : IUnorderedList<TItem>
 
     public void Remove(int id)
     {
+        if (_reusableSlotsIndex == _reusableSlots.Length)
+            Array.Resize(ref _reusableSlots, _reusableSlots.Length * 2);
+
         _reusableSlots[_reusableSlotsIndex++] = id;
     }
 

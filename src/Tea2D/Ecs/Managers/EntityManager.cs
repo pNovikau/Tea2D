@@ -1,16 +1,12 @@
 ﻿using Tea2D.Core.Collections;
+using Tea2D.Diagnostics;
 using Tea2D.Ecs.Managers.Events;
 
 namespace Tea2D.Ecs.Managers;
 
 public class EntityManager : IEntityManager
 {
-    private readonly IUnorderedList<Entity> _list;
-
-    public EntityManager()
-    {
-        _list = new UnorderedList<Entity>();
-    }
+    private readonly IUnorderedList<Entity> _list = new UnorderedList<Entity>();
 
     public EntityManagerEvents Events { get; } = new();
 
@@ -20,6 +16,8 @@ public class EntityManager : IEntityManager
 
         var eventArgs = new EntityEventArgs(entity.Id);
         Events.OnEntityAdded(eventArgs);
+
+        Metrics.Entities.Increment();
 
         return ref entity;
     }
@@ -32,5 +30,7 @@ public class EntityManager : IEntityManager
 
         var eventArgs = new EntityEventArgs(id);
         Events.OnEntityRemoved(eventArgs);
+
+        Metrics.Entities.Decrement();
     }
 }

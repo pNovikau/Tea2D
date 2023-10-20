@@ -41,6 +41,7 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
         id = _componentIndex++;
 
         _components[id] = new TComponent { Id = id };
+
         return ref _components[id];
     }
 

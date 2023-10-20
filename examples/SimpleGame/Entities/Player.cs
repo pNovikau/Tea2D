@@ -9,12 +9,10 @@ namespace SimpleGame.Entities;
 
 public static class Player
 {
-    private static Font Font = new Font(@"C:\Work\sandbox\arialbd.ttf");
-    
     public static void CreateRectangle(this IGameWorld gameWorld)
     {
-        var rnd = new Random();
-        
+        var rnd = Random.Shared;
+
         var player = gameWorld.AddEntity();
         var shape = new RectangleShape(new Vector2f(10, 10));
 
@@ -26,14 +24,10 @@ public static class Player
         drawableComponent.Drawable = shape;
 
         ref var moveComponent = ref player.AddComponent<MoveComponent>();
-        moveComponent.Direction = new Vector2<float>(rnd.NextSingle() * (1f - -1f) + -1f, rnd.NextSingle() * (1f - -1f) + -1f);
+        moveComponent.Direction = new Vector2<float>(rnd.NextSingle(), rnd.NextSingle());
         moveComponent.Velocity = rnd.NextSingle();
 
-#if DEBUG
-        ref var debugComponent = ref player.AddComponent<DrawDebugInformationComponent>();
-        
-        debugComponent.Text = new Text(string.Empty, Font, 9);
-        debugComponent.Text.FillColor = Color.Red;
-#endif
+        ref var lifetimeComponent = ref player.AddComponent<LifetimeComponent>();
+        lifetimeComponent.LifetimeInMilliseconds = rnd.Next(30, 60);
     }
 }

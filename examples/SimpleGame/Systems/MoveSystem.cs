@@ -1,6 +1,7 @@
 using SFML.System;
 using SimpleGame.Components;
 using Tea2D;
+using Tea2D.Diagnostics;
 using Tea2D.Ecs.ComponentFilters;
 
 namespace SimpleGame.Systems;
@@ -16,6 +17,8 @@ public class MoveSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
+        using var _ = Metrics.Execution.Record("MoveSystem.Update");
+        
         foreach (var (_, moveComponentRef, transformComponentRef) in _filter)
         {
             ref var moveComponent = ref moveComponentRef.Value;

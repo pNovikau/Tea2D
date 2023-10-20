@@ -36,13 +36,9 @@ public class Game
 
         _gameWorld.SystemManager.RegisterSystem<DrawSystem>(context);
         _gameWorld.SystemManager.RegisterSystem<MoveSystem>(context);
+        _gameWorld.SystemManager.RegisterSystem<LifetimeSystem>(context);
 
         _gameWorld.Initialize(context);
-
-        for (var i = 0; i < 10000; i++)
-        {
-            _gameWorld.CreateRectangle();
-        }
     }
 
     public void Run()
