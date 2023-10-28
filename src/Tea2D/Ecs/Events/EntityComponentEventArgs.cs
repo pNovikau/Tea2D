@@ -1,3 +1,3 @@
-namespace Tea2D.Ecs.Managers.Events;
+namespace Tea2D.Ecs.Events;
 
 public record struct EntityComponentEventArgs(int EntityId, int ComponentId, int ComponentType);

@@ -3,7 +3,7 @@ using Tea2D.Ecs.Components;
 
 namespace Tea2D.Ecs.Managers;
 
-public interface IComponentManager
+internal interface IComponentManager
 {
     ref TComponent CreateComponent<TComponent>()
         where TComponent : struct, IComponent<TComponent>;
@@ -16,6 +16,8 @@ public interface IComponentManager
 
     void Delete<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>;
+
+    void Delete(int componentType, int id);
 
     IComponentBucket<TComponent> GetComponentBucket<TComponent>()
         where TComponent : struct, IComponent<TComponent>;

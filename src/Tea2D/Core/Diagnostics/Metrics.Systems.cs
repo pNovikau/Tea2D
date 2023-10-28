@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics.Metrics;
 
-namespace Tea2D.Diagnostics;
+namespace Tea2D.Core.Diagnostics;
 
 public static partial class Metrics
 {

@@ -1,5 +1,5 @@
 ﻿using Tea2D.Core.Collections;
-using Tea2D.Diagnostics;
+using Tea2D.Core.Diagnostics;
 using Tea2D.Ecs.Systems;
 
 namespace Tea2D.Ecs.Managers;
@@ -10,7 +10,7 @@ public class SystemManager : ISystemManager
 
     public FastList<ISystem> Systems => _systems;
 
-    public void RegisterSystem<TSystem>(GameContext gameContext)
+    public void RegisterSystem<TSystem>()
         where TSystem : class, ISystem, new()
     {
         var system = new TSystem();

@@ -1,9 +1,6 @@
-﻿using SFML.Graphics;
-using SFML.System;
-using SimpleGame.Components;
+﻿using SimpleGame.Components;
 using Tea2D;
-using Tea2D.Core.Memory;
-using Tea2D.Diagnostics;
+using Tea2D.Core.Diagnostics;
 using Tea2D.Ecs.ComponentFilters;
 
 namespace SimpleGame.Systems;
@@ -14,7 +11,7 @@ public class DrawSystem : Tea2D.Ecs.Systems.System
 
     public override void Initialize(GameContext context)
     {
-        _filter = new ComponentsFilter<TransformComponent, DrawableComponent>(context.GameWorld.EntityManager, context.GameWorld.ComponentManager);
+        _filter = new ComponentsFilter<TransformComponent, DrawableComponent>(context.GameWorld);
     }
 
     public override void Update(GameContext context)

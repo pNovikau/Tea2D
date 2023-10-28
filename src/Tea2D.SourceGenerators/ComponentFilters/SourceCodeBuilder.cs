@@ -1,5 +1,6 @@
 ﻿using System.Text;
 using JetBrains.Annotations;
+using Tea2D.SourceGenerators.Utils;
 
 namespace Tea2D.SourceGenerators.ComponentFilters
 {
@@ -17,7 +18,7 @@ namespace Tea2D.SourceGenerators.ComponentFilters
             _stringBuilder = new StringBuilder();
         }
 
-        public void Append<TArg>(TArg arg) => _stringBuilder.Append(arg.ToString());
+        public void Append(CSharpInterpolatedStringHandler builder) => _stringBuilder.Append(builder.ToString());
 
         [StringFormatMethod("format")]
         public void AppendFormat<TArg>(string format, TArg arg)
