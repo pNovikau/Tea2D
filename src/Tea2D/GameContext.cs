@@ -7,7 +7,7 @@ namespace Tea2D;
 public struct GameContext
 {
     public GameTime GameTime;
-    public IGameWorld GameWorld;
+    public GameWorldBase GameWorld;
     public RenderWindow RenderWindow;
     //public IApplication Application;
 }

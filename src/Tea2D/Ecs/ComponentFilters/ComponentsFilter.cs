@@ -1,92 +1,109 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using Tea2D.Core.Collections;
-using Tea2D.Ecs.Managers;
-using Tea2D.Ecs.Managers.Events;
+using Tea2D.Ecs.Events;
 
 namespace Tea2D.Ecs.ComponentFilters;
 
 public abstract class ComponentsFilter : IComponentFilter
 {
-    private readonly int[] _componentTypes;
+    private readonly Queue<int> _entitiesToAdd = new();
+    private readonly Queue<int> _entitiesToRemove = new();
 
-    protected readonly List<int> EntitiesIds = new(255);
-    protected readonly IEntityManager EntityManager;
+    protected internal readonly List<int> EntitiesIds = new(255);
+    protected internal readonly GameWorldBase GameWorld;
 
-    protected ComponentsFilter(IEntityManager entityManager, IComponentManager componentManager, params int[] componentTypes)
+    private bool IsFreeze { get; set; }
+
+    protected internal ComponentsFilter(GameWorldBase gameWorld)
     {
-        Debug.Assert(entityManager != null);
-        Debug.Assert(componentManager != null);
+        Debug.Assert(gameWorld != null);
 
-        entityManager.Events.EntityAdded += OnEntityAdded;
-        entityManager.Events.EntityRemoved += OnEntityRemoved;
-        entityManager.Events.EntityComponentAdded += OnEntityComponentAdded;
-        entityManager.Events.EntityComponentRemoved += OnEntityComponentRemoved;
+        gameWorld.Events.EntityRemoved += OnEntityComponentRemoved;
+        gameWorld.Events.EntityComponentAdded += OnEntityComponentAdded;
+        gameWorld.Events.EntityComponentRemoved += OnEntityComponentRemoved;
 
-        _componentTypes = componentTypes;
-        EntityManager = entityManager;
+        GameWorld = gameWorld;
     }
 
-    private bool OnEntityAdded(ref EntityEventArgs args)
+    internal void Freeze()
     {
-        //if (!IsEntityContainsAllComponents(args.EntityId)) 
-        //    return false;
-        //
-        //EntitiesIds.Add(args.EntityId);
-        return true;
+        IsFreeze = true;
     }
 
-    private bool OnEntityRemoved(ref EntityEventArgs args)
+    internal void Unfreeze()
     {
-        if (!IsEntityContainsAllComponents(args.EntityId)) 
-            return false;
+        IsFreeze = false;
 
-        EntitiesIds.Remove(args.EntityId);
-        return true;
+        while (_entitiesToAdd.TryDequeue(out var entity)) 
+            EntitiesIds.Add(entity);
 
+        while (_entitiesToRemove.TryDequeue(out var entity)) 
+            EntitiesIds.Remove(entity);
     }
 
     private bool OnEntityComponentAdded(ref EntityComponentEventArgs args)
     {
-        if (Array.IndexOf(_componentTypes, args.ComponentType) == -1)
+        if (!IsComponentTypeSupported(args.ComponentType))
             return false;
 
-        if (!IsEntityContainsAllComponents(args.EntityId))
+        ref var entity = ref GameWorld.EntityManager.Get(args.EntityId);
+        if (!IsEntitySupported(ref entity))
             return false;
 
-        EntitiesIds.Add(args.EntityId);
+        AddEntity(args.EntityId);
+
         return true;
     }
 
     private bool OnEntityComponentRemoved(ref EntityComponentEventArgs args)
     {
-        if (Array.IndexOf(_componentTypes, args.ComponentType) == -1)
+        if (!IsComponentTypeSupported(args.ComponentType))
             return false;
 
-        EntitiesIds.Remove(args.EntityId);
+        RemoveEntity(args.EntityId);
+
         return true;
     }
 
-    private bool IsEntityContainsAllComponents(int entityId)
+    private bool OnEntityComponentRemoved(ref EntityEventArgs args)
     {
-        ref var entity = ref EntityManager.Get(entityId);
+        ref var entity = ref GameWorld.EntityManager.Get(args.EntityId);
+        if (!IsEntitySupported(ref entity))
+            return false;
 
-        var length = _componentTypes.Length;
-        for (var i = 0; i < length; i++)
-        {
-            if (entity.Components[_componentTypes[i]] == -1)
-                return false;
-        }
+        RemoveEntity(args.EntityId);
 
         return true;
     }
+
+    private void AddEntity(int entityId)
+    {
+        if (IsFreeze)
+        {
+            _entitiesToAdd.Enqueue(entityId);
+        }
+        else
+            EntitiesIds.Add(entityId);
+    }
+
+    private void RemoveEntity(int entityId)
+    {
+        if (IsFreeze)
+            _entitiesToRemove.Enqueue(entityId);
+        else
+            EntitiesIds.Remove(entityId);
+    }
+
+    protected abstract bool IsComponentTypeSupported(int componentType);
+    protected abstract bool IsEntitySupported(ref Entity entity);
 
     public void Dispose()
     {
-        EntityManager.Events.EntityAdded -= OnEntityAdded;
-        EntityManager.Events.EntityRemoved -= OnEntityRemoved;
-        EntityManager.Events.EntityComponentAdded -= OnEntityComponentAdded;
-        EntityManager.Events.EntityComponentRemoved -= OnEntityComponentRemoved;
+        GameWorld.Events.EntityRemoved -= OnEntityComponentRemoved;
+        GameWorld.Events.EntityComponentAdded -= OnEntityComponentAdded;
+        GameWorld.Events.EntityComponentRemoved -= OnEntityComponentRemoved;
+
+        GC.SuppressFinalize(this);
     }
 }

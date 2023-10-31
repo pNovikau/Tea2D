@@ -1,20 +1,23 @@
-﻿using Tea2D.Ecs.Managers;
+﻿using Tea2D.Ecs.Events;
+using Tea2D.Ecs.Managers;
 
 namespace Tea2D.Ecs;
 
-public class GameWorld : IGameWorld
+internal class GameWorld : GameWorldBase
 {
-    public IEntityManager EntityManager { get; } = new EntityManager();
-    public ISystemManager SystemManager { get; } = new SystemManager();
-    public IComponentManager ComponentManager { get; } = new ComponentManager();
+    internal override IEntityManager EntityManager { get; } = new EntityManager();
+    internal override ISystemManager SystemManager { get; } = new SystemManager();
+    internal override IComponentManager ComponentManager { get; } = new ComponentManager();
 
-    public void Initialize(GameContext context)
+    internal override GameWorldEvents Events { get; } = new();
+
+    public override void Initialize(GameContext context)
     {
         foreach (var system in SystemManager.Systems)
             system.Initialize(context);
     }
 
-    public void Update(GameContext context)
+    public override void Update(GameContext context)
     {
         foreach (var system in SystemManager.Systems)
             system.Update(context);
@@ -22,15 +25,36 @@ public class GameWorld : IGameWorld
         context.GameTime.Update();
     }
 
-    public EntityApi AddEntity()
+    public override EntityApi AddEntity()
     {
         ref var entity = ref EntityManager.Create();
 
-        return new EntityApi(entity.Id, EntityManager, ComponentManager);
+        return new EntityApi(entity.Id, this);
     }
 
-    public EntityApi GetEntity(int entityId)
+    public override EntityApi GetEntity(int entityId)
     {
-        return new EntityApi(entityId, EntityManager, ComponentManager);
+        return new EntityApi(entityId, this);
+    }
+
+    public override void DestroyEntity(int entityId)
+    {
+        var entity = EntityManager.Get(entityId);
+
+        for (var componentType = 0; componentType < entity.Components.Length; componentType++)
+        {
+            if (entity.Components[componentType] != -1)
+                ComponentManager.Delete(componentType, entity.Components[componentType]);
+        }
+
+        EntityManager.Remove(entityId);
+
+        var args = new EntityEventArgs(entityId); 
+        Events?.RaiseEntityRemoved(args);
+    }
+
+    public override void RegisterSystem<TSystem>()
+    {
+        SystemManager.RegisterSystem<TSystem>();
     }
 }

@@ -4,7 +4,7 @@ using System.Diagnostics;
 using System.Diagnostics.Metrics;
 using Tea2D.Core.Memory;
 
-namespace Tea2D.Diagnostics;
+namespace Tea2D.Core.Diagnostics;
 
 public static partial class Metrics
 {

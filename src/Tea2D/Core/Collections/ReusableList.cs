@@ -1,12 +1,13 @@
 ﻿using System;
-using Tea2D.Ecs;
 
 namespace Tea2D.Core.Collections;
 
-public class UnorderedList<TItem> : IUnorderedList<TItem>
-    where TItem : struct, IHasId
+public class ReusableList<TItem> : IReusableList<TItem>
 {
     private const int DefaultCapacity = 255;
+
+    private readonly Func<int, TItem> _typeFactory;
+    private readonly RefAction<TItem> _reuseFactory;
 
     private TItem[] _array;
     private int _arrayIndex;
@@ -14,11 +15,14 @@ public class UnorderedList<TItem> : IUnorderedList<TItem>
     private int[] _reusableSlots;
     private int _reusableSlotsIndex;
 
-    public UnorderedList() : this(DefaultCapacity)
+    public ReusableList(Func<int, TItem> factory, RefAction<TItem> reuseFactory) : this(factory, reuseFactory, DefaultCapacity)
     { }
 
-    public UnorderedList(int capacity)
+    public ReusableList(Func<int, TItem> factory, RefAction<TItem> reuseFactory, int capacity)
     {
+        _typeFactory = factory;
+        _reuseFactory = reuseFactory;
+
         _array = new TItem[capacity];
         _arrayIndex = 0;
 
@@ -26,16 +30,12 @@ public class UnorderedList<TItem> : IUnorderedList<TItem>
         _reusableSlotsIndex = 0;
     }
 
-    public TItem[] Items => _array;
-
-    public ref TItem Get()
+    public ref TItem Get(out int id)
     {
-        int id;
-
         if (_reusableSlotsIndex != 0)
         {
             id = _reusableSlots[--_reusableSlotsIndex];
-            _array[id] = new TItem { Id = id };
+            _reuseFactory(ref _array[id]);
 
             return ref _array[id];
         }
@@ -44,10 +44,12 @@ public class UnorderedList<TItem> : IUnorderedList<TItem>
             Array.Resize(ref _array, _array.Length * 2);
 
         id = _arrayIndex++;
-        _array[id] = new TItem { Id = id };
+        _array[id] = _typeFactory(id);
 
         return ref _array[id];
     }
+
+    public ref TItem Get(int id) => ref _array[id];
 
     public void Remove(int id)
     {
@@ -62,4 +64,6 @@ public class UnorderedList<TItem> : IUnorderedList<TItem>
         _arrayIndex = 0;
         _reusableSlotsIndex = 0;
     }
+
+    public Span<TItem> AsSpan() => _array.AsSpan();
 }

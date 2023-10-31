@@ -9,7 +9,7 @@ namespace SimpleGame.Entities;
 
 public static class Player
 {
-    public static void CreateRectangle(this IGameWorld gameWorld)
+    public static void CreateRectangle(this GameWorldBase gameWorld)
     {
         var rnd = Random.Shared;
 
@@ -28,6 +28,6 @@ public static class Player
         moveComponent.Velocity = rnd.NextSingle();
 
         ref var lifetimeComponent = ref player.AddComponent<LifetimeComponent>();
-        lifetimeComponent.LifetimeInMilliseconds = rnd.Next(30, 60);
+        lifetimeComponent.LifetimeInMilliseconds = rnd.Next(500, 1_000);
     }
 }

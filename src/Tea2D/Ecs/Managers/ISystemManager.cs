@@ -3,9 +3,10 @@ using Tea2D.Ecs.Systems;
 
 namespace Tea2D.Ecs.Managers;
 
-public interface ISystemManager
+internal interface ISystemManager
 {
     FastList<ISystem> Systems { get; }
 
-    void RegisterSystem<TSystem>(GameContext gameContext) where TSystem : class, ISystem, new();
+    void RegisterSystem<TSystem>()
+        where TSystem : class, ISystem, new();
 }

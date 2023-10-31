@@ -1,6 +1,6 @@
 ﻿using System.Diagnostics;
 using CommunityToolkit.HighPerformance;
-using Tea2D.Diagnostics;
+using Tea2D.Core.Diagnostics;
 using Tea2D.Ecs.Components;
 
 namespace Tea2D.Ecs.Managers;
@@ -41,14 +41,16 @@ public class ComponentManager : IComponentManager
     public void Delete<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>
     {
-        var index = IComponent<TComponent>.ComponentType;
-
-        Debug.Assert(_components[index] != null);
-
-        var componentBucket = (IComponentBucket<TComponent>)_components[index];
-        componentBucket.Delete(id);
+        Delete(IComponent<TComponent>.ComponentType, id);
 
         Metrics.Components<TComponent>.Decrement();
+    }
+
+    public void Delete(int componentType, int id)
+    {
+        Debug.Assert(_components[componentType] != null);
+
+        _components[componentType].Delete(id);
     }
 
     public IComponentBucket<TComponent> GetComponentBucket<TComponent>()

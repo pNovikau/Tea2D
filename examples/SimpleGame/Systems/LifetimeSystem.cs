@@ -1,24 +1,21 @@
-﻿using System.Collections.Generic;
-using SimpleGame.Components;
+﻿using SimpleGame.Components;
 using SimpleGame.Entities;
 using Tea2D;
-using Tea2D.Diagnostics;
+using Tea2D.Core.Diagnostics;
 using Tea2D.Ecs.ComponentFilters;
 
 namespace SimpleGame.Systems;
 
 public class LifetimeSystem : Tea2D.Ecs.Systems.System
 {
-    private const int MaxEntities = 2000;
-    
-    private readonly List<int> _entitiesToRemove = new();
+    private const int MaxEntities = 1000;
     private int _totalEntities = 0;
 
     private ComponentsFilter<LifetimeComponent> _filter;
 
     public override void Initialize(GameContext context)
     {
-        _filter = new ComponentsFilter<LifetimeComponent>(context.GameWorld.EntityManager, context.GameWorld.ComponentManager);
+        _filter = new ComponentsFilter<LifetimeComponent>(context.GameWorld);
     }
 
     public override void Update(GameContext context)
@@ -34,26 +31,18 @@ public class LifetimeSystem : Tea2D.Ecs.Systems.System
 
             if (remainTimeInMilliseconds <= 0)
             {
-                _entitiesToRemove.Add(entityId);
+                context.GameWorld.DestroyEntity(entityId);
+                --_totalEntities;
                 continue;
             }
 
             lifetimeComponent.LifetimeInMilliseconds = remainTimeInMilliseconds;
         }
 
-        // TODO: revisit delete components/entities logic
-        // TODO: implement queue to delete/add components/entities 
-        foreach (var id in _entitiesToRemove)
-        {
-            --_totalEntities;
-            context.GameWorld.EntityManager.Remove(id);
-        }
-
-        _entitiesToRemove.Clear();
-
-        for (; _totalEntities < MaxEntities; _totalEntities++)
+        for (var i = _totalEntities; i < MaxEntities; i++)
         {
             context.GameWorld.CreateRectangle();
+            ++_totalEntities;
         }
     }
 }

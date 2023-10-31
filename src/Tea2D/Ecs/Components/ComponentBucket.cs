@@ -65,8 +65,8 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
             Array.Resize(ref _freeComponents, _freeComponents.Length * 2);
 
         _freeComponents[_freeComponentsIndex++] = id;
+        
     }
 
     public Span<TComponent> AsSpan() => _components.AsSpan()[.._componentIndex];
-    public Memory<TComponent> AsMemory() => _components.AsMemory()[.._componentIndex];
 }

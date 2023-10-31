@@ -20,13 +20,13 @@ namespace SimpleGame;
 public class Game
 {
     private RenderWindow _window;
-    private IGameWorld _gameWorld;
+    private GameWorldBase _gameWorld;
 
     public void Init()
     {
         _window = new RenderWindow(new VideoMode(1200, 600), "Tea2D");
         //_window.SetFramerateLimit(60);
-        _gameWorld = new GameWorld();
+        _gameWorld = Application.CreateGameWorld();
 
         var context = new GameContext
         {
@@ -34,9 +34,9 @@ public class Game
             GameWorld = _gameWorld
         };
 
-        _gameWorld.SystemManager.RegisterSystem<DrawSystem>(context);
-        _gameWorld.SystemManager.RegisterSystem<MoveSystem>(context);
-        _gameWorld.SystemManager.RegisterSystem<LifetimeSystem>(context);
+        _gameWorld.RegisterSystem<DrawSystem>();
+        _gameWorld.RegisterSystem<MoveSystem>();
+        _gameWorld.RegisterSystem<LifetimeSystem>();
 
         _gameWorld.Initialize(context);
     }

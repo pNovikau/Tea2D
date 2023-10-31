@@ -1,8 +1,10 @@
 ﻿namespace Tea2D.Ecs.Components;
 
-public interface IComponent : IHasId
+public interface IComponent
 {
     protected static int TypeCount = 0;
+
+    int Id { get; init; }
 }
 
 public interface IComponent<TComponent> : IComponent

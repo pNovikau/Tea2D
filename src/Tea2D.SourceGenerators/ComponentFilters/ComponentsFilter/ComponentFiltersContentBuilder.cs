@@ -1,7 +1,7 @@
-﻿namespace Tea2D.SourceGenerators.ComponentFilters.ComponentsFilter
-{
-    //TODO: refactor this in near future
+﻿using System.Linq;
 
+namespace Tea2D.SourceGenerators.ComponentFilters.ComponentsFilter
+{
     public sealed class ComponentFiltersContentBuilder
     {
         private readonly SourceCodeBuilder _builder;
@@ -16,7 +16,101 @@
 
         public void AppendFilter(params string[] templatesParams)
         {
-            ComponentFiltersClassBuilder.Build(_builder, templatesParams);
+            var templatesParamsString = string.Join(", ", templatesParams);
+
+            _builder.Append(
+$$"""
+[global::System.CodeDom.Compiler.GeneratedCode("{{ Constants.Name }}", "{{ Constants.Version }}")]
+public sealed partial class ComponentsFilter<{{ templatesParamsString }}>
+{
+    public ComponentsFilter(global::Tea2D.Ecs.GameWorldBase gameWorld) : base(gameWorld) { }
+
+    public ComponentEnumerator GetEnumerator() => new(this);
+
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    protected override bool IsComponentTypeSupported(int componentType)
+    {
+        return
+            {{ templatesParams.Select((p, i) => $"global::Tea2D.Ecs.Components.IComponent<{p}>.ComponentType == componentType{(i != templatesParams.Length - 1 ? " ||" : ";" )}") }}
+    }
+
+    [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
+    protected override bool IsEntitySupported(ref global::Tea2D.Ecs.Entity entity)
+    {
+        return
+            {{ templatesParams.Select((p, i) => $"entity.Components[global::Tea2D.Ecs.Components.IComponent<{p}>.ComponentType] != -1{(i != templatesParams.Length - 1 ? " &&" : ";" )}") }}
+    }
+
+    public ref struct ComponentEnumerator
+    {
+        private readonly ComponentsFilter _componentsFilter;
+        private readonly global::System.Span<int> _entitiesIds;
+        private readonly global::System.Span<Entity> _entities;
+
+        {{ templatesParams.Select(p => $"private readonly global::System.Span<{p}> _componentsSpan{p};") }}
+
+        private int _index = -1;
+
+        public ComponentEnumerator(ComponentsFilter componentsFilter)
+        {
+            _componentsFilter = componentsFilter;
+            _entities = componentsFilter.GameWorld.EntityManager.AsSpan();
+            _entitiesIds = global::CommunityToolkit.HighPerformance.ListExtensions.AsSpan(componentsFilter.EntitiesIds);
+            {{ templatesParams.Select(p => $"_componentsSpan{p} = componentsFilter.GameWorld.ComponentManager.GetComponentBucket<{p}>().AsSpan();") }}
+
+            componentsFilter.Freeze();
+        }
+
+        public global::Tea2D.Ecs.ComponentFilters.ComponentsTuple<{{ templatesParamsString }}> Current
+        {
+            get
+            {
+                ref var entity = ref _entities[_entitiesIds[_index]];
+
+                {{ templatesParams.SelectMany(p =>
+                        {
+                            return new[] 
+                            {
+                                $"var componentId{p} = entity.Components[global::Tea2D.Ecs.Components.IComponent<{p}>.ComponentType];",
+                                $"ref var component{p} = ref _componentsSpan{p}[componentId{p}];" 
+                            };
+                        })
+                }}
+
+                return new global::Tea2D.Ecs.ComponentFilters.ComponentsTuple<{{ templatesParamsString }}>(
+                    _entitiesIds[_index],
+                    {{ templatesParams.Select((p, index) =>
+                        {
+                            return $"new global::CommunityToolkit.HighPerformance.Ref<{p}>(ref component{p}){(index != templatesParams.Length - 1 ? "," : ");" )}";
+                        })
+                    }}
+            }
+        }
+
+        public bool MoveNext()
+        {
+            if (_index == _entitiesIds.Length - 1)
+                return false;
+
+            ++_index;
+            return true;
+        }
+
+        public void Reset()
+        {
+            _index = -1;
+            _componentsFilter.Unfreeze();
+        }
+
+        public void Dispose()
+        {
+            Reset();
+        }
+    }
+}
+
+"""
+                );
         }
 
         public string GetContent()

@@ -1,3 +1,5 @@
+using System.Linq;
+
 namespace Tea2D.SourceGenerators.ComponentFilters.ComponentsTuple
 {
     public sealed class ComponentsTuplesContentBuilder
@@ -15,7 +17,39 @@ namespace Tea2D.SourceGenerators.ComponentFilters.ComponentsTuple
 
         public void Add(string[] genericParameters)
         {
-            ComponentsTupleStructBuilder.Build(_builder, genericParameters);
+            var genericParametersString = string.Join(", ", genericParameters);
+
+            _builder.Append(
+$$"""
+[global::System.CodeDom.Compiler.GeneratedCode("{{ Constants.Name }}", "{{ Constants.Version }}")]
+public ref struct ComponentsTuple<{{ genericParametersString }}>
+    {{ genericParameters.Select(p => $"where {p} : struct, global::Tea2D.Ecs.Components.IComponent<{p}>") }}
+{
+    public int EntityId;
+
+    {{ genericParameters.Select(p => $"public global::CommunityToolkit.HighPerformance.Ref<{p}> Component{p};") }}
+
+    public ComponentsTuple(
+        int entityId,
+        {{ genericParameters.Select((p, i) => $"global::CommunityToolkit.HighPerformance.Ref<{p}> component{p}{(i == genericParameters.Length - 1 ? ")" : ",")}") }}
+    {
+        EntityId = entityId;
+
+        {{ genericParameters.Select(p => $"Component{p} = component{p};") }}
+    }
+
+    public void Deconstruct(
+        out int entityId,
+        {{ genericParameters.Select((p, i) => $"out global::CommunityToolkit.HighPerformance.Ref<{p}> component{p}{(i == genericParameters.Length - 1 ? ")" : ",")}") }}
+    {
+        entityId = EntityId;
+
+        {{ genericParameters.Select(p => $"component{p} = Component{p};") }}
+    }
+}
+"""
+            );
+
             _builder.AppendLine();
         }
 
