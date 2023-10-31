@@ -38,15 +38,15 @@ public class ComponentManager : IComponentManager
         return new Ref<TComponent>(ref component);
     }
 
-    public void Delete<TComponent>(int id)
+    public void DeleteComponent<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>
     {
-        Delete(IComponent<TComponent>.ComponentType, id);
+        DeleteComponent(IComponent<TComponent>.ComponentType, id);
 
         Metrics.Components<TComponent>.Decrement();
     }
 
-    public void Delete(int componentType, int id)
+    public void DeleteComponent(int componentType, int id)
     {
         Debug.Assert(_components[componentType] != null);
 

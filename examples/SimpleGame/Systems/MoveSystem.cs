@@ -1,6 +1,6 @@
-using SFML.System;
 using SimpleGame.Components;
 using Tea2D;
+using Tea2D.Common;
 using Tea2D.Core.Diagnostics;
 using Tea2D.Ecs.ComponentFilters;
 
@@ -24,7 +24,7 @@ public class MoveSystem : Tea2D.Ecs.Systems.System
             ref var moveComponent = ref moveComponentRef.Value;
             ref var transformComponent = ref transformComponentRef.Value;
 
-            transformComponent.Transformable.Position = new Vector2f(
+            transformComponent.Transformable.Position = new Vector2<float>(
                 transformComponent.Transformable.Position.X + (moveComponent.Direction.X * moveComponent.Velocity),
                 transformComponent.Transformable.Position.Y + ((moveComponent.Direction.Y * moveComponent.Velocity)));
         }

@@ -9,4 +9,10 @@ public struct MoveComponent : IComponent<MoveComponent>
 
     public Vector2<float> Direction;
     public float Velocity;
+
+    public void Disable()
+    {
+        Direction = default;
+        Velocity = default;
+    }
 }

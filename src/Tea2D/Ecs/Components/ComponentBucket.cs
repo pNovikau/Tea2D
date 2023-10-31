@@ -54,6 +54,8 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
 
     public void Delete(int id)
     {
+        _components[id].Disable();
+
         if (id == _componentIndex - 1)
         {
             --_componentIndex;
@@ -65,7 +67,6 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
             Array.Resize(ref _freeComponents, _freeComponents.Length * 2);
 
         _freeComponents[_freeComponentsIndex++] = id;
-        
     }
 
     public Span<TComponent> AsSpan() => _components.AsSpan()[.._componentIndex];

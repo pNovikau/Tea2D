@@ -41,7 +41,7 @@ public ref struct EntityApi
         var componentId = entity.Components[IComponent<TComponent>.ComponentType];
         entity.Components[IComponent<TComponent>.ComponentType] = -1;
 
-        _gameWorld.ComponentManager.Delete<TComponent>(componentId);
+        _gameWorld.ComponentManager.DeleteComponent<TComponent>(componentId);
 
         var args = new EntityComponentEventArgs(_entityId, componentId, IComponent<TComponent>.ComponentType);
         _gameWorld.Events.RaiseEntityComponentRemoved(args);

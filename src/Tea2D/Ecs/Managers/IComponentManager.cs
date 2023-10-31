@@ -14,10 +14,10 @@ internal interface IComponentManager
     Ref<TComponent> GetComponentAsRef<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>;
 
-    void Delete<TComponent>(int id)
+    void DeleteComponent<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>;
 
-    void Delete(int componentType, int id);
+    void DeleteComponent(int componentType, int id);
 
     IComponentBucket<TComponent> GetComponentBucket<TComponent>()
         where TComponent : struct, IComponent<TComponent>;

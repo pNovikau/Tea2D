@@ -7,6 +7,7 @@ namespace Tea2D.Ecs.ComponentFilters;
 
 public abstract class ComponentsFilter : IComponentFilter
 {
+    //TODO: add metrics in order to track queues 
     private readonly Queue<int> _entitiesToAdd = new();
     private readonly Queue<int> _entitiesToRemove = new();
 
