@@ -12,10 +12,10 @@ internal class Program
 {
     public static void Main(string[] args)
     {
-        var t = new GameBenchmarks();
-        t.Setup();
-        t.Run();
-        //BenchmarkRunner.Run<GameBenchmarks>();
+        //var t = new GameBenchmarks();
+        //t.Setup();
+        //t.Run();
+        BenchmarkRunner.Run<GameBenchmarks>();
     }
 }
 
@@ -67,9 +67,10 @@ public class DeleteSystem : Ecs.Systems.System
             ref var component2 = ref component2Ref.Value;
 
             if (component1.Value >= 10 && component2.Value >= 10)
+            {
                 context.GameWorld.DestroyEntity(entityId);
-
-            --CreateSystem.EntityCount;
+                --CreateSystem.EntityCount;
+            }
         }
     }
 }
