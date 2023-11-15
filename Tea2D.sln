@@ -12,7 +12,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.SourceGenerators", "s
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F64B1D40-05BD-40F1-AF2E-29C6FFA74535}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.PerformanceTests", "test\Tea2D.PerformanceTests\Tea2D.PerformanceTests.csproj", "{840799B8-B2AD-4C4C-AE8A-8F05518FADDE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.Benchmarks", "test\Tea2D.Benchmarks\Tea2D.Benchmarks.csproj", "{840799B8-B2AD-4C4C-AE8A-8F05518FADDE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

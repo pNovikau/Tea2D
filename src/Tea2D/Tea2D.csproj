@@ -14,7 +14,7 @@
 
     <ItemGroup>
         <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
-            <_Parameter1>Tea2D.PerformanceTests</_Parameter1>
+            <_Parameter1>Tea2D.Benchmarks</_Parameter1>
         </AssemblyAttribute>
     </ItemGroup>
 
