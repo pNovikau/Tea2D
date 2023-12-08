@@ -1,4 +1,4 @@
-using System.Linq;
+using Tea2D.SourceGenerators.Utils;
 
 namespace Tea2D.SourceGenerators.ComponentFilters.ComponentsTuple
 {
@@ -23,28 +23,30 @@ namespace Tea2D.SourceGenerators.ComponentFilters.ComponentsTuple
 $$"""
 [global::System.CodeDom.Compiler.GeneratedCode("{{ Constants.Name }}", "{{ Constants.Version }}")]
 public ref struct ComponentsTuple<{{ genericParametersString }}>
-    {{ genericParameters.Select(p => $"where {p} : struct, global::Tea2D.Ecs.Components.IComponent<{p}>") }}
+    {{ "where {0} : struct, global::Tea2D.Ecs.Components.IComponent<{0}>".Format(genericParameters) }}
 {
     public int EntityId;
 
-    {{ genericParameters.Select(p => $"public global::CommunityToolkit.HighPerformance.Ref<{p}> Component{p};") }}
+    {{ "public global::CommunityToolkit.HighPerformance.Ref<{0}> Component{0};".Format(genericParameters) }}
 
     public ComponentsTuple(
         int entityId,
-        {{ genericParameters.Select((p, i) => $"global::CommunityToolkit.HighPerformance.Ref<{p}> component{p}{(i == genericParameters.Length - 1 ? ")" : ",")}") }}
+        {{ "global::CommunityToolkit.HighPerformance.Ref<{0}> component{0}".Format(genericParameters, ",") }}
+        )
     {
         EntityId = entityId;
 
-        {{ genericParameters.Select(p => $"Component{p} = component{p};") }}
+        {{ "Component{0} = component{0};".Format(genericParameters) }}
     }
 
     public void Deconstruct(
         out int entityId,
-        {{ genericParameters.Select((p, i) => $"out global::CommunityToolkit.HighPerformance.Ref<{p}> component{p}{(i == genericParameters.Length - 1 ? ")" : ",")}") }}
+        {{ "out global::CommunityToolkit.HighPerformance.Ref<{0}> component{0}".Format(genericParameters, ",") }}
+        )
     {
         entityId = EntityId;
 
-        {{ genericParameters.Select(p => $"component{p} = Component{p};") }}
+        {{ "component{0} = Component{0};".Format(genericParameters) }}
     }
 }
 """

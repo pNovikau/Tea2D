@@ -83,7 +83,7 @@ public readonly struct CSharpInterpolatedStringHandler
         _builder.Append(value);
     }
 
-    public string ToString()
+    public override string ToString()
     {
         return _builder.ToString();
     }
