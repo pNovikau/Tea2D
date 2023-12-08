@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using Tea2D.SourceGenerators.Utils;
 
 namespace Tea2D.SourceGenerators.ComponentFilters.ComponentsFilter
 {
@@ -31,14 +31,16 @@ public sealed partial class ComponentsFilter<{{ templatesParamsString }}>
     protected override bool IsComponentTypeSupported(int componentType)
     {
         return
-            {{ templatesParams.Select((p, i) => $"global::Tea2D.Ecs.Components.IComponent<{p}>.ComponentType == componentType{(i != templatesParams.Length - 1 ? " ||" : ";" )}") }}
+            {{ "global::Tea2D.Ecs.Components.IComponent<{0}>.ComponentType == componentType".Format(templatesParams, " ||") }}
+            ;
     }
 
     [global::System.Runtime.CompilerServices.MethodImpl(global::System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]
     protected override bool IsEntitySupported(ref global::Tea2D.Ecs.Entity entity)
     {
         return
-            {{ templatesParams.Select((p, i) => $"entity.Components[global::Tea2D.Ecs.Components.IComponent<{p}>.ComponentType] != -1{(i != templatesParams.Length - 1 ? " &&" : ";" )}") }}
+            {{ "entity.Components[global::Tea2D.Ecs.Components.IComponent<{0}>.ComponentType] != -1".Format(templatesParams, " &&") }}
+            ;
     }
 
     public ref struct ComponentEnumerator
@@ -47,7 +49,7 @@ public sealed partial class ComponentsFilter<{{ templatesParamsString }}>
         private readonly global::System.Span<int> _entitiesIds;
         private readonly global::System.Span<Entity> _entities;
 
-        {{ templatesParams.Select(p => $"private readonly global::System.Span<{p}> _componentsSpan{p};") }}
+        {{ "private readonly global::System.Span<{0}> _componentsSpan{0};".Format(templatesParams) }}
 
         private int _index = -1;
 
@@ -56,7 +58,8 @@ public sealed partial class ComponentsFilter<{{ templatesParamsString }}>
             _componentsFilter = componentsFilter;
             _entities = componentsFilter.GameWorld.EntityManager.AsSpan();
             _entitiesIds = global::CommunityToolkit.HighPerformance.ListExtensions.AsSpan(componentsFilter.EntitiesIds);
-            {{ templatesParams.Select(p => $"_componentsSpan{p} = componentsFilter.GameWorld.ComponentManager.GetComponentBucket<{p}>().AsSpan();") }}
+
+            {{ "_componentsSpan{0} = componentsFilter.GameWorld.ComponentManager.GetComponentBucket<{0}>().AsSpan();".Format(templatesParams) }}
 
             componentsFilter.Freeze();
         }
@@ -67,23 +70,14 @@ public sealed partial class ComponentsFilter<{{ templatesParamsString }}>
             {
                 ref var entity = ref _entities[_entitiesIds[_index]];
 
-                {{ templatesParams.SelectMany(p =>
-                        {
-                            return new[] 
-                            {
-                                $"var componentId{p} = entity.Components[global::Tea2D.Ecs.Components.IComponent<{p}>.ComponentType];",
-                                $"ref var component{p} = ref _componentsSpan{p}[componentId{p}];" 
-                            };
-                        })
-                }}
+                {{ "var componentId{0} = entity.Components[global::Tea2D.Ecs.Components.IComponent<{0}>.ComponentType];".Format(templatesParams) }}
+
+                {{ "ref var component{0} = ref _componentsSpan{0}[componentId{0}];".Format(templatesParams) }}
 
                 return new global::Tea2D.Ecs.ComponentFilters.ComponentsTuple<{{ templatesParamsString }}>(
                     _entitiesIds[_index],
-                    {{ templatesParams.Select((p, index) =>
-                        {
-                            return $"new global::CommunityToolkit.HighPerformance.Ref<{p}>(ref component{p}){(index != templatesParams.Length - 1 ? "," : ");" )}";
-                        })
-                    }}
+                    {{ "new global::CommunityToolkit.HighPerformance.Ref<{0}>(ref component{0})".Format(templatesParams, ",") }}
+                );
             }
         }
 
