@@ -1,16 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Diagnostics.Metrics;
 using Tea2D.Core.Memory;
+using Tea2D.Metrics.Diagnostics;
 
 namespace Tea2D.Core.Diagnostics;
 
-public static partial class Metrics
+public static partial class Metric
 {
-    public static partial class Execution
+    public static class Execution
     {
-        private static readonly Dictionary<int, Histogram<long>> Histograms = new();
+        private static readonly Dictionary<int, IHistogram<long>> Histograms = new();
 
         public static ExecutionScope Record(string method)
         {
@@ -20,29 +20,32 @@ public static partial class Metrics
             var histogramName = new ValueString(prefix, buffer);
             histogramName.Append(method);
 
-            if (Histograms.TryGetValue(histogramName.GetHashCode(), out var histogram) is false)
-            {
-                histogram = Meter.CreateHistogram<long>(histogramName.ToString()!);
-                Histograms[histogramName.GetHashCode()] = histogram;
-            }
+            if (Histograms.TryGetValue(histogramName.GetHashCode(), out var histogram))
+                return new ExecutionScope(histogram);
+
+            histogram = CreateHistogram<long>(histogramName);
+            Histograms[histogramName.GetHashCode()] = histogram;
 
             return new ExecutionScope(histogram);
         }
 
-        public readonly ref struct ExecutionScope
+        private static IHistogram<T> CreateHistogram<T>(ReadOnlySpan<char> name)
+            where T : struct
         {
-            private readonly long _startTimestamp;
-            private readonly Histogram<long> _histogram;
+#if DEBUG
+            return new SharedHistogram<T>(name);
+#else
+            return new NoOpHistogram<T>();
+#endif
+        }
 
-            public ExecutionScope(Histogram<long> histogram)
-            {
-                _startTimestamp = Stopwatch.GetTimestamp();
-                _histogram = histogram;
-            }
+        public readonly ref struct ExecutionScope(IHistogram<long> histogram)
+        {
+            private readonly long _startTimestamp = Stopwatch.GetTimestamp();
 
             public void Dispose()
             {
-                _histogram.Record(Stopwatch.GetElapsedTime(_startTimestamp).Microseconds);
+                histogram.Record(Stopwatch.GetElapsedTime(_startTimestamp).Microseconds);
             }
         }
     }

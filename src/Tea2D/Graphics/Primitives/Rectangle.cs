@@ -1,6 +1,6 @@
 ﻿using SFML.Graphics;
 using SFML.System;
-using Tea2D.Common;
+using Tea2D.Core.Common;
 using Tea2D.Core.Memory;
 
 namespace Tea2D.Graphics.Primitives;

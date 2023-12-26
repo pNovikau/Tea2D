@@ -1,4 +1,4 @@
-﻿using Tea2D.Common;
+﻿using Tea2D.Core.Common;
 using Tea2D.Ecs.Components;
 
 namespace SimpleGame.Components;

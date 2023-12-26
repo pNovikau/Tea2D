@@ -1,6 +1,6 @@
 using SimpleGame.Components;
 using Tea2D;
-using Tea2D.Common;
+using Tea2D.Core.Common;
 using Tea2D.Core.Diagnostics;
 using Tea2D.Ecs.ComponentFilters;
 
@@ -17,7 +17,7 @@ public class MoveSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
-        using var _ = Metrics.Execution.Record("MoveSystem.Update");
+        using var _ = Metric.Execution.Record("MoveSystem.Update");
         
         foreach (var (_, moveComponentRef, transformComponentRef) in _filter)
         {

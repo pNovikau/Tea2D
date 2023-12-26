@@ -2,7 +2,7 @@
 using SFML.Graphics;
 using SFML.System;
 using SimpleGame.Components;
-using Tea2D.Common;
+using Tea2D.Core.Common;
 using Tea2D.Ecs;
 using Tea2D.Graphics.Primitives;
 

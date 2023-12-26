@@ -14,6 +14,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{F64B1D40-0
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.Benchmarks", "test\Tea2D.Benchmarks\Tea2D.Benchmarks.csproj", "{840799B8-B2AD-4C4C-AE8A-8F05518FADDE}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{5398D957-7475-4B2B-908B-4A8B7633C079}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.Metrics", "src\Tea2D.Metrics\Tea2D.Metrics.csproj", "{1903E7E5-D938-4678-9C20-35C25CF0C215}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsVisualizer", "tools\MetricsVisualizer\MetricsVisualizer.csproj", "{68EF074F-49EC-4098-87A3-A6543EA8D023}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,9 +46,18 @@ Global
 		{840799B8-B2AD-4C4C-AE8A-8F05518FADDE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{840799B8-B2AD-4C4C-AE8A-8F05518FADDE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{840799B8-B2AD-4C4C-AE8A-8F05518FADDE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1903E7E5-D938-4678-9C20-35C25CF0C215}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1903E7E5-D938-4678-9C20-35C25CF0C215}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1903E7E5-D938-4678-9C20-35C25CF0C215}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1903E7E5-D938-4678-9C20-35C25CF0C215}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68EF074F-49EC-4098-87A3-A6543EA8D023}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68EF074F-49EC-4098-87A3-A6543EA8D023}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68EF074F-49EC-4098-87A3-A6543EA8D023}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68EF074F-49EC-4098-87A3-A6543EA8D023}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3B583D46-A616-4C87-AF67-071E7252652A} = {59DC496F-12D1-4F2F-B366-3FC48255E4F7}
 		{840799B8-B2AD-4C4C-AE8A-8F05518FADDE} = {F64B1D40-05BD-40F1-AF2E-29C6FFA74535}
+		{68EF074F-49EC-4098-87A3-A6543EA8D023} = {5398D957-7475-4B2B-908B-4A8B7633C079}
 	EndGlobalSection
 EndGlobal

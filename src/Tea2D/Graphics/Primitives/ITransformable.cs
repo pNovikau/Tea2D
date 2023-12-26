@@ -1,4 +1,4 @@
-﻿using Tea2D.Common;
+﻿using Tea2D.Core.Common;
 
 namespace Tea2D.Graphics.Primitives;
 
