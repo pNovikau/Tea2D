@@ -33,7 +33,7 @@ public static partial class Metric
             where T : struct
         {
 #if DEBUG
-            return new SharedHistogram<T>(name);
+            return new SharedHistogram<T>(name.ToString());
 #else
             return new NoOpHistogram<T>();
 #endif

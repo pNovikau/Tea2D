@@ -15,6 +15,9 @@ public sealed class PipeReader<T> : SharedRingBuffer<T>
 
     public PipeReader(string name)
     {
+        if (name.Length > Constants.MaxMetricNameSize)
+            throw new ArgumentException("");
+
         MemoryMappedFile = MemoryMappedFile.OpenExisting(name, MemoryMappedFileRights.Read);
         ViewAccessor = MemoryMappedFile.CreateViewAccessor(0, HeaderSize, MemoryMappedFileAccess.Read);
 
