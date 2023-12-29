@@ -17,7 +17,7 @@ public class Rectangle : RectangleShape, ITransformable, IDrawable
 
         return rectangle;
     }
-    
+
     public void Destroy()
     {
         if (_isDestroyed)
