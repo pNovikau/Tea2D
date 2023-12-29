@@ -1,13 +1,6 @@
-﻿using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
+using Tea2D.Metrics.Diagnostics;
 
 namespace MetricsVisualizer;
 
@@ -16,8 +9,46 @@ namespace MetricsVisualizer;
 /// </summary>
 public partial class MainWindow : Window
 {
+    private readonly Dictionary<string, (MetricType type, long val, TextBlock text)> _metrics = new();
+    private readonly MetricListener _metricListener;
+
     public MainWindow()
     {
         InitializeComponent();
+
+        _metricListener = new MetricListener();
+        _metricListener.Start();
+
+        _metricListener.MetricAdded += MetricListenerOnMetricAdded;
+        _metricListener.MetricUpdated += MetricListenerOnMetricUpdated;
+    }
+
+    private void MetricListenerOnMetricUpdated(object? sender, MeasureEventArgs e)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            var (type, val, text) = _metrics[e.Name];
+
+            if (type == MetricType.Histogram)
+                text.Text = $"[{e.Name}] {e.Value}";
+            else
+            {
+                val += e.Value;
+                text.Text = $"[{e.Name}] {val}";
+            }
+
+            _metrics[e.Name] = (type, val, text);
+        });
+    }
+
+    private void MetricListenerOnMetricAdded(object? sender, MetricRegisteredEventArgs e)
+    {
+        Dispatcher.Invoke(() =>
+        {
+            var textBlock = new TextBlock();
+            Panel.Children.Add(textBlock);
+
+            _metrics[e.Name] = (e.Type, 0, textBlock);
+        });
     }
 }

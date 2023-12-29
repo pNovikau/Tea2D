@@ -24,9 +24,4 @@
         <ProjectReference Include="..\Tea2D.SourceGenerators\Tea2D.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 
-    <ItemGroup>
-      <Folder Include="Core\Diagnostics\Metrics\" />
-      <Folder Include="Core\IO\SharedMemory\" />
-    </ItemGroup>
-
 </Project>

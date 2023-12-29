@@ -1,7 +1,9 @@
-﻿using System.IO.MemoryMappedFiles;
+﻿using System.Diagnostics.CodeAnalysis;
+using System.IO.MemoryMappedFiles;
 
 namespace Tea2D.Metrics.IO.SharedMemory;
 
+[SuppressMessage("Interoperability", "CA1416:Validate platform compatibility")]
 public sealed class PipeWriter<T> : SharedRingBuffer<T>
     where T : struct
 {
@@ -17,7 +19,7 @@ public sealed class PipeWriter<T> : SharedRingBuffer<T>
         _capacity = capacity;
         var memorySize = HeaderSize + ItemSize * capacity;
 
-        MemoryMappedFile = MemoryMappedFile.CreateNew(name, memorySize, MemoryMappedFileAccess.ReadWrite);
+        MemoryMappedFile = MemoryMappedFile.CreateOrOpen(name, memorySize, MemoryMappedFileAccess.ReadWrite);
         ViewAccessor = MemoryMappedFile.CreateViewAccessor(0, memorySize, MemoryMappedFileAccess.ReadWrite);
 
         var header = new Header()

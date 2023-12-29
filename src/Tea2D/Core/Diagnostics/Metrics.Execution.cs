@@ -23,20 +23,10 @@ public static partial class Metric
             if (Histograms.TryGetValue(histogramName.GetHashCode(), out var histogram))
                 return new ExecutionScope(histogram);
 
-            histogram = CreateHistogram<long>(histogramName);
+            histogram = Meter.CreateHistogram<long>(histogramName.ToString());
             Histograms[histogramName.GetHashCode()] = histogram;
 
             return new ExecutionScope(histogram);
-        }
-
-        private static IHistogram<T> CreateHistogram<T>(ReadOnlySpan<char> name)
-            where T : struct
-        {
-#if DEBUG
-            return new SharedHistogram<T>(name.ToString());
-#else
-            return new NoOpHistogram<T>();
-#endif
         }
 
         public readonly ref struct ExecutionScope(IHistogram<long> histogram)

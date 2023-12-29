@@ -10,16 +10,7 @@ public static partial class Metric
         private static readonly string CounterName = "components." + typeof(TComponent).Name;
 
         [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
-        private static readonly ICounter<long> Counter;
-
-        static Components()
-        {
-#if DEBUG
-            Counter = new SharedCounter<long>(CounterName);
-#else
-            _counter = new NoOpCounter<long>();
-#endif
-        }
+        private static readonly ICounter<long> Counter = Meter.CreateCounter<long>(CounterName);
 
         public static void Increment()
         {
