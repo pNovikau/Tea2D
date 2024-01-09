@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimpleGame", "examples\Simp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.SourceGenerators", "src\Tea2D.SourceGenerators\Tea2D.SourceGenerators.csproj", "{64208451-EB0E-41EC-B63B-F78963D8809B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tools", "tools", "{9C61E668-9165-4510-9CE4-FDE081C1266E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tea2D.VulkanGenerator", "tools\Tea2D.VulkanGenerator\Tea2D.VulkanGenerator.csproj", "{72276DD3-4D2C-4A40-9611-7179D890A783}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -32,8 +36,13 @@ Global
 		{64208451-EB0E-41EC-B63B-F78963D8809B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{64208451-EB0E-41EC-B63B-F78963D8809B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{64208451-EB0E-41EC-B63B-F78963D8809B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{72276DD3-4D2C-4A40-9611-7179D890A783}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72276DD3-4D2C-4A40-9611-7179D890A783}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72276DD3-4D2C-4A40-9611-7179D890A783}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{72276DD3-4D2C-4A40-9611-7179D890A783}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{3B583D46-A616-4C87-AF67-071E7252652A} = {59DC496F-12D1-4F2F-B366-3FC48255E4F7}
+		{72276DD3-4D2C-4A40-9611-7179D890A783} = {9C61E668-9165-4510-9CE4-FDE081C1266E}
 	EndGlobalSection
 EndGlobal
