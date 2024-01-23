@@ -1,7 +1,6 @@
 ﻿namespace Tea2D.Metrics.Diagnostics;
 
-public sealed class SharedCounter<T>(string name) : SharedMetric<T>(name, 10), ICounter<T>
-    where T : struct
+public sealed class SharedCounter(string name) : SharedMetric<long>(name, 10), ICounter
 {
-    public void Add(T value) => PipeWriter.Write(value);
+    public void Add(long value) => PipeWriter.Write(value);
 }

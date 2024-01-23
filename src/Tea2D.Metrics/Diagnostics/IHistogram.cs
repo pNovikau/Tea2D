@@ -1,7 +1,6 @@
 namespace Tea2D.Metrics.Diagnostics;
 
-public interface IHistogram<in T> : IMetric, IDisposable
-    where T : struct
+public interface IHistogram : IMetric, IDisposable
 {
-    void Record(T value);
+    void Record(long value);
 }

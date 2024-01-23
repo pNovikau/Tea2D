@@ -10,7 +10,7 @@ public static partial class Metric
 {
     public static class Execution
     {
-        private static readonly Dictionary<int, IHistogram<long>> Histograms = new();
+        private static readonly Dictionary<int, IHistogram> Histograms = new();
 
         public static ExecutionScope Record(string method)
         {
@@ -23,13 +23,13 @@ public static partial class Metric
             if (Histograms.TryGetValue(histogramName.GetHashCode(), out var histogram))
                 return new ExecutionScope(histogram);
 
-            histogram = Meter.CreateHistogram<long>(histogramName.ToString());
+            histogram = Meter.CreateHistogram(histogramName.ToString());
             Histograms[histogramName.GetHashCode()] = histogram;
 
             return new ExecutionScope(histogram);
         }
 
-        public readonly ref struct ExecutionScope(IHistogram<long> histogram)
+        public readonly ref struct ExecutionScope(IHistogram histogram)
         {
             private readonly long _startTimestamp = Stopwatch.GetTimestamp();
 

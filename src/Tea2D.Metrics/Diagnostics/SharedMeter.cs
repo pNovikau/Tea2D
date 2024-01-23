@@ -6,9 +6,9 @@ public sealed class SharedMeter(string name) : IMeter
 {
     private readonly PipeWriter<MetricMetadata> _pipeWriter = new(name);
 
-    public ICounter<TValue> CreateCounter<TValue>(string name) where TValue : struct
+    public ICounter CreateCounter(string name)
     {
-        var counter = new SharedCounter<TValue>(name);
+        var counter = new SharedCounter(name);
 
         var metadata = new MetricMetadata
         {
@@ -21,9 +21,9 @@ public sealed class SharedMeter(string name) : IMeter
         return counter;
     }
 
-    public IHistogram<TValue> CreateHistogram<TValue>(string name) where TValue : struct
+    public IHistogram CreateHistogram(string name)
     {
-        var histogram = new SharedHistogram<TValue>(name);
+        var histogram = new SharedHistogram(name);
 
         var metadata = new MetricMetadata
         {

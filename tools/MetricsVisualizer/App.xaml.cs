@@ -1,7 +1,7 @@
-﻿using System.Configuration;
-using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using CommunityToolkit.Mvvm.DependencyInjection;
+using MetricsVisualizer.Services.Metrics;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MetricsVisualizer;
 
@@ -12,6 +12,12 @@ public partial class App : Application
 {
     protected override void OnStartup(StartupEventArgs e)
     {
+        var serviceCollection = new ServiceCollection();
+
+        serviceCollection.AddSingleton<MetricNamespaceListener>();
+
+        Ioc.Default.ConfigureServices(serviceCollection.BuildServiceProvider());
+        
         base.OnStartup(e);
     }
 

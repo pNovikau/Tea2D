@@ -1,7 +1,6 @@
 namespace Tea2D.Metrics.Diagnostics;
 
-public interface ICounter<in T> : IMetric, IDisposable
-    where T : struct
+public interface ICounter : IMetric, IDisposable
 {
-    void Add(T value);
+    void Add(long value);
 }

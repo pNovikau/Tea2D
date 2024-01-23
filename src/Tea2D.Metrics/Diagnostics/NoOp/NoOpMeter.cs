@@ -2,7 +2,7 @@
 
 public sealed class NoOpMeter : IMeter
 {
-    public ICounter<TValue> CreateCounter<TValue>(string name) where TValue : struct => new NoOpCounter<TValue>();
+    public ICounter CreateCounter(string name) => new NoOpCounter();
 
-    public IHistogram<TValue> CreateHistogram<TValue>(string name) where TValue : struct => new NoOpHistogram<TValue>();
+    public IHistogram CreateHistogram(string name) => new NoOpHistogram();
 }

@@ -1,7 +1,6 @@
 namespace Tea2D.Metrics.Diagnostics;
 
-public sealed class SharedHistogram<T> : SharedMetric<T>, IHistogram<T>
-    where T : struct
+public sealed class SharedHistogram : SharedMetric<long>, IHistogram
 {
     public SharedHistogram(string name) : base(name, 125)
     {
@@ -9,5 +8,5 @@ public sealed class SharedHistogram<T> : SharedMetric<T>, IHistogram<T>
             throw new ArgumentException("");
     }
 
-    public void Record(T value) => PipeWriter.Write(value);
+    public void Record(long value) => PipeWriter.Write(value);
 }

@@ -10,7 +10,7 @@ public static partial class Metric
         private const string CounterName = "systems." + nameof(TComponent);
 
         [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
-        private static readonly ICounter<long> Counter = Meter.CreateCounter<long>(CounterName);
+        private static readonly ICounter Counter = Meter.CreateCounter(CounterName);
 
         public static void Increment()
         {

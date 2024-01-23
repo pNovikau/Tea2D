@@ -2,9 +2,7 @@
 
 public interface IMeter
 {
-    ICounter<TValue> CreateCounter<TValue>(string name)
-        where TValue : struct;
+    ICounter CreateCounter(string name);
 
-    IHistogram<TValue> CreateHistogram<TValue>(string name)
-        where TValue : struct;
+    IHistogram CreateHistogram(string name);
 }

@@ -1,6 +1,6 @@
 ﻿namespace MetricsVisualizer.Services.IO.SharedMemory;
 
-public interface ISharedRingBufferListener : IAsyncDisposable
+public interface IBackgroundWorker : IAsyncDisposable
 {
     Task StartAsync();
     Task StopAsync();
