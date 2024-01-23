@@ -1,5 +1,6 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
+using MetricsVisualizer.Services.Metrics;
 using Tea2D.Metrics.Diagnostics;
 
 namespace MetricsVisualizer;
@@ -16,11 +17,11 @@ public partial class MainWindow : Window
     {
         InitializeComponent();
 
-        _metricListener = new MetricListener();
-        _metricListener.Start();
-
-        _metricListener.MetricAdded += MetricListenerOnMetricAdded;
-        _metricListener.MetricUpdated += MetricListenerOnMetricUpdated;
+        //_metricListener = new MetricListener();
+        //_metricListener.Start();
+        //
+        //_metricListener.MetricAdded += MetricListenerOnMetricAdded;
+        //_metricListener.MetricUpdated += MetricListenerOnMetricUpdated;
     }
 
     private void MetricListenerOnMetricUpdated(object? sender, MeasureEventArgs e)

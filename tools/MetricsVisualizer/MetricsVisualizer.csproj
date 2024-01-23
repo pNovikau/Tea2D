@@ -16,4 +16,11 @@
       <ProjectReference Include="..\..\src\Tea2D.Metrics\Tea2D.Metrics.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Infrastructure\" />
+      <Folder Include="Models\" />
+      <Folder Include="ViewModels\" />
+      <Folder Include="Views\Controls\" />
+    </ItemGroup>
+
 </Project>

@@ -1,5 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
+﻿using System.Runtime.InteropServices;
 
 namespace Tea2D.Metrics.Diagnostics;
 
@@ -9,7 +8,6 @@ public unsafe struct MetricMetadata
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.MaxMetricNameSize)]
     public fixed char Name[Constants.MaxMetricNameSize];
 
-    //public ReadOnlyMemory<char> Name;
     public MetricType Type;
 }
 
