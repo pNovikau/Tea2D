@@ -1,11 +1,11 @@
 ﻿using Tea2D.Metrics.Diagnostics;
 using Tea2D.Metrics.IO.SharedMemory;
-using Tea2DTrace.Models.Messages;
-using Tea2DTrace.Services.Collections;
-using Tea2DTrace.Services.IO.SharedMemory;
-using Tea2DTrace.Services.Messaging;
+using Tea2D.Trace.Models.Messages;
+using Tea2D.Trace.Services.Collections;
+using Tea2D.Trace.Services.IO.SharedMemory;
+using Tea2D.Trace.Services.Messaging;
 
-namespace Tea2DTrace.Services.Metrics;
+namespace Tea2D.Trace.Services.Metrics;
 
 public sealed class MetricNamespaceListener : BackgroundWorker
 {

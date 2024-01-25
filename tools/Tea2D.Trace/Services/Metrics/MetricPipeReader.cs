@@ -1,7 +1,7 @@
 ﻿using Tea2D.Metrics.Diagnostics;
 using Tea2D.Metrics.IO.SharedMemory;
 
-namespace Tea2DTrace.Services.Metrics;
+namespace Tea2D.Trace.Services.Metrics;
 
 public sealed record MetricPipeReader<T> : IDisposable
     where T : struct

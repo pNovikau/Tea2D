@@ -1,4 +1,4 @@
-﻿namespace Tea2DTrace.Services.Messaging;
+﻿namespace Tea2D.Trace.Services.Messaging;
 
 public interface IMessageHandler<in TMessage>
     where TMessage : struct, IMessage

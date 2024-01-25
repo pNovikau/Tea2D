@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 
-namespace Tea2DTrace.Services.Messaging;
+namespace Tea2D.Trace.Services.Messaging;
 
 internal class MessagePublisher : IMessagePublisher
 {

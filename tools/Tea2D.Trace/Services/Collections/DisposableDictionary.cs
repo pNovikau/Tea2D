@@ -1,4 +1,4 @@
-namespace Tea2DTrace.Services.Collections;
+namespace Tea2D.Trace.Services.Collections;
 
 public sealed class DisposableDictionary<TKey, TItem> : Dictionary<TKey, TItem>, IDisposable
     where TKey : notnull
