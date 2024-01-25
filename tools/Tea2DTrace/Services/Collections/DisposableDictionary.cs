@@ -1,4 +1,4 @@
-namespace MetricsVisualizer.Collections;
+namespace Tea2DTrace.Services.Collections;
 
 public sealed class DisposableDictionary<TKey, TItem> : Dictionary<TKey, TItem>, IDisposable
     where TKey : notnull

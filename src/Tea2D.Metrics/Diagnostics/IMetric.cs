@@ -2,5 +2,4 @@
 
 public interface IMetric
 {
-    string Name { get; }
 }

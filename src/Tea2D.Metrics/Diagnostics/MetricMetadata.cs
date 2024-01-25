@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 namespace Tea2D.Metrics.Diagnostics;
 
@@ -6,26 +7,21 @@ namespace Tea2D.Metrics.Diagnostics;
 public unsafe struct MetricMetadata
 {
     [MarshalAs(UnmanagedType.ByValArray, SizeConst = Constants.MaxMetricNameSize)]
-    public fixed char Name[Constants.MaxMetricNameSize];
+    private fixed char _name[Constants.MaxMetricNameSize];
+
+    private int _nameLength;
 
     public MetricType Type;
-}
 
-public static unsafe class MetricMetadataExtensions
-{
-    public static void SetName(ref this MetricMetadata metadata, string value)
+    public ReadOnlySpan<char> Name
     {
-        var span = value.AsSpan();
-
-        for (var i = 0; i < span.Length; i++)
+        get => new(Unsafe.AsPointer(ref _name[0]), _nameLength);
+        set
         {
-            metadata.Name[i] = span[i];
-        }
-    }
+            _nameLength = value.Length;
 
-    public static string GetName(ref this MetricMetadata metadata)
-    {
-        fixed (char* pointer = metadata.Name)
-            return new string(pointer);
+            for (var i = 0; i < value.Length; i++) 
+                _name[i] = value[i];
+        }
     }
 }

@@ -11,7 +11,7 @@ public sealed class PipeWriter<T> : SharedRingBuffer<T>
 
     private readonly int _capacity;
 
-    public PipeWriter(string name, int capacity = DefaultCapacity)
+    public PipeWriter(ReadOnlySpan<char> name, int capacity = DefaultCapacity)
     {
         if (name.Length > Constants.MaxMetricNameSize)
             throw new ArgumentException("");
@@ -19,7 +19,8 @@ public sealed class PipeWriter<T> : SharedRingBuffer<T>
         _capacity = capacity;
         var memorySize = HeaderSize + ItemSize * capacity;
 
-        MemoryMappedFile = MemoryMappedFile.CreateOrOpen(name, memorySize, MemoryMappedFileAccess.ReadWrite);
+        //TODO: create new CreateOrOpen method to avoid ToString allocation
+        MemoryMappedFile = MemoryMappedFile.CreateOrOpen(name.ToString(), memorySize, MemoryMappedFileAccess.ReadWrite);
         ViewAccessor = MemoryMappedFile.CreateViewAccessor(0, memorySize, MemoryMappedFileAccess.ReadWrite);
 
         var header = new Header()

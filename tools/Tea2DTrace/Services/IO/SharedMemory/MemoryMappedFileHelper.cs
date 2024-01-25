@@ -1,7 +1,6 @@
-﻿using System.IO;
-using System.IO.MemoryMappedFiles;
+﻿using System.IO.MemoryMappedFiles;
 
-namespace MetricsVisualizer.Services.IO.SharedMemory;
+namespace Tea2DTrace.Services.IO.SharedMemory;
 
 public static class MemoryMappedFileHelper
 {

@@ -1,4 +1,4 @@
-﻿namespace MetricsVisualizer.Services.IO.SharedMemory;
+﻿namespace Tea2DTrace.Services.IO.SharedMemory;
 
 public interface IBackgroundWorker : IAsyncDisposable
 {

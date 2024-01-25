@@ -2,7 +2,7 @@
 
 public sealed class NoOpMeter : IMeter
 {
-    public ICounter CreateCounter(string name) => new NoOpCounter();
+    public ICounter CreateCounter(ReadOnlySpan<char> name) => new NoOpCounter();
 
-    public IHistogram CreateHistogram(string name) => new NoOpHistogram();
+    public IHistogram CreateHistogram(ReadOnlySpan<char> name) => new NoOpHistogram();
 }

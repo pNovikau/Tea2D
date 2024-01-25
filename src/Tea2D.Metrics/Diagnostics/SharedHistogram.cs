@@ -2,7 +2,7 @@ namespace Tea2D.Metrics.Diagnostics;
 
 public sealed class SharedHistogram : SharedMetric<long>, IHistogram
 {
-    public SharedHistogram(string name) : base(name, 125)
+    public SharedHistogram(ReadOnlySpan<char> name) : base(name, 125)
     {
         if (name.Length > 125)
             throw new ArgumentException("");

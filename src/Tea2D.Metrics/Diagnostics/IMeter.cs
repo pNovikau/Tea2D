@@ -2,7 +2,7 @@
 
 public interface IMeter
 {
-    ICounter CreateCounter(string name);
+    ICounter CreateCounter(ReadOnlySpan<char> name);
 
-    IHistogram CreateHistogram(string name);
+    IHistogram CreateHistogram(ReadOnlySpan<char> name);
 }
