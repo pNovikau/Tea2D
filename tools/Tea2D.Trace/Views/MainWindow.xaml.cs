@@ -1,4 +1,6 @@
 ﻿using System.Windows;
+using CommunityToolkit.Mvvm.DependencyInjection;
+using Tea2D.Trace.ViewModels;
 
 namespace Tea2D.Trace.Views;
 
@@ -7,37 +9,11 @@ namespace Tea2D.Trace.Views;
 /// </summary>
 public partial class MainWindow : Window
 {
-
-    private Thread _thread;
-
     public MainWindow()
     {
         InitializeComponent();
-        _thread = new Thread(Start);
-        _thread.Start();
 
-        //_metricListener = new MetricListener();
-        //_metricListener.Start();
-        //
-        //_metricListener.MetricAdded += MetricListenerOnMetricAdded;
-        //_metricListener.MetricUpdated += MetricListenerOnMetricUpdated;
+        DataContext = Ioc.Default.GetRequiredService<MainWindowViewModel>();
     }
 
-    private void Start()
-    {
-        while (true)
-        {
-            Thread.Sleep(10);
-
-            Dispatcher.Invoke(Draw);
-        }
-    }
-
-    public void Draw()
-    {
-        label1.Value += 1;
-        label2.Value += 1;
-        label3.Value += 1;
-        label4.Value += 1;
-    }
 }
