@@ -2,7 +2,16 @@
 
 public static class LongConverter
 {
-    public static int GetDigitsCount(this long val) => (int)Math.Floor(Math.Log10(val)) + 1;
+    public static int GetDigitsCount(this long val)
+    {
+        if (val < 0)
+            return 0;
+
+        if (val == 0)
+            return 1;
+
+        return (int)Math.Floor(Math.Log10(val)) + 1;
+    }
 
     public static void ConvertToSpan(this long value, Span<char> span)
     {

@@ -4,6 +4,7 @@ using Tea2D.Trace.Models.Messages;
 using Tea2D.Trace.Services.Collections;
 using Tea2D.Trace.Services.IO.SharedMemory;
 using Tea2D.Trace.Services.Messaging;
+using Tea2D.Trace.Services.Threading;
 
 namespace Tea2D.Trace.Services.Metrics;
 
@@ -29,6 +30,8 @@ public sealed class MetricNamespaceListener : BackgroundWorker
 
         while (cancellationToken.IsCancellationRequested is false)
         {
+            Thread.Sleep(10);
+
             while (pipeReader.Read(out var item))
             {
                 var metricNameSpan = item.Name;

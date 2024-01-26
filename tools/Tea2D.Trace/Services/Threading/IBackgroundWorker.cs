@@ -1,4 +1,4 @@
-﻿namespace Tea2D.Trace.Services.IO.SharedMemory;
+﻿namespace Tea2D.Trace.Services.Threading;
 
 public interface IBackgroundWorker : IAsyncDisposable
 {

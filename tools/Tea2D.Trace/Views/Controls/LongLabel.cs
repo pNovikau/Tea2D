@@ -8,8 +8,6 @@ public partial class LongLabel : UserControl
 
     private Font _font = SystemFonts.DefaultFont;
     private SolidBrush _brush = new(Color.Black);
-    
-    private static readonly SolidBrush DrawBrush = new(Color.Black);
 
     public LongLabel()
     {
@@ -18,13 +16,12 @@ public partial class LongLabel : UserControl
         _graphics = CreateGraphics();
     }
 
-
     public string FontFamily
     {
         get => _font.FontFamily.ToString();
         set => _font = new Font(value, _font.Size);
     }
-    
+
     public float FontSize
     {
         get => _font.Size;
@@ -44,9 +41,13 @@ public partial class LongLabel : UserControl
             var digitsCount = value.GetDigitsCount();
             Span<char> text = stackalloc char[digitsCount];
             value.ConvertToSpan(text);
+            
+            var stringSize = _graphics.MeasureString(text, _font);
+            var xPosition = (Width - stringSize.Width) / 2;
+            var yPosition = (Height - stringSize.Height) / 2;
 
             _graphics.Clear(BackColor);
-            _graphics.DrawString(text, _font, _brush, new PointF(0, 0));
+            _graphics.DrawString(text, _font, _brush, new PointF(xPosition, yPosition));
         }
     }
 }

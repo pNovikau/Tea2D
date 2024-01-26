@@ -4,16 +4,55 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:v="clr-namespace:Tea2D.Trace.Views.Controls"
+        xmlns:vm="clr-namespace:Tea2D.Trace.ViewModels"
         mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=vm:MainWindowViewModel}"
+        Background="{StaticResource BackgroundBrush}"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Grid>
-            <v:LongLabelWrapper x:Name="label1" Margin="50"/>
-            <v:LongLabelWrapper x:Name="label2"/>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="200" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="{StaticResource SecondaryBackgroundBrush}">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
+                <Button Height="40" Width="40">
+                    <Image Source="../Resources/counter-menu-icon.svg"/>
+                </Button>
+            </StackPanel>
         </Grid>
-        <StackPanel Orientation="Horizontal">
-            <v:LongLabelWrapper x:Name="label3"/>
-            <v:LongLabelWrapper x:Name="label4"/>
-        </StackPanel>
+        
+        <Grid Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+
+            <Label Grid.Row="0" Foreground="{StaticResource TextBrush}">Counters</Label>
+            <ItemsControl Grid.Row="1" ItemsSource="{Binding Counters}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type vm:CounterViewModel}">
+                        <Border BorderBrush="DarkGray">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock
+                                    VerticalAlignment="Top"
+                                    ToolTip="{Binding Name}"
+                                    Foreground="{StaticResource TextBrush}"
+                                    TextTrimming="CharacterEllipsis"
+                                    Text="{Binding Name}" />
+                                <v:LongLabelWrapper Grid.Column="1" Foreground="{StaticResource TextBrush}" Value="{Binding Value}" />
+                            </Grid>
+                        </Border>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
     </Grid>
 </Window>
