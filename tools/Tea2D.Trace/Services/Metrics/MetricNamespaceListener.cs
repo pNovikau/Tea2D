@@ -1,4 +1,6 @@
-﻿using Tea2D.Metrics.Diagnostics;
+﻿using CommunityToolkit.HighPerformance;
+using CommunityToolkit.HighPerformance.Buffers;
+using Tea2D.Metrics.Diagnostics;
 using Tea2D.Metrics.IO.SharedMemory;
 using Tea2D.Trace.Models.Messages;
 using Tea2D.Trace.Services.Collections;
@@ -26,7 +28,7 @@ public sealed class MetricNamespaceListener : BackgroundWorker
         MemoryMappedFileHelper.WaitForMemoryMappedFile(MetricsNamespace, cancellationToken);
 
         using var pipeReader = new PipeReader<MetricMetadata>(MetricsNamespace);
-        using var metricDictionary = new DisposableDictionary<int, MetricPipeReader<long>>();
+        using var metricDictionary = new DisposableDictionary<string, MetricPipeReader<long>>();
 
         while (cancellationToken.IsCancellationRequested is false)
         {
@@ -35,10 +37,9 @@ public sealed class MetricNamespaceListener : BackgroundWorker
             while (pipeReader.Read(out var item))
             {
                 var metricNameSpan = item.Name;
-                var metricName = metricNameSpan.ToString();
-                var hashCode = string.GetHashCode(metricNameSpan);
+                var metricName = StringPool.Shared.GetOrAdd(metricNameSpan);
 
-                metricDictionary[hashCode] = new MetricPipeReader<long>(metricName, item.Type);
+                metricDictionary[metricName] = new MetricPipeReader<long>(metricName, item.Type);
 
                 _messagePublisher.PublishAsync(new MetricAddedMessage(metricName, item.Type));
             }

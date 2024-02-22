@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
     {
         ArgumentNullException.ThrowIfNull(serviceCollection);
 
-        serviceCollection.AddSingleton<IMessageHandler<TMessage>, THandler>();
+        serviceCollection.AddSingleton<IMessageHandler<TMessage>>(provider => new DispatcherMessageHandlerDecorator<TMessage>(provider.GetRequiredService<THandler>()));
 
         return serviceCollection;
     }

@@ -11,7 +11,7 @@ namespace Tea2D.Trace;
 /// <summary>
 /// Interaction logic for App.xaml
 /// </summary>
-public partial class App : System.Windows.Application
+public partial class App
 {
     protected override void OnStartup(StartupEventArgs e)
     {
@@ -24,8 +24,8 @@ public partial class App : System.Windows.Application
 
         serviceCollection.AddMessaging();
 
-        serviceCollection.AddSingleton<IMessageHandler<MetricAddedMessage>>(p => new DispatcherMessageHandlerDecorator<MetricAddedMessage>(p.GetRequiredService<CountersViewModel>()));
-        serviceCollection.AddSingleton<IMessageHandler<MetricUpdatedMessage>>(p => new DispatcherMessageHandlerDecorator<MetricUpdatedMessage>(p.GetRequiredService<CountersViewModel>()));
+        serviceCollection.AddMessageHandler<MetricAddedMessage, CountersViewModel>();
+        serviceCollection.AddMessageHandler<MetricUpdatedMessage, CountersViewModel>();
 
         Ioc.Default.ConfigureServices(serviceCollection.BuildServiceProvider());
 

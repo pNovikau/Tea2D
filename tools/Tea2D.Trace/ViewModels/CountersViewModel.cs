@@ -15,8 +15,6 @@ public sealed partial class CountersViewModel : ObservableObject, IMessageHandle
     [ObservableProperty]
     private Visibility _visibility = Visibility.Visible;
 
-    
-
     public ValueTask HandleAsync(MetricAddedMessage message)
     {
         if (message.Type == MetricType.Counter)
