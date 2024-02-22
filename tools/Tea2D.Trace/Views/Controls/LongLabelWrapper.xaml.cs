@@ -2,7 +2,6 @@
 using System.Windows;
 using System.Windows.Forms.Integration;
 using Tea2D.Trace.Views.Utils;
-using UserControl = System.Windows.Controls.UserControl;
 
 namespace Tea2D.Trace.Views.Controls;
 

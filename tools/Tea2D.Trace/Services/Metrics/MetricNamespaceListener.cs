@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.HighPerformance;
-using CommunityToolkit.HighPerformance.Buffers;
+﻿using CommunityToolkit.HighPerformance.Buffers;
 using Tea2D.Metrics.Diagnostics;
 using Tea2D.Metrics.IO.SharedMemory;
 using Tea2D.Trace.Models.Messages;
@@ -23,9 +22,10 @@ public sealed class MetricNamespaceListener : BackgroundWorker
 
     protected override void Run()
     {
-        var cancellationToken = Token;
+        var cancellationToken = CancellationToken;
 
-        MemoryMappedFileHelper.WaitForMemoryMappedFile(MetricsNamespace, cancellationToken);
+        if (!MemoryMappedFileHelper.WaitForMemoryMappedFile(MetricsNamespace, cancellationToken))
+            return;
 
         using var pipeReader = new PipeReader<MetricMetadata>(MetricsNamespace);
         using var metricDictionary = new DisposableDictionary<string, MetricPipeReader<long>>();

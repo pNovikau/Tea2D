@@ -8,7 +8,7 @@ public abstract class BackgroundWorker : IBackgroundWorker
 
     private volatile bool _isRunning;
 
-    protected CancellationToken Token => _tokenSource.Token;
+    protected CancellationToken CancellationToken => _tokenSource.Token;
 
     public async Task StartAsync()
     {

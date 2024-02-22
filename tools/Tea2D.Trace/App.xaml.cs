@@ -5,6 +5,7 @@ using Tea2D.Trace.Models.Messages;
 using Tea2D.Trace.Services.Messaging;
 using Tea2D.Trace.Services.Metrics;
 using Tea2D.Trace.ViewModels;
+using Tea2D.Trace.ViewModels.Tabs;
 
 namespace Tea2D.Trace;
 
@@ -20,12 +21,12 @@ public partial class App
         serviceCollection.AddSingleton<MetricNamespaceListener>();
 
         serviceCollection.AddSingleton<MainWindowViewModel>();
-        serviceCollection.AddSingleton<CountersViewModel>();
+        serviceCollection.AddSingleton<MetricsTabViewModel>();
 
         serviceCollection.AddMessaging();
 
-        serviceCollection.AddMessageHandler<MetricAddedMessage, CountersViewModel>();
-        serviceCollection.AddMessageHandler<MetricUpdatedMessage, CountersViewModel>();
+        serviceCollection.AddMessageHandler<MetricAddedMessage, MetricsTabViewModel>();
+        serviceCollection.AddMessageHandler<MetricUpdatedMessage, MetricsTabViewModel>();
 
         Ioc.Default.ConfigureServices(serviceCollection.BuildServiceProvider());
 

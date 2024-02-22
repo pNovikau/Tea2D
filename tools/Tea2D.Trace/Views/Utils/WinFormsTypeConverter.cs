@@ -1,13 +1,12 @@
 ﻿using System.Windows.Media;
-using Color = System.Drawing.Color;
-using Brush = System.Windows.Media.Brush;
-using FontFamily = System.Windows.Media.FontFamily;
+using WinFormsBrush = System.Windows.Media.Brush;
+using WinFormsFontFamily = System.Windows.Media.FontFamily;
 
 namespace Tea2D.Trace.Views.Utils;
 
 public static class WinFormsTypeConverter
 {
-    public static Color Convert(Brush brush)
+    public static Color Convert(WinFormsBrush brush)
     {
         ArgumentNullException.ThrowIfNull(brush);
 
@@ -17,7 +16,7 @@ public static class WinFormsTypeConverter
         return Color.FromArgb(solidColorBrush.Color.A, solidColorBrush.Color.R, solidColorBrush.Color.G, solidColorBrush.Color.B);
     }
 
-    public static string Convert(FontFamily fontFamily)
+    public static string Convert(WinFormsFontFamily fontFamily)
     {
         ArgumentNullException.ThrowIfNull(fontFamily);
 

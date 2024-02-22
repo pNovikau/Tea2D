@@ -2,7 +2,7 @@
 
 namespace Tea2D.Trace.Views.Controls;
 
-public partial class LongLabel : UserControl
+public partial class LongLabel : System.Windows.Forms.UserControl
 {
     private readonly Graphics _graphics;
 

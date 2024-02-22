@@ -5,7 +5,7 @@ namespace Tea2D.Trace.Services.IO.SharedMemory;
 
 public static class MemoryMappedFileHelper
 {
-    public static void WaitForMemoryMappedFile(string mapName, CancellationToken cancellationToken = default)
+    public static bool WaitForMemoryMappedFile(string mapName, CancellationToken cancellationToken = default)
     {
         const int delayInMilliseconds = 500;
 
@@ -14,12 +14,14 @@ public static class MemoryMappedFileHelper
             try
             {
                 using (MemoryMappedFile.OpenExisting(mapName))
-                    break;
+                    return true;
             }
             catch (FileNotFoundException)
             {
                 Thread.Sleep(delayInMilliseconds);
             }
         }
+
+        return false;
     }
 }
