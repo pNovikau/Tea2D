@@ -1,0 +1,18 @@
+﻿<UserControl x:Class="Tea2D.Trace.Views.Tabs.TabsContainer"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:controls="clr-namespace:Tea2D.Trace.Views.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="400" d:DesignWidth="500"
+             d:Background="{StaticResource SecondaryBackgroundBrush}"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}">
+    <Grid>
+        <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+            <controls:TabItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
+            <controls:TabItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
+            <controls:TabItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

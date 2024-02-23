@@ -5,34 +5,24 @@ using System.Windows.Media;
 
 namespace Tea2D.Trace.Views.Controls;
 
-public partial class MenuItem
+public partial class TabItem
 {
-    public static readonly DependencyProperty FillProperty =
-        DependencyProperty.Register(nameof(Fill), typeof(Brush), typeof(MenuItem), new PropertyMetadata(Brushes.Transparent));
-
     public static readonly DependencyProperty IsSelectedProperty =
-        DependencyProperty.Register(nameof(IsSelected), typeof(bool), typeof(MenuItem), new PropertyMetadata(false, OnIsSelectedChanged));
+        DependencyProperty.Register(nameof(IsSelected), typeof(bool), typeof(TabItem), new PropertyMetadata(false, OnIsSelectedChanged));
 
     public static readonly DependencyProperty SourceProperty =
-        DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(MenuItem), new PropertyMetadata((ImageSource)null!));
+        DependencyProperty.Register(nameof(Source), typeof(ImageSource), typeof(TabItem), new PropertyMetadata((ImageSource)null!));
 
     public static readonly DependencyProperty SelectedCommandProperty =
-        DependencyProperty.Register(nameof(SelectedCommand), typeof(ICommand), typeof(MenuItem), new PropertyMetadata((ICommand)null!));
+        DependencyProperty.Register(nameof(SelectedCommand), typeof(ICommand), typeof(TabItem), new PropertyMetadata((ICommand)null!));
 
     public static readonly DependencyProperty UnselectedCommandProperty =
-        DependencyProperty.Register(nameof(UnselectedCommand), typeof(ICommand), typeof(MenuItem), new PropertyMetadata((ICommand)null!));
+        DependencyProperty.Register(nameof(UnselectedCommand), typeof(ICommand), typeof(TabItem), new PropertyMetadata((ICommand)null!));
 
-    public MenuItem()
+    public TabItem()
     {
         InitializeComponent();
     }
-
-    public Brush Fill
-    {
-        get => (Brush)GetValue(FillProperty);
-        set => SetValue(FillProperty, value);
-    }
-
     public bool IsSelected
     {
         get => (bool)GetValue(IsSelectedProperty);
@@ -59,7 +49,7 @@ public partial class MenuItem
 
     private static void OnIsSelectedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
     {
-        if (d is not MenuItem menuItem)
+        if (d is not TabItem menuItem)
             return;
 
         if (menuItem.IsSelected)

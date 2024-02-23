@@ -18,9 +18,9 @@
 
         <Grid Background="{StaticResource SecondaryBackgroundBrush}">
             <StackPanel Orientation="Vertical" VerticalAlignment="Top">
-                <test:MenuItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
-                <test:MenuItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
-                <test:MenuItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
+                <test:TabItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
+                <test:TabItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
+                <test:TabItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
             </StackPanel>
         </Grid>
 

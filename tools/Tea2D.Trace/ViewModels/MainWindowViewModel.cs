@@ -7,7 +7,8 @@ namespace Tea2D.Trace.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    [ObservableProperty] private MetricsTabViewModel _metricsTab;
+    [ObservableProperty]
+    private MetricsTabViewModel _metricsTab;
 
     public MainWindowViewModel(MetricsTabViewModel metricsTab)
     {
