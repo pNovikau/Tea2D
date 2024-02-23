@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:sample="clr-namespace:Tea2D.Trace.ViewModels.Samples"
         xmlns:tabs="clr-namespace:Tea2D.Trace.Views.Tabs"
+        xmlns:test="clr-namespace:Tea2D.Trace.Views.Controls"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance Type=sample:MainWindowViewModelSample}"
         Background="{StaticResource BackgroundBrush}"
@@ -16,15 +17,15 @@
         </Grid.ColumnDefinitions>
 
         <Grid Background="{StaticResource SecondaryBackgroundBrush}">
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Top">
-                <Button Height="40" Width="40" Command="{Binding ViewOrHideMetricsTabCommand}" Padding="20">
-                    <Image Source="../Resources/counter-menu-icon.svg" Stretch="Fill"/>
-                </Button>
+            <StackPanel Orientation="Vertical" VerticalAlignment="Top">
+                <test:MenuItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
+                <test:MenuItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
+                <test:MenuItem Source="{StaticResource CounterMenuItemDrawingImage}" Padding="8"/>
             </StackPanel>
         </Grid>
 
-        <Grid Grid.Column="1">
+        <!--<Grid Grid.Column="1">
             <tabs:MetricsTab DataContext="{Binding MetricsTab}"/>
-        </Grid>
+        </Grid>-->
     </Grid>
 </Window>
