@@ -6,6 +6,8 @@ public partial class LongLabel : System.Windows.Forms.UserControl
 {
     private readonly Graphics _graphics;
 
+    private long _value;
+
     private Font _font = SystemFonts.DefaultFont;
     private SolidBrush _brush = new(Color.Black);
 
@@ -36,14 +38,17 @@ public partial class LongLabel : System.Windows.Forms.UserControl
 
     public long Value
     {
+        get => _value;
         set
         {
+            _value = value;
+
             var digitsCount = value.GetDigitsCount();
             Span<char> text = stackalloc char[digitsCount];
             value.ConvertToSpan(text);
-            
+
             var stringSize = _graphics.MeasureString(text, _font);
-            var xPosition = (Width - stringSize.Width) / 2;
+            var xPosition = 0;
             var yPosition = (Height - stringSize.Height) / 2;
 
             _graphics.Clear(BackColor);
