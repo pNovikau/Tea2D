@@ -19,6 +19,9 @@ public partial class MetricsTabViewModel : TabBaseViewModel, IMessageHandler<Met
 
     public ValueTask HandleAsync(MetricAddedMessage message)
     {
+        if (!IsSelected)
+            return ValueTask.CompletedTask;
+
         return message.Type switch
         {
             MetricType.Counter => HandleCounterAddedMessageAsync(message),
@@ -35,6 +38,9 @@ public partial class MetricsTabViewModel : TabBaseViewModel, IMessageHandler<Met
 
     public ValueTask HandleAsync(MetricUpdatedMessage message)
     {
+        if (!IsSelected)
+            return ValueTask.CompletedTask;
+
         return message.Type switch
         {
             MetricType.Counter => HandleCounterUpdatedMessageAsync(message),

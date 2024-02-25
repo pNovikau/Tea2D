@@ -13,7 +13,7 @@ public class DispatcherMessageHandlerDecorator<TMessage> : IMessageHandler<TMess
     public ValueTask HandleAsync(TMessage message)
     {
         return Application.Current.Dispatcher.CheckAccess() 
-            ? Application.Current.Dispatcher.Invoke(() => _innerMessageHandler.HandleAsync(message)) 
-            : _innerMessageHandler.HandleAsync(message);
+            ? _innerMessageHandler.HandleAsync(message) 
+            : Application.Current.Dispatcher.Invoke(() => _innerMessageHandler.HandleAsync(message));
     }
 }
