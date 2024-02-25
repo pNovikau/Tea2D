@@ -1,25 +1,13 @@
-﻿using System.Windows;
-using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using Tea2D.Trace.ViewModels.Tabs;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 
 namespace Tea2D.Trace.ViewModels;
 
 public partial class MainWindowViewModel : ObservableObject
 {
-    [ObservableProperty]
-    private MetricsTabViewModel _metricsTab;
+    [ObservableProperty] private TabsContainerViewModel _tabsContainer;
 
-    public MainWindowViewModel(MetricsTabViewModel metricsTab)
+    public MainWindowViewModel(TabsContainerViewModel tabsContainerViewModel)
     {
-        _metricsTab = metricsTab ?? throw new ArgumentNullException(nameof(metricsTab));
-    }
-
-    [RelayCommand]
-    private void ViewOrHideMetricsTab()
-    {
-        MetricsTab.Visibility = MetricsTab.Visibility == Visibility.Visible
-            ? Visibility.Collapsed
-            : Visibility.Visible;
+        _tabsContainer = tabsContainerViewModel ?? throw new ArgumentNullException(nameof(tabsContainerViewModel));
     }
 }

@@ -21,7 +21,9 @@ public partial class App
         serviceCollection.AddSingleton<MetricNamespaceListener>();
 
         serviceCollection.AddSingleton<MainWindowViewModel>();
+        serviceCollection.AddSingleton<TabsContainerViewModel>();
         serviceCollection.AddSingleton<MetricsTabViewModel>();
+        serviceCollection.AddSingleton<TabBaseViewModel>(p => p.GetRequiredService<MetricsTabViewModel>());
 
         serviceCollection.AddMessaging();
 

@@ -1,19 +1,21 @@
 ﻿using System.Collections.ObjectModel;
-using System.Windows;
+using System.Windows.Media;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Tea2D.Metrics.Diagnostics;
 using Tea2D.Trace.Models.Messages;
+using Tea2D.Trace.Resources;
 using Tea2D.Trace.Services.Messaging;
 
 namespace Tea2D.Trace.ViewModels.Tabs;
 
-public partial class MetricsTabViewModel : ObservableObject, IMessageHandler<MetricAddedMessage>, IMessageHandler<MetricUpdatedMessage>
+public partial class MetricsTabViewModel : TabBaseViewModel, IMessageHandler<MetricAddedMessage>, IMessageHandler<MetricUpdatedMessage>
 {
-    [ObservableProperty]
-    private ObservableCollection<CounterViewModel> _counters = [];
+    [ObservableProperty] private ObservableCollection<CounterViewModel> _counters = [];
 
-    [ObservableProperty]
-    private Visibility _visibility = Visibility.Visible;
+    public MetricsTabViewModel()
+    {
+        Source = Application.Current.Resources[ResourceKeys.SvgImages.CounterMenuItemDrawingImage] as ImageSource;
+    }
 
     public ValueTask HandleAsync(MetricAddedMessage message)
     {

@@ -6,11 +6,11 @@
              xmlns:controlsVm="clr-namespace:Tea2D.Trace.ViewModels"
              xmlns:sample="clr-namespace:Tea2D.Trace.ViewModels.Samples.Tabs"
              xmlns:controls="clr-namespace:Tea2D.Trace.Views.Controls"
+             Background="{StaticResource BackgroundBrush}"
+             Visibility="{Binding ContentVisibility}"
              mc:Ignorable="d"
              d:DataContext="{d:DesignInstance Type=sample:MetricsTabViewModelSample}"
-             Background="{StaticResource BackgroundBrush}"
-             d:DesignHeight="450" d:DesignWidth="800"
-             Visibility="{Binding Visibility}">
+             d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition />

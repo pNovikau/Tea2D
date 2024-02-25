@@ -1,6 +1,4 @@
-﻿using Application = System.Windows.Application;
-
-namespace Tea2D.Trace.Services.Messaging;
+﻿namespace Tea2D.Trace.Services.Messaging;
 
 public class DispatcherMessageHandlerDecorator<TMessage> : IMessageHandler<TMessage>
     where TMessage : struct, IMessage
@@ -14,6 +12,8 @@ public class DispatcherMessageHandlerDecorator<TMessage> : IMessageHandler<TMess
 
     public ValueTask HandleAsync(TMessage message)
     {
-        return Application.Current.Dispatcher.Invoke(() => _innerMessageHandler.HandleAsync(message));
+        return Application.Current.Dispatcher.CheckAccess() 
+            ? Application.Current.Dispatcher.Invoke(() => _innerMessageHandler.HandleAsync(message)) 
+            : _innerMessageHandler.HandleAsync(message);
     }
 }

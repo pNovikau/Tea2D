@@ -1,4 +1,6 @@
-﻿global using UserControl = System.Windows.Controls.UserControl;
+﻿global using Application = System.Windows.Application;
+
+global using UserControl = System.Windows.Controls.UserControl;
 
 global using Color = System.Drawing.Color;
 global using Brush = System.Drawing.Brush;
