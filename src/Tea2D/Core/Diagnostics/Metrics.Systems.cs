@@ -7,7 +7,7 @@ public static partial class Metric
 {
     public static class Systems<TComponent>
     {
-        private const string CounterName = "systems." + nameof(TComponent);
+        private static readonly string CounterName = "systems." + typeof(TComponent).Name;
 
         [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
         private static readonly ICounter Counter = Meter.CreateCounter(CounterName);

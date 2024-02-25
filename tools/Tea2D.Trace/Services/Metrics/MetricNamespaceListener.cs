@@ -32,7 +32,7 @@ public sealed class MetricNamespaceListener : BackgroundWorker
 
         while (cancellationToken.IsCancellationRequested is false)
         {
-            Thread.Sleep(10);
+            Thread.Sleep(100);
 
             while (pipeReader.Read(out var item))
             {
