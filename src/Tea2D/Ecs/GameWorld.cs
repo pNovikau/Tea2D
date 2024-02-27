@@ -44,7 +44,7 @@ internal class GameWorld : GameWorldBase
         for (var componentType = 0; componentType < entity.Components.Length; componentType++)
         {
             if (entity.Components[componentType] != -1)
-                ComponentManager.Delete(componentType, entity.Components[componentType]);
+                ComponentManager.DeleteComponent(componentType, entity.Components[componentType]);
         }
 
         EntityManager.Remove(entityId);

@@ -2,7 +2,7 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Runtime.InteropServices;
 
-namespace Tea2D.Common;
+namespace Tea2D.Core.Common;
 
 [StructLayout(LayoutKind.Sequential)]
 [DebuggerDisplay("[Vector2] X({X}) Y({Y})")]

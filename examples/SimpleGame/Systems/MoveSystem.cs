@@ -1,6 +1,6 @@
-using SFML.System;
 using SimpleGame.Components;
 using Tea2D;
+using Tea2D.Core.Common;
 using Tea2D.Core.Diagnostics;
 using Tea2D.Ecs.ComponentFilters;
 
@@ -17,14 +17,14 @@ public class MoveSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
-        using var _ = Metrics.Execution.Record("MoveSystem.Update");
+        using var _ = Metric.Execution.Record("MoveSystem.Update");
         
         foreach (var (_, moveComponentRef, transformComponentRef) in _filter)
         {
             ref var moveComponent = ref moveComponentRef.Value;
             ref var transformComponent = ref transformComponentRef.Value;
 
-            transformComponent.Transformable.Position = new Vector2f(
+            transformComponent.Transformable.Position = new Vector2<float>(
                 transformComponent.Transformable.Position.X + (moveComponent.Direction.X * moveComponent.Velocity),
                 transformComponent.Transformable.Position.Y + ((moveComponent.Direction.Y * moveComponent.Velocity)));
         }

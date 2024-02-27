@@ -17,6 +17,6 @@ public class SystemManager : ISystemManager
 
         _systems.Add(system);
 
-        Metrics.Systems<TSystem>.Increment();
+        Metric.Systems<TSystem>.Increment();
     }
 }

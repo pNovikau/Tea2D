@@ -19,7 +19,7 @@ public class EntityManager : IEntityManager
     {
         ref var entity = ref _list.Get(out _);
 
-        Metrics.Entities.Increment();
+        Metric.Entities.Increment();
 
         return ref entity;
     }
@@ -30,7 +30,7 @@ public class EntityManager : IEntityManager
     {
         _list.Remove(id);
 
-        Metrics.Entities.Decrement();
+        Metric.Entities.Decrement();
     }
 
     public Span<Entity> AsSpan() => _list.AsSpan();

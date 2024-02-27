@@ -20,7 +20,7 @@ public class LifetimeSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
-        using var _ = Metrics.Execution.Record("LifetimeSystem.Update");
+        using var _ = Metric.Execution.Record("LifetimeSystem.Update");
         
         foreach (var (entityId, lifetimeComponentRef) in _filter)
         {

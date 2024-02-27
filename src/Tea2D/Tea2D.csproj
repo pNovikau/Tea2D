@@ -1,18 +1,26 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
-        <TargetFramework>net7.0</TargetFramework>
+        <TargetFramework>net8.0</TargetFramework>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <LangVersion>default</LangVersion>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="CommunityToolkit.HighPerformance" Version="8.1.0" />
-        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="7.0.13" />
+        <PackageReference Include="Microsoft.Extensions.ObjectPool" Version="8.0.0" />
         <PackageReference Include="SFML.Net" Version="2.5.0" />
+        <PackageReference Include="SharedMemory" Version="2.3.2" />
     </ItemGroup>
 
     <ItemGroup>
+        <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleToAttribute">
+            <_Parameter1>Tea2D.Benchmarks</_Parameter1>
+        </AssemblyAttribute>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\Tea2D.Metrics\Tea2D.Metrics.csproj" />
         <ProjectReference Include="..\Tea2D.SourceGenerators\Tea2D.SourceGenerators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     </ItemGroup>
 

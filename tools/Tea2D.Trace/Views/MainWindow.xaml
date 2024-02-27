@@ -1,0 +1,45 @@
+﻿<Window x:Class="Tea2D.Trace.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:samples="clr-namespace:Tea2D.Trace.ViewModels.Samples"
+        xmlns:tabSamples="clr-namespace:Tea2D.Trace.ViewModels.Samples.Tabs"
+        xmlns:tabViewModels="clr-namespace:Tea2D.Trace.ViewModels.Tabs"
+        xmlns:views="clr-namespace:Tea2D.Trace.Views"
+        xmlns:tabs="clr-namespace:Tea2D.Trace.Views.Tabs"
+        xmlns:controls="clr-namespace:Tea2D.Trace.Views.Controls"
+        mc:Ignorable="d"
+        d:DataContext="{d:DesignInstance Type=samples:MainWindowViewModelSample}"
+        Background="{StaticResource BackgroundBrush}"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+
+        <Grid Background="{StaticResource SecondaryBackgroundBrush}">
+            <ItemsControl ItemsSource="{Binding TabsContainer.Tabs}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate DataType="{x:Type tabViewModels:TabBaseViewModel}">
+                       <Grid Width="40" Height="40">
+                           <controls:TabItem Margin="5"
+                                             Padding="5"
+                                             IsSelected="{Binding IsSelected}"
+                                             Source="{Binding Source}"
+                                             SelectedCommand="{Binding DataContext.TabsContainer.SelectTabCommand, RelativeSource={RelativeSource AncestorType=views:MainWindow}}"
+                                             SelectedCommandParameter="{Binding}"
+                                             UnselectedCommand="{Binding DataContext.TabsContainer.UnselectTabCommand, RelativeSource={RelativeSource AncestorType=views:MainWindow}}"
+                                             UnselectedCommandParameter="{Binding}"/>
+                       </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </Grid>
+        
+        <Grid Grid.Column="1">
+            <tabs:MetricsTab d:DataContext="{d:DesignInstance d:Type=tabSamples:MetricsTabViewModelSample}"/>
+        </Grid>
+    </Grid>
+</Window>

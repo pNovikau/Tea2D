@@ -16,7 +16,7 @@ public class DrawSystem : Tea2D.Ecs.Systems.System
 
     public override void Update(GameContext context)
     {
-        using var _ = Metrics.Execution.Record("DrawSystem.Update");
+        using var _ = Metric.Execution.Record("DrawSystem.Update");
 
         foreach (var (_, _, drawableComponentRef) in _filter)
         {

@@ -5,6 +5,8 @@ public interface IComponent
     protected static int TypeCount = 0;
 
     int Id { get; init; }
+
+    void Disable();
 }
 
 public interface IComponent<TComponent> : IComponent

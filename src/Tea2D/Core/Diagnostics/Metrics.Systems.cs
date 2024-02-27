@@ -1,14 +1,16 @@
-﻿using System.Diagnostics.Metrics;
+﻿using System.Diagnostics.CodeAnalysis;
+using Tea2D.Metrics.Diagnostics;
 
 namespace Tea2D.Core.Diagnostics;
 
-public static partial class Metrics
+public static partial class Metric
 {
-    public static partial class Systems<TComponent>
+    public static class Systems<TComponent>
     {
-        private const string CounterName = "systems." + nameof(TComponent);
+        private static readonly string CounterName = "systems." + typeof(TComponent).Name;
 
-        private static readonly Counter<long> Counter = Meter.CreateCounter<long>(CounterName);
+        [SuppressMessage("ReSharper", "StaticMemberInGenericType")]
+        private static readonly ICounter Counter = Meter.CreateCounter(CounterName);
 
         public static void Increment()
         {

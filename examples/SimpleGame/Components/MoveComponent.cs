@@ -1,4 +1,4 @@
-﻿using Tea2D.Common;
+﻿using Tea2D.Core.Common;
 using Tea2D.Ecs.Components;
 
 namespace SimpleGame.Components;
@@ -9,4 +9,10 @@ public struct MoveComponent : IComponent<MoveComponent>
 
     public Vector2<float> Direction;
     public float Velocity;
+
+    public void Disable()
+    {
+        Direction = default;
+        Velocity = default;
+    }
 }

@@ -7,6 +7,7 @@ namespace Tea2D.Ecs.ComponentFilters;
 
 public abstract class ComponentsFilter : IComponentFilter
 {
+    //TODO: add metrics in order to track queues 
     private readonly Queue<int> _entitiesToAdd = new();
     private readonly Queue<int> _entitiesToRemove = new();
 
@@ -35,11 +36,11 @@ public abstract class ComponentsFilter : IComponentFilter
     {
         IsFreeze = false;
 
-        while (_entitiesToAdd.TryDequeue(out var entity)) 
-            EntitiesIds.Add(entity);
+        while (_entitiesToAdd.TryDequeue(out var entityId)) 
+            EntitiesIds.Add(entityId);
 
-        while (_entitiesToRemove.TryDequeue(out var entity)) 
-            EntitiesIds.Remove(entity);
+        while (_entitiesToRemove.TryDequeue(out var entityId)) 
+            EntitiesIds.Remove(entityId);
     }
 
     private bool OnEntityComponentAdded(ref EntityComponentEventArgs args)
@@ -80,9 +81,7 @@ public abstract class ComponentsFilter : IComponentFilter
     private void AddEntity(int entityId)
     {
         if (IsFreeze)
-        {
             _entitiesToAdd.Enqueue(entityId);
-        }
         else
             EntitiesIds.Add(entityId);
     }

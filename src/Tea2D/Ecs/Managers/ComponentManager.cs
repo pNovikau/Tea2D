@@ -16,8 +16,6 @@ public class ComponentManager : IComponentManager
 
         ref var component = ref componentBucket.CreateComponent();
 
-        Metrics.Components<TComponent>.Increment();
-
         return ref component;
     }
 
@@ -38,15 +36,13 @@ public class ComponentManager : IComponentManager
         return new Ref<TComponent>(ref component);
     }
 
-    public void Delete<TComponent>(int id)
+    public void DeleteComponent<TComponent>(int id)
         where TComponent : struct, IComponent<TComponent>
     {
-        Delete(IComponent<TComponent>.ComponentType, id);
-
-        Metrics.Components<TComponent>.Decrement();
+        DeleteComponent(IComponent<TComponent>.ComponentType, id);
     }
 
-    public void Delete(int componentType, int id)
+    public void DeleteComponent(int componentType, int id)
     {
         Debug.Assert(_components[componentType] != null);
 
