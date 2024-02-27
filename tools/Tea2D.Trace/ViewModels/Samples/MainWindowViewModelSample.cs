@@ -2,7 +2,7 @@
 
 public sealed class MainWindowViewModelSample : MainWindowViewModel
 {
-    public MainWindowViewModelSample() : base( new TabsContainerViewModelSample())
+    public MainWindowViewModelSample() : base(new TabsContainerViewModelSample())
     {
     }
 }

@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Tea2D.Ecs.Components;
+﻿namespace Tea2D.Ecs.Components;
 
 public interface IComponent
 {

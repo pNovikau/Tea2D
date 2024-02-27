@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using Tea2D.Core.Diagnostics;
 
 namespace Tea2D.Ecs.Components;
 
@@ -42,6 +43,8 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
 
         _components[id] = new TComponent { Id = id };
 
+        Metric.Components<TComponent>.Increment();
+
         return ref _components[id];
     }
 
@@ -67,6 +70,8 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
             Array.Resize(ref _freeComponents, _freeComponents.Length * 2);
 
         _freeComponents[_freeComponentsIndex++] = id;
+
+        Metric.Components<TComponent>.Decrement();
     }
 
     public Span<TComponent> AsSpan() => _components.AsSpan()[.._componentIndex];
