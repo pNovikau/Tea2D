@@ -1,6 +1,8 @@
-﻿using SimpleGame.Components;
+﻿using SFML.Window;
+using SimpleGame.Components;
 using SimpleGame.Entities;
 using Tea2D;
+using Tea2D.Core.Common;
 using Tea2D.Core.Diagnostics;
 using Tea2D.Ecs.ComponentFilters;
 
@@ -8,9 +10,6 @@ namespace SimpleGame.Systems;
 
 public class LifetimeSystem : Tea2D.Ecs.Systems.System
 {
-    private const int MaxEntities = 1000;
-    private int _totalEntities = 0;
-
     private ComponentsFilter<LifetimeComponent> _filter;
 
     public override void Initialize(GameContext context)
@@ -32,17 +31,31 @@ public class LifetimeSystem : Tea2D.Ecs.Systems.System
             if (remainTimeInMilliseconds <= 0)
             {
                 context.GameWorld.DestroyEntity(entityId);
-                --_totalEntities;
                 continue;
             }
 
             lifetimeComponent.LifetimeInMilliseconds = remainTimeInMilliseconds;
         }
+    }
+}
 
-        for (var i = _totalEntities; i < MaxEntities; i++)
+public class InputSystem : Tea2D.Ecs.Systems.System
+{
+    private ComponentsFilter<LifetimeComponent> _filter;
+
+    public override void Initialize(GameContext context)
+    {
+        _filter = new ComponentsFilter<LifetimeComponent>(context.GameWorld);
+    }
+
+    public override void Update(GameContext context)
+    {
+        using var _ = Metric.Execution.Record("InputSystem.Update");
+
+        if (Mouse.IsButtonPressed(Mouse.Button.Left))
         {
-            context.GameWorld.CreateRectangle();
-            ++_totalEntities;
+            var position = Mouse.GetPosition(context.RenderWindow);
+            context.GameWorld.CreateRectangle(new Vector2<float>(position.X, position.Y));
         }
     }
 }

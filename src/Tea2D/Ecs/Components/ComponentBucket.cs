@@ -74,5 +74,5 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
         Metric.Components<TComponent>.Decrement();
     }
 
-    public Span<TComponent> AsSpan() => _components.AsSpan()[.._componentIndex];
+    public Span<TComponent> AsSpan() => _components.AsSpan();
 }

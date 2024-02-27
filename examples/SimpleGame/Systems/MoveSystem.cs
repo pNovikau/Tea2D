@@ -26,7 +26,7 @@ public class MoveSystem : Tea2D.Ecs.Systems.System
 
             transformComponent.Transformable.Position = new Vector2<float>(
                 transformComponent.Transformable.Position.X + (moveComponent.Direction.X * moveComponent.Velocity),
-                transformComponent.Transformable.Position.Y + ((moveComponent.Direction.Y * moveComponent.Velocity)));
+                transformComponent.Transformable.Position.Y + (moveComponent.Direction.Y * moveComponent.Velocity));
         }
     }
 }

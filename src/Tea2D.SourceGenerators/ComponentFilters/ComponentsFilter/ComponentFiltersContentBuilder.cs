@@ -72,7 +72,7 @@ public sealed partial class ComponentsFilter<{{ templatesParamsString }}>
                             return new[] 
                             {
                                 $"var componentId{p} = entity.Components[global::Tea2D.Ecs.Components.IComponent<{p}>.ComponentType];",
-                                $"ref var component{p} = ref _componentsSpan{p}[componentId{p}];" 
+                                $"ref var component{p} = ref _componentsSpan{p}[componentId{p}];"
                             };
                         })
                 }}

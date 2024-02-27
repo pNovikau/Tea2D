@@ -27,30 +27,38 @@ public sealed class MetricNamespaceListener : BackgroundWorker
         if (!MemoryMappedFileHelper.WaitForMemoryMappedFile(MetricsNamespace, cancellationToken))
             return;
 
-        using var pipeReader = new PipeReader<MetricMetadata>(MetricsNamespace);
-        using var metricDictionary = new DisposableDictionary<string, MetricPipeReader<long>>();
-
-        while (cancellationToken.IsCancellationRequested is false)
+        try
         {
-            Thread.Sleep(100);
+            using var pipeReader = new PipeReader<MetricMetadata>(MetricsNamespace);
+            using var metricDictionary = new DisposableDictionary<string, MetricPipeReader<long>>();
 
-            while (pipeReader.Read(out var item))
+            while (cancellationToken.IsCancellationRequested is false)
             {
-                var metricNameSpan = item.Name;
-                var metricName = StringPool.Shared.GetOrAdd(metricNameSpan);
+                Thread.Sleep(100);
 
-                metricDictionary[metricName] = new MetricPipeReader<long>(metricName, item.Type);
-
-                _messagePublisher.PublishAsync(new MetricAddedMessage(metricName, item.Type));
-            }
-
-            foreach (var (_, metricPipeReader) in metricDictionary)
-            {
-                if (metricPipeReader.Reader.Read(out var value))
+                while (pipeReader.Read(out var item))
                 {
-                    _messagePublisher.PublishAsync(new MetricUpdatedMessage(metricPipeReader.Name, metricPipeReader.Type, value));
+                    var metricNameSpan = item.Name;
+                    var metricName = StringPool.Shared.GetOrAdd(metricNameSpan);
+
+                    metricDictionary[metricName] = new MetricPipeReader<long>(metricName, item.Type);
+
+                    _messagePublisher.PublishAsync(new MetricAddedMessage(metricName, item.Type));
+                }
+
+                foreach (var (_, metricPipeReader) in metricDictionary)
+                {
+                    if (metricPipeReader.Reader.Read(out var value))
+                    {
+                        _messagePublisher.PublishAsync(new MetricUpdatedMessage(metricPipeReader.Name, metricPipeReader.Type, value));
+                    }
                 }
             }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e);
+            throw;
         }
     }
 }

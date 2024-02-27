@@ -25,7 +25,7 @@ public class Game
     public void Init()
     {
         _window = new RenderWindow(new VideoMode(1200, 600), "Tea2D");
-        //_window.SetFramerateLimit(60);
+        _window.SetFramerateLimit(60);
         _gameWorld = Application.CreateGameWorld();
 
         var context = new GameContext
@@ -36,6 +36,7 @@ public class Game
 
         _gameWorld.RegisterSystem<DrawSystem>();
         _gameWorld.RegisterSystem<MoveSystem>();
+        _gameWorld.RegisterSystem<InputSystem>();
         _gameWorld.RegisterSystem<LifetimeSystem>();
 
         _gameWorld.Initialize(context);
