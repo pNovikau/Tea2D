@@ -29,36 +29,44 @@ public sealed class MetricNamespaceListener : BackgroundWorker
 
         try
         {
-            using var pipeReader = new PipeReader<MetricMetadata>(MetricsNamespace);
-            using var metricDictionary = new DisposableDictionary<string, MetricPipeReader<long>>();
-
-            while (cancellationToken.IsCancellationRequested is false)
-            {
-                Thread.Sleep(100);
-
-                while (pipeReader.Read(out var item))
-                {
-                    var metricNameSpan = item.Name;
-                    var metricName = StringPool.Shared.GetOrAdd(metricNameSpan);
-
-                    metricDictionary[metricName] = new MetricPipeReader<long>(metricName, item.Type);
-
-                    _messagePublisher.PublishAsync(new MetricAddedMessage(metricName, item.Type));
-                }
-
-                foreach (var (_, metricPipeReader) in metricDictionary)
-                {
-                    if (metricPipeReader.Reader.Read(out var value))
-                    {
-                        _messagePublisher.PublishAsync(new MetricUpdatedMessage(metricPipeReader.Name, metricPipeReader.Type, value));
-                    }
-                }
-            }
+            RunInternal(cancellationToken);
         }
         catch (Exception e)
         {
             Console.WriteLine(e);
             throw;
+        }
+    }
+    
+    private void RunInternal(CancellationToken cancellationToken)
+    {
+        if (!MemoryMappedFileHelper.WaitForMemoryMappedFile(MetricsNamespace, cancellationToken))
+            return;
+
+        using var pipeReader = new PipeReader<MetricMetadata>(MetricsNamespace);
+        using var metricDictionary = new DisposableDictionary<string, MetricPipeReader<long>>();
+
+        while (cancellationToken.IsCancellationRequested is false)
+        {
+            Thread.Sleep(100);
+
+            while (pipeReader.Read(out var item))
+            {
+                var metricNameSpan = item.Name;
+                var metricName = StringPool.Shared.GetOrAdd(metricNameSpan);
+
+                metricDictionary[metricName] = new MetricPipeReader<long>(metricName, item.Type);
+
+                _messagePublisher.PublishAsync(new MetricAddedMessage(metricName, item.Type));
+            }
+
+            foreach (var (_, metricPipeReader) in metricDictionary)
+            {
+                if (metricPipeReader.Reader.Read(out var value))
+                {
+                    _messagePublisher.PublishAsync(new MetricUpdatedMessage(metricPipeReader.Name, metricPipeReader.Type, value));
+                }
+            }
         }
     }
 }

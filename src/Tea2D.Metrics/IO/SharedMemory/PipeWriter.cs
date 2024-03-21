@@ -20,7 +20,7 @@ public sealed class PipeWriter<T> : SharedRingBuffer<T>
         var memorySize = HeaderSize + ItemSize * capacity;
 
         //TODO: create new CreateOrOpen method to avoid ToString allocation
-        MemoryMappedFile = MemoryMappedFile.CreateOrOpen(name.ToString(), memorySize, MemoryMappedFileAccess.ReadWrite);
+        MemoryMappedFile = MemoryMappedFile.CreateNew(name.ToString(), memorySize, MemoryMappedFileAccess.ReadWrite);
         ViewAccessor = MemoryMappedFile.CreateViewAccessor(0, memorySize, MemoryMappedFileAccess.ReadWrite);
 
         var header = new Header()

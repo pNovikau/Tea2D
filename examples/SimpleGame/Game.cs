@@ -26,6 +26,7 @@ public class Game
     {
         _window = new RenderWindow(new VideoMode(1200, 600), "Tea2D");
         _window.SetFramerateLimit(60);
+        _window.Closed += (_, _) => _window.Close();
         _gameWorld = Application.CreateGameWorld();
 
         var context = new GameContext

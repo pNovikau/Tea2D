@@ -31,8 +31,8 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
         if (_freeComponentsIndex != 0)
         {
             id = _freeComponents[_freeComponentsIndex--];
+            Metric.Components<TComponent>.Increment();
 
-            _components[id] = new TComponent { Id = id };
             return ref _components[id];
         }
 
@@ -42,7 +42,6 @@ public struct ComponentBucket<TComponent> : IComponentBucket<TComponent>
         id = _componentIndex++;
 
         _components[id] = new TComponent { Id = id };
-
         Metric.Components<TComponent>.Increment();
 
         return ref _components[id];

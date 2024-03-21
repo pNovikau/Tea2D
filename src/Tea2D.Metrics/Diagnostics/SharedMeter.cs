@@ -2,7 +2,7 @@
 
 namespace Tea2D.Metrics.Diagnostics;
 
-public sealed class SharedMeter(ReadOnlySpan<char> name) : IMeter
+public sealed class SharedMeter(ReadOnlySpan<char> name) : IMeter, IDisposable
 {
     private readonly PipeWriter<MetricMetadata> _pipeWriter = new(name);
 
@@ -39,5 +39,11 @@ public sealed class SharedMeter(ReadOnlySpan<char> name) : IMeter
     private void RegisterMetric(MetricMetadata metadata)
     {
         _pipeWriter.Write(metadata);
+    }
+
+    //TODO: dispose not calling when application is exiting. So memory mapped file still alive even after application is closed.
+    public void Dispose()
+    {
+        _pipeWriter.Dispose();
     }
 }
